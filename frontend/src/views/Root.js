@@ -4,16 +4,20 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { routes } from 'routes';
 import LoginPage from 'views/LoginPage';
 import RegisterPage from 'views/RegisterPage';
+import { Provider } from 'react-redux';
+import store from 'store';
 
 const Root = () => (
   <>
-    <Router>
-      <Switch>
-        <Route exact path={routes.home} />
-        <Route path={routes.login} component={LoginPage} />
-        <Route path={routes.register} component={RegisterPage} />
-      </Switch>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Switch>
+          <Route exact path={routes.home} />
+          <Route path={routes.login} component={LoginPage} />
+          <Route path={routes.register} component={RegisterPage} />
+        </Switch>
+      </Router>
+    </Provider>
   </>
 );
 
