@@ -1,7 +1,13 @@
-import { AUTH_SUCCESS, AUTH_FAILURE, AUTH_REQUEST } from 'actions/UserActions';
+import {
+  AUTH_SUCCESS,
+  AUTH_FAILURE,
+  AUTH_REQUEST,
+  REGISTER_USER_FAILURE,
+} from 'actions/UserActions';
+import { REGISTER_USER_SUCCESS } from '../actions/UserActions';
 
 const initialState = {
-  name: 'siemson',
+  isError: false,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -11,7 +17,16 @@ const userReducer = (state = initialState, action) => {
         ...state,
         userID: action.payload.data.id,
       };
-
+    case REGISTER_USER_SUCCESS:
+      return {
+        ...state,
+        isError: false,
+      };
+    case REGISTER_USER_FAILURE:
+      return {
+        ...state,
+        isError: true,
+      };
     default:
       return state;
   }

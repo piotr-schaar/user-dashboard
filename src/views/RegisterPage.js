@@ -3,6 +3,8 @@ import { Formik, Form } from 'formik';
 import styled from 'styled-components';
 
 import Input from 'components/Input';
+import { registerUser as registerAction } from 'actions/UserActions';
+import { connect } from 'react-redux';
 
 const StyledForm = styled(Form)`
   display: flex;
@@ -17,10 +19,16 @@ const StyledInput = styled(Input)`
   width: 300px;
 `;
 
-const RegisterPage = () => {
+const RegisterPage = ({ register, UserReducer: { isError } }) => {
   return (
     <>
-      <Formik initialValues={{ name: '', password: '' }} onSubmit={() => console.log('siemson')}>
+      {isError && <p>error</p>}
+      <Formik
+        initialValues={{ username: '', password: '' }}
+        onSubmit={({ username, password }) => {
+          register(username, password);
+        }}
+      >
         {({ handleChange, handleBlur, values }) => {
           return (
             <>
@@ -35,7 +43,7 @@ const RegisterPage = () => {
                   value={values.title}
                 />
                 <StyledInput
-                  type="text"
+                  type="password"
                   name="password"
                   placeholder="password"
                   onChange={handleChange}
@@ -52,4 +60,15 @@ const RegisterPage = () => {
   );
 };
 
-export default RegisterPage;
+const mapDispatchToProps = dispatch => ({
+  register: (username, password) => dispatch(registerAction(username, password)),
+});
+
+const mapStateToProps = ({ UserReducer }) => ({
+  UserReducer,
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(RegisterPage);

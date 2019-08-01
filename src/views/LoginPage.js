@@ -23,7 +23,7 @@ const LoginPage = ({ auth, UserReducer }) => {
   return (
     <>
       <Formik
-        initialValues={{ name: '', password: '' }}
+        initialValues={{ username: '', password: '' }}
         onSubmit={({ username, password }) => {
           auth(username, password);
         }}
