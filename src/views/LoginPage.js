@@ -1,8 +1,10 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import styled from 'styled-components';
-
+import { connect } from 'react-redux';
 import Input from 'components/Input';
+import { auth as authAction } from 'actions/UserActions';
+import PropTypes from 'prop-types';
 
 const StyledForm = styled(Form)`
   display: flex;
@@ -16,10 +18,16 @@ const StyledInput = styled(Input)`
   height: 20px;
   width: 300px;
 `;
-const LoginPage = () => {
+
+const LoginPage = ({ auth, UserReducer }) => {
   return (
     <>
-      <Formik initialValues={{ name: '', password: '' }} onSubmit={() => console.log('siemson')}>
+      <Formik
+        initialValues={{ name: '', password: '' }}
+        onSubmit={({ username, password }) => {
+          auth(username, password);
+        }}
+      >
         {({ handleChange, handleBlur, values }) => {
           return (
             <>
@@ -41,7 +49,7 @@ const LoginPage = () => {
                   onBlur={handleBlur}
                   value={values.title}
                 />
-                <button type="submit">Register</button>
+                <button type="submit">Login</button>
               </StyledForm>
             </>
           );
@@ -51,4 +59,15 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+const mapStateToProps = ({ UserReducer }) => ({
+  UserReducer,
+});
+
+const mapDispatchToProps = dispatch => ({
+  auth: (username, password) => dispatch(authAction(username, password)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(LoginPage);
