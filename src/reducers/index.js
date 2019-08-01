@@ -1,4 +1,6 @@
-const initialState = {};
+const initialState = {
+  user: 'Piter',
+};
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
