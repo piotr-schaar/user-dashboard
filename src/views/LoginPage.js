@@ -1,10 +1,12 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import Input from 'components/Input';
 import { auth as authAction } from 'actions/UserActions';
 import PropTypes from 'prop-types';
+import { routes } from '../routes';
 
 const StyledForm = styled(Form)`
   display: flex;
@@ -19,7 +21,7 @@ const StyledInput = styled(Input)`
   width: 300px;
 `;
 
-const LoginPage = ({ auth, UserReducer }) => {
+const LoginPage = ({ auth, userID }) => {
   return (
     <>
       <Formik
@@ -29,6 +31,9 @@ const LoginPage = ({ auth, UserReducer }) => {
         }}
       >
         {({ handleChange, handleBlur, values }) => {
+          if (userID) {
+            return <Redirect to={routes.home} />;
+          }
           return (
             <>
               <h1>Sign up</h1>
@@ -59,8 +64,8 @@ const LoginPage = ({ auth, UserReducer }) => {
   );
 };
 
-const mapStateToProps = ({ UserReducer }) => ({
-  UserReducer,
+const mapStateToProps = ({ UserReducer: { userID = null } }) => ({
+  userID,
 });
 
 const mapDispatchToProps = dispatch => ({

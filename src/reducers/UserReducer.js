@@ -7,6 +7,7 @@ import {
 import { REGISTER_USER_SUCCESS } from '../actions/UserActions';
 
 const initialState = {
+  userID: null,
   isError: false,
 };
 
@@ -15,7 +16,7 @@ const userReducer = (state = initialState, action) => {
     case AUTH_SUCCESS:
       return {
         ...state,
-        userID: action.payload.data.id,
+        userID: action.payload.data._id,
       };
     case REGISTER_USER_SUCCESS:
       return {

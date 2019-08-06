@@ -1,13 +1,12 @@
 const mongoose = require('mongoose');
 const passport = require('passport');
 require('../models/User');
-const bcrypt = require('bcryptjs');
 
 const User = mongoose.model('users');
 
 const user = {
   userLogin: (req, res, next) => {
-    passport.authenticate('local', (err, user, info) => {
+    passport.authenticate('local', function(err, user, info) {
       if (err) {
         return next(err);
       }
@@ -15,7 +14,7 @@ const user = {
         return res.sendStatus(403);
       }
 
-      req.logIn(user, () => {
+      req.logIn(user, function(err) {
         if (err) {
           return next(err);
         }
@@ -28,59 +27,20 @@ const user = {
     res.sendStatus(200);
   },
   userRegister: (req, res) => {
-    const { username, password } = req.body;
-    let errors = [];
-    if (!username || !password) {
-      errors.push({
-        msg: 'Please fill in all fields',
-      });
-    }
-    if (password.length < 6) {
-      errors.push({
-        msg: 'Password is too short(atleast 6 charactes)',
-      });
-    }
-    User.findOne({ username }).then(userN => {
-      if (userN) {
-        errors.push({
-          msg: 'Email is already registered',
-        });
+    console.log(req.body.username, req.body.password);
+    User.register(new User({ username: req.body.username }), req.body.password, function(
+      err,
+      user,
+    ) {
+      if (err) {
+        console.log(err);
+        return res.sendStatus(500);
       } else {
-        const newUser = new User({
-          username,
-          password,
+        passport.authenticate('local')(req, res, function() {
+          res.sendStatus(201);
         });
-
-        bcrypt.genSalt(10, (err, salt) =>
-          bcrypt.hash(newUser.password, salt, (err, hash) => {
-            if (err) throw err;
-
-            newUser.password = hash;
-            newUser
-              .save()
-              .then(user => {
-                passport.authenticate('local')(req, res, () => {
-                  res.sendStatus(201);
-                });
-              })
-              .catch(error => console.log(error));
-          }),
-        );
       }
     });
-    // User.register(
-    //   new User({ username: req.body.username, password: req.body.password }),
-    //   req.body.password,
-    //   (err, user) => {
-    //     if (err) {
-    //       return res.sendStatus(500);
-    //     } else {
-    // passport.authenticate('local')(req, res, () => {
-    //   res.sendStatus(201);
-    // });
-    //     }
-    //   },
-    // );
   },
 };
 
