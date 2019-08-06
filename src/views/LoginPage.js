@@ -8,23 +8,24 @@ import { auth as authAction } from 'actions/UserActions';
 import PropTypes from 'prop-types';
 import { routes } from '../routes';
 import AuthTemplate from '../templates/AuthTemplate';
+import Heading from '../components/Heading';
+import Button from '../components/Button';
 
 const StyledForm = styled(Form)`
+  width: 350px;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
 `;
 
 const StyledInput = styled(Input)`
-  margin: 0 0 15px 0;
-  height: 20px;
-  width: 300px;
+  margin: 0 0 30px 0;
+  height: 40px;
 `;
 
 const LoginPage = ({ auth, userID }) => {
   return (
     <AuthTemplate>
+      <Heading big>sign in</Heading>
       <Formik
         initialValues={{ username: '', password: '' }}
         onSubmit={({ username, password }) => {
@@ -37,9 +38,9 @@ const LoginPage = ({ auth, userID }) => {
           }
           return (
             <>
-              <h1>Sign up</h1>
-              <StyledForm>
+              <StyledForm autoComplete="off">
                 <StyledInput
+                  id="username"
                   type="text"
                   name="username"
                   placeholder="login"
@@ -55,7 +56,7 @@ const LoginPage = ({ auth, userID }) => {
                   onBlur={handleBlur}
                   value={values.title}
                 />
-                <button type="submit">Login</button>
+                <Button type="submit">Login</Button>
               </StyledForm>
             </>
           );

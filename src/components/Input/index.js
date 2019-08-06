@@ -1,17 +1,12 @@
 import styled from 'styled-components';
 
 const Input = styled.input`
-  padding: 15px 30px;
+  padding: 10px 15px;
   font-size: 15px;
   font-weight: 400;
-  background-color: grey;
+  background-color: white;
   border: none;
-  border-radius: 50px;
-  ::placeholder {
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: white;
-  }
+  border-radius: 10px;
 `;
 
 export default Input;
