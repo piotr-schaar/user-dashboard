@@ -33,9 +33,6 @@ const LoginPage = ({ auth, userID }) => {
         }}
       >
         {({ handleChange, handleBlur, values }) => {
-          if (userID) {
-            return <Redirect to={routes.home} />;
-          }
           return (
             <>
               <StyledForm autoComplete="off">

@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
+
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 import { theme } from 'theme/MainTheme';
 import PropTypes from 'prop-types';
+import { routes } from 'routes';
 
 const GridContainer = styled.div`
   display: flex;
@@ -26,7 +30,8 @@ const SideWrapperStyled = styled.div`
   position: relative;
   color: ${({ theme }) => theme.blue};
   font-size: 70px;
-  transition: width 1s;
+  transition: all 1s;
+  opacity: ${({ isAuth }) => (isAuth ? '0' : '1')};
 `;
 
 const Hero = styled.h1`
@@ -34,8 +39,23 @@ const Hero = styled.h1`
   user-select: none;
 `;
 
-const AuthTemplate = ({ children }) => {
+const AuthTemplate = ({ children, userID }) => {
   const [isAuth, setAuth] = useState(false);
+  const [isReady, setReady] = useState(false);
+
+  useEffect(() => {
+    if (userID) {
+      setAuth(true);
+      setTimeout(() => {
+        setReady(true);
+      }, 2000);
+    }
+  }, [userID]);
+
+  if (isReady) {
+    return <Redirect to="/" />;
+  }
+
   return (
     <GridContainer>
       <WrapperStyled isAuth={isAuth}>{children}</WrapperStyled>
@@ -52,6 +72,15 @@ const AuthTemplate = ({ children }) => {
 
 AuthTemplate.propTypes = {
   children: PropTypes.array.isRequired,
+  userID: PropTypes.string,
 };
 
-export default AuthTemplate;
+AuthTemplate.defaultProps = {
+  userID: null,
+};
+
+const mapStateToProps = ({ UserReducer: { userID = null } }) => ({
+  userID,
+});
+
+export default connect(mapStateToProps)(AuthTemplate);
