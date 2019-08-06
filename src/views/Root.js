@@ -4,8 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { routes } from 'routes';
 import { Provider } from 'react-redux';
 import store from 'store';
-import LoginPage from 'views/LoginPage';
-import RegisterPage from 'views/RegisterPage';
+import AuthPage from 'views/AuthPage';
 import MainTemplate from 'templates/MainTemplate';
 import MainPage from './MainPage';
 
@@ -15,8 +14,7 @@ const Root = () => (
       <MainTemplate>
         <Switch>
           <Route exact path={routes.home} component={MainPage} />
-          <Route path={routes.login} component={LoginPage} />
-          <Route path={routes.register} component={RegisterPage} />
+          <Route path={routes.register} component={AuthPage} />
         </Switch>
       </MainTemplate>
     </Router>

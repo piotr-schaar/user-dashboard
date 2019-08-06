@@ -9,6 +9,7 @@ const Button = styled.button`
   font-weight: 600;
   padding: 10px 5px;
   border-radius: 10px;
+  font-size: ${({ theme }) => theme.fontSize.m};
 `;
 
 export default Button;

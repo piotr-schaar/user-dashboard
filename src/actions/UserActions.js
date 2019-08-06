@@ -11,7 +11,7 @@ export const auth = (username, password) => dispatch => {
   dispatch({ type: AUTH_REQUEST });
 
   return axios
-    .post('http://localhost:5000/api/user/login', {
+    .post('http://localhost:9000/api/user/login', {
       username,
       password,
     })
@@ -28,7 +28,7 @@ export const registerUser = (username, password) => dispatch => {
 
   dispatch({ type: REGISTER_USER_SUCCESS });
   return axios
-    .post('http://localhost:5000/api/user/register', {
+    .post('http://localhost:9000/api/user/register', {
       username,
       password,
     })
