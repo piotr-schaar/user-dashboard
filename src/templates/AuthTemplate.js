@@ -71,7 +71,6 @@ const AuthTemplate = ({ children, userID }) => {
 };
 
 AuthTemplate.propTypes = {
-  children: PropTypes.array.isRequired,
   userID: PropTypes.string,
 };
 
