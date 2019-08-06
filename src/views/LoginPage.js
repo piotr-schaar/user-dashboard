@@ -7,6 +7,7 @@ import Input from 'components/Input';
 import { auth as authAction } from 'actions/UserActions';
 import PropTypes from 'prop-types';
 import { routes } from '../routes';
+import AuthTemplate from '../templates/AuthTemplate';
 
 const StyledForm = styled(Form)`
   display: flex;
@@ -23,7 +24,7 @@ const StyledInput = styled(Input)`
 
 const LoginPage = ({ auth, userID }) => {
   return (
-    <>
+    <AuthTemplate>
       <Formik
         initialValues={{ username: '', password: '' }}
         onSubmit={({ username, password }) => {
@@ -47,7 +48,7 @@ const LoginPage = ({ auth, userID }) => {
                   value={values.title}
                 />
                 <StyledInput
-                  type="text"
+                  type="password"
                   name="password"
                   placeholder="password"
                   onChange={handleChange}
@@ -60,8 +61,17 @@ const LoginPage = ({ auth, userID }) => {
           );
         }}
       </Formik>
-    </>
+    </AuthTemplate>
   );
+};
+
+LoginPage.defaultProps = {
+  userID: null,
+};
+
+LoginPage.propTypes = {
+  auth: PropTypes.func.isRequired,
+  userID: PropTypes.string,
 };
 
 const mapStateToProps = ({ UserReducer: { userID = null } }) => ({

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import Input from 'components/Input';
 import { registerUser as registerAction } from 'actions/UserActions';
@@ -58,6 +59,16 @@ const RegisterPage = ({ register, UserReducer: { isError } }) => {
       </Formik>
     </>
   );
+};
+
+RegisterPage.defaultProps = {
+  isError: null,
+};
+
+RegisterPage.propTypes = {
+  register: PropTypes.func.isRequired,
+  UserReducer: PropTypes.object.isRequired,
+  isError: PropTypes.bool,
 };
 
 const mapDispatchToProps = dispatch => ({
