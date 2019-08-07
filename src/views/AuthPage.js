@@ -10,7 +10,7 @@ import Button from 'components/Button';
 import AuthTemplate from 'templates/AuthTemplate';
 import useForm from 'hooks/useForm';
 
-const StyledForm = styled(Form)`
+const StyledForm = styled.form`
   width: 350px;
   display: flex;
   flex-direction: column;
@@ -29,15 +29,15 @@ const ChangeAuthButton = styled(Button)`
   font-size: ${({ theme }) => theme.fontSize.s};
 `;
 
-const AuthPage = ({ authLogin, authRegister, UserReducer: { isError } }) => {
-  const login = true;
+const AuthPage = ({ authLogin, authRegister }) => {
+  const loginType = true;
 
   const [updateValue, values, errors] = useForm({
     username: '',
     password: '',
   });
 
-  const [authType, setAuthType] = useState(login);
+  const [authType, setAuthType] = useState(loginType);
 
   const submitFunc = e => {
     e.preventDefault();
@@ -78,15 +78,9 @@ const AuthPage = ({ authLogin, authRegister, UserReducer: { isError } }) => {
   );
 };
 
-AuthPage.defaultProps = {
-  isError: null,
-};
-
 AuthPage.propTypes = {
   authRegister: PropTypes.func.isRequired,
   authLogin: PropTypes.func.isRequired,
-  UserReducer: PropTypes.object.isRequired,
-  isError: PropTypes.bool,
 };
 
 const mapDispatchToProps = dispatch => ({
