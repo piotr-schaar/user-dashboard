@@ -53,7 +53,7 @@ const AuthTemplate = ({ children, userID }) => {
   }, [userID]);
 
   if (isReady) {
-    return <Redirect to="/" />;
+    return <Redirect to={routes.home} />;
   }
 
   return (

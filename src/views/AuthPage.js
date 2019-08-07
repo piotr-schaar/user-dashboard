@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import Heading from 'components/Heading';
 import Button from 'components/Button';
 import AuthTemplate from 'templates/AuthTemplate';
+import useForm from 'hooks/useForm';
 
 const StyledForm = styled(Form)`
   width: 350px;
@@ -29,56 +30,51 @@ const ChangeAuthButton = styled(Button)`
   font-size: ${({ theme }) => theme.fontSize.s};
 `;
 
-const AuthPage = ({ authLogin, userID, authRegister, UserReducer: { isError } }) => {
+const AuthPage = ({ authLogin, authRegister, UserReducer: { isError } }) => {
   const login = true;
+
+  const [updateValue, values, errors] = useForm({
+    username: '',
+    password: '',
+  });
 
   const [authType, setAuthType] = useState(login);
 
-  const submitFunc = (username, password) =>
-    authType ? authLogin(username, password) : authRegister(username, password);
+  const submitFunc = e => {
+    e.preventDefault();
+    const { username, password } = values;
+    return authType ? authLogin(username, password) : authRegister(username, password);
+  };
 
   const setAuth = () => setAuthType(!authType);
 
   return (
     <AuthTemplate>
-      <Formik
-        initialValues={{ username: '', password: '' }}
-        onSubmit={({ username, password }) => {
-          submitFunc(username, password);
-        }}
-      >
-        {({ handleChange, handleBlur, values }) => {
-          return (
-            <>
-              {authType ? <Heading big>Sign in</Heading> : <Heading big>Sign Up</Heading>}
-              <StyledForm>
-                <StyledInput
-                  type="text"
-                  name="username"
-                  placeholder="login"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.title}
-                />
-                <StyledInput
-                  type="password"
-                  name="password"
-                  placeholder="password"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.title}
-                />
-                <Button big type="submit">
-                  {authType ? 'login' : 'register'}
-                </Button>
-                <ChangeAuthButton type="button" onClick={setAuth}>
-                  {authType ? 'create new account' : 'already have a accout? Log in'}
-                </ChangeAuthButton>
-              </StyledForm>
-            </>
-          );
-        }}
-      </Formik>
+      {authType ? <Heading big>Sign in</Heading> : <Heading big>Sign Up</Heading>}
+
+      <StyledForm onSubmit={submitFunc}>
+        <StyledInput
+          type="text"
+          name="username"
+          placeholder="login"
+          onChange={updateValue}
+          onBlur={updateValue}
+        />
+        <StyledInput
+          type="password"
+          name="password"
+          placeholder="password"
+          onChange={updateValue}
+          onBlur={updateValue}
+        />
+        <Button big type="submit">
+          {authType ? 'login' : 'register'}
+        </Button>
+        <ChangeAuthButton type="button" onClick={setAuth}>
+          {authType ? 'create new account' : 'already have a accout? Log in'}
+        </ChangeAuthButton>
+        {errors && errors.map(err => <p>{err}</p>)}
+      </StyledForm>
     </AuthTemplate>
   );
 };
