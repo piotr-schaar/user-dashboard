@@ -2,7 +2,7 @@ import { AUTH_SUCCESS, REGISTER_USER_FAILURE } from 'actions/UserActions';
 import { REGISTER_USER_SUCCESS } from '../actions/UserActions';
 
 const initialState = {
-  userID: '5d4b4033d0286511d04940e4',
+  userID: `5d4b4033d0286511d04940e4`,
   isError: false,
 };
 

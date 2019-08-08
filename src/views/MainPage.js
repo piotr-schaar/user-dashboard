@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { fetchMovies as fetchMoviesAction } from 'actions/MoviesActions';
+import DashboardTemlate from '../templates/DashboardTemplate';
+
+import Card from 'components/Card';
+import Heading from 'components/Heading';
 
 const MainPage = ({ UserReducer: { userID }, MoviesReducer: { movies }, fetchMovies }) => {
   useEffect(() => {
@@ -14,11 +18,19 @@ const MainPage = ({ UserReducer: { userID }, MoviesReducer: { movies }, fetchMov
     return <Redirect to="/login" />;
   }
   return (
-    <>
-      {movies.map(item => (
-        <p>{item.title}</p>
-      ))}
-    </>
+    <DashboardTemlate>
+      <Heading big color="white">
+        News
+      </Heading>
+      <Card>
+        News
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus saepe ipsam labore
+          iste assumenda eveniet, nam dolorem et adipisci quam placeat, dignissimos eligendi nulla
+          libero iusto illum veritatis, corporis repudiandae!
+        </p>
+      </Card>
+    </DashboardTemlate>
   );
 };
 
