@@ -3,7 +3,6 @@ import { Redirect } from 'react-router-dom';
 
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { theme } from 'theme/MainTheme';
 import PropTypes from 'prop-types';
 import { routes } from 'routes';
 
@@ -72,6 +71,7 @@ const AuthTemplate = ({ children, userID }) => {
 
 AuthTemplate.propTypes = {
   userID: PropTypes.string,
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 };
 
 AuthTemplate.defaultProps = {

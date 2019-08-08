@@ -32,17 +32,20 @@ const ChangeAuthButton = styled(Button)`
 const AuthPage = ({ authLogin, authRegister }) => {
   const loginType = true;
 
-  const [updateValue, values, errors] = useForm({
+  const [updateValue, values, submitForm, errors] = useForm({
     username: '',
     password: '',
   });
-
   const [authType, setAuthType] = useState(loginType);
 
   const submitFunc = e => {
     e.preventDefault();
+    submitForm();
     const { username, password } = values;
-    return authType ? authLogin(username, password) : authRegister(username, password);
+    if (errors.length === 0) {
+      return authType ? authLogin(username, password) : authRegister(username, password);
+    }
+    return null;
   };
 
   const setAuth = () => setAuthType(!authType);
@@ -72,7 +75,7 @@ const AuthPage = ({ authLogin, authRegister }) => {
         <ChangeAuthButton type="button" onClick={setAuth}>
           {authType ? 'create new account' : 'already have a accout? Log in'}
         </ChangeAuthButton>
-        {errors && errors.map(err => <p>{err}</p>)}
+        {errors && errors.map(err => <p key={err}>{err}</p>)}
       </StyledForm>
     </AuthTemplate>
   );

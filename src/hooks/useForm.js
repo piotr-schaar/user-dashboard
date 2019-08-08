@@ -13,20 +13,19 @@ const validateForm = values => {
   return errors;
 };
 
-const useForm = initial => {
-  const [values, setValues] = useState(initial);
+const useForm = initialValues => {
+  const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState([]);
-
-  useEffect(() => {
-    setErrors(validateForm(values));
-    validateForm(values);
-  }, [values]);
 
   const updateValue = e => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  return [updateValue, values, errors];
+  const submitForm = () => {
+    setErrors(validateForm(values));
+  };
+
+  return [updateValue, values, submitForm, errors];
 };
 
 export default useForm;
