@@ -1,7 +1,7 @@
 import { FETCH_ITEMS, FETCH_REQUEST } from 'actions/MoviesActions';
 
 const initialState = {
-  movies: [],
+  moviesPopular: [],
 };
 
 const MoviesReducer = (state = initialState, action) => {
@@ -11,7 +11,7 @@ const MoviesReducer = (state = initialState, action) => {
     case FETCH_ITEMS:
       return {
         ...state,
-        movies: [...action.payload],
+        [action.payload.itemType]: [...action.payload.data],
       };
     default:
       return state;

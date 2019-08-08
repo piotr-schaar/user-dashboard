@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import Sidebar from '../components/Sidebar';
 
 const WrapperStyled = styled.div`
-  background: #2c3554;
+  background: #151A28;
   width: 100%;
   height: 100vh;
-  padding: 50px 50px 50px 120px;
+  padding: 20px 50px;
 `;
 
 const DashboardTemlate = ({ children }) => {
