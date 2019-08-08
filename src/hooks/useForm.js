@@ -7,9 +7,6 @@ const validateForm = values => {
     errors.push('Please enter username');
   }
 
-  if (!values.password < 5) {
-    errors.push('Password is too short');
-  }
   return errors;
 };
 

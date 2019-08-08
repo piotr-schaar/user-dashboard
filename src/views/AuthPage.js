@@ -54,22 +54,29 @@ const AuthPage = ({ authLogin, authRegister }) => {
     password: '',
   });
   const [authType, setAuthType] = useState(loginType);
-
+  const [isRegister, setRegister] = useState(false);
   const submitFunc = e => {
     e.preventDefault();
     submitForm();
     const { username, password } = values;
     if (errors.length === 0) {
-      return authType ? authLogin(username, password) : authRegister(username, password);
+      if (authType) {
+        authLogin(username, password);
+      } else {
+        setRegister(true);
+        authRegister(username, password);
+      }
     }
-    return null;
   };
 
-  const setAuth = () => setAuthType(!authType);
+  const setAuth = () => {
+    setAuthType(!authType);
+    errors.length = 0;
+  };
 
   return (
     <AuthTemplate>
-      {authType ? <Heading big>sign in</Heading> : <Heading big>sign Up</Heading>}
+      {authType ? <Heading big>sign in</Heading> : <Heading big>sign up</Heading>}
 
       <StyledForm onSubmit={submitFunc}>
         <StyledInput
@@ -99,6 +106,11 @@ const AuthPage = ({ authLogin, authRegister }) => {
                 {err}
               </Alert>
             ))}
+          </MessagesStyled>
+        )}
+        {isRegister && (
+          <MessagesStyled>
+            <Alert type="info">You can log now</Alert>
           </MessagesStyled>
         )}
       </StyledForm>
