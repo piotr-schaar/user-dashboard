@@ -1,13 +1,8 @@
-import {
-  AUTH_SUCCESS,
-  AUTH_FAILURE,
-  AUTH_REQUEST,
-  REGISTER_USER_FAILURE,
-} from 'actions/UserActions';
+import { AUTH_SUCCESS, REGISTER_USER_FAILURE } from 'actions/UserActions';
 import { REGISTER_USER_SUCCESS } from '../actions/UserActions';
 
 const initialState = {
-  userID: null,
+  userID: '5d4b4033d0286511d04940e4',
   isError: false,
 };
 
