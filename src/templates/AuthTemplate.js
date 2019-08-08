@@ -17,7 +17,7 @@ const WrapperStyled = styled.div`
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  background: ${({ theme }) => theme.greenLight};
+  background: ${({ theme }) => theme.white};
   transition: all 1s;
   opacity: ${({ isAuth }) => (isAuth ? '0' : '1')};
 `;
@@ -27,7 +27,9 @@ const SideWrapperStyled = styled.div`
   display: flex;
   flex-direction: column-reverse;
   position: relative;
-  color: ${({ theme }) => theme.blue};
+  background-color: ${({ theme }) => theme.blue};
+
+  color: ${({ theme }) => theme.white};
   font-size: 70px;
   transition: all 1s;
   opacity: ${({ isAuth }) => (isAuth ? '0' : '1')};

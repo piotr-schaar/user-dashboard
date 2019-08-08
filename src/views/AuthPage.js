@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import PropTypes from 'prop-types';
 
 import Input from 'components/Input';
@@ -9,6 +9,18 @@ import Heading from 'components/Heading';
 import Button from 'components/Button';
 import AuthTemplate from 'templates/AuthTemplate';
 import useForm from 'hooks/useForm';
+import Alert from '../components/Alert';
+
+const fadeIn = keyframes`
+   from {
+     opacity: 0;
+     bottom: -10px;
+   } 
+   to {
+     opacity: 1;
+     bottom: 0;
+   }
+`;
 
 const StyledForm = styled.form`
   width: 350px;
@@ -27,6 +39,11 @@ const ChangeAuthButton = styled(Button)`
   border: none;
   color: ${({ theme }) => theme.blue};
   font-size: ${({ theme }) => theme.fontSize.s};
+`;
+
+const MessagesStyled = styled.div`
+  position: relative;
+  animation: ${fadeIn} 1s ease-in-out;
 `;
 
 const AuthPage = ({ authLogin, authRegister }) => {
@@ -52,7 +69,7 @@ const AuthPage = ({ authLogin, authRegister }) => {
 
   return (
     <AuthTemplate>
-      {authType ? <Heading big>Sign in</Heading> : <Heading big>Sign Up</Heading>}
+      {authType ? <Heading big>sign in</Heading> : <Heading big>sign Up</Heading>}
 
       <StyledForm onSubmit={submitFunc}>
         <StyledInput
@@ -70,12 +87,20 @@ const AuthPage = ({ authLogin, authRegister }) => {
           onBlur={updateValue}
         />
         <Button big type="submit">
-          {authType ? 'login' : 'register'}
+          {authType ? 'log in' : 'register'}
         </Button>
         <ChangeAuthButton type="button" onClick={setAuth}>
-          {authType ? 'create new account' : 'already have a accout? Log in'}
+          {authType ? 'create new account' : 'already have a account? Log in'}
         </ChangeAuthButton>
-        {errors && errors.map(err => <p key={err}>{err}</p>)}
+        {errors && (
+          <MessagesStyled>
+            {errors.map(err => (
+              <Alert type="warning" key={err}>
+                {err}
+              </Alert>
+            ))}
+          </MessagesStyled>
+        )}
       </StyledForm>
     </AuthTemplate>
   );

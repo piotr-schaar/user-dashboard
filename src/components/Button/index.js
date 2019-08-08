@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import theme from 'theme/MainTheme';
 
 const Button = styled.button`
   background: ${({ theme }) => theme.blue};
@@ -9,7 +8,7 @@ const Button = styled.button`
   font-weight: 600;
   padding: 10px 5px;
   border-radius: 10px;
-  font-size: ${({ theme }) => theme.fontSize.m};
+  font-size: ${({ theme }) => theme.fontSize.s};
 `;
 
 export default Button;
