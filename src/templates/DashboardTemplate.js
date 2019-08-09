@@ -5,8 +5,9 @@ import Sidebar from '../components/Sidebar';
 const WrapperStyled = styled.div`
   background: #151A28;
   width: 100%;
-  height: 100vh;
   padding: 20px 50px;
+  min-height: 100vh;
+  display: flex;
 `;
 
 const DashboardTemlate = ({ children }) => {
