@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import UserReducer from 'reducers/UserReducer';
-import MoviesReducer from 'reducers/MoviesReducer';
+import ContactsReducer from 'reducers/ContactsReducer';
 
 export default combineReducers({
   UserReducer,
-  MoviesReducer,
+  ContactsReducer,
 });

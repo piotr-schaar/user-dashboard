@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import DashboardTemlate from '../templates/DashboardTemplate';
-import NewMoviesSection from '../components/Sections/NewMoviesSection';
+import ContactsSection from '../components/Sections/Contacts/ContactsSection';
 
 const MainPage = ({ UserReducer: { userID } }) => {
   if (userID === null) {
@@ -12,7 +12,7 @@ const MainPage = ({ UserReducer: { userID } }) => {
   }
   return (
     <DashboardTemlate>
-      <NewMoviesSection />
+      <ContactsSection />
     </DashboardTemlate>
   );
 };
@@ -26,9 +26,8 @@ MainPage.propTypes = {
   userID: PropTypes.string,
 };
 
-const mapStateToProps = ({ UserReducer, MoviesReducer }) => ({
+const mapStateToProps = ({ UserReducer }) => ({
   UserReducer,
-  MoviesReducer,
 });
 
 export default connect(mapStateToProps)(MainPage);
