@@ -1,15 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { FaBeer, FaEnvelope } from 'react-icons/fa';
 
 const WrapperStyled = styled.div`
   padding: 12px;
   width: 100%;
   border-bottom: 2px solid rgba(73, 85, 124, 0.4);
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 5fr 1fr;
+  grid-gap: 30px;
   align-items: center;
   :last-of-type {
     border: 0;
+  }
+  &:hover,
+  &:active {
+    background: rgba(54, 64, 99, 0.8);
   }
 `;
 const ParagraphStyled = styled.div`
@@ -19,25 +26,34 @@ const ParagraphStyled = styled.div`
 `;
 
 const DescWrapper = styled.div`
-  padding-left: 20px;
   display: flex;
   flex-direction: column;
 `;
-const IconWrapper = styled.div`
-  width: 25px;
-  height: 25px;
+const AvatarWrapper = styled.div`
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: grey;
+`;
+const LinkStyled = styled.a`
+  color: white;
+  opacity: 0.5;
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 const ContactsItem = ({ item: { name, email }, index }) => {
   return (
     <WrapperStyled index={index}>
-      <IconWrapper />
+      <AvatarWrapper />
       <DescWrapper>
         <ParagraphStyled big>{name}</ParagraphStyled>
         <ParagraphStyled>{email}</ParagraphStyled>
       </DescWrapper>
+      <LinkStyled href={`mailto:${email}`}>
+        <FaEnvelope />
+      </LinkStyled>
     </WrapperStyled>
   );
 };

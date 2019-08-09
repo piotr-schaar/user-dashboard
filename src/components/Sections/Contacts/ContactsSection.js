@@ -12,9 +12,7 @@ const ContactsWrapper = styled.div`
   height: 300px;
   overflow-y: scroll;
 `;
-const SectionWrapper = styled.div`
-  width: 50%;
-`;
+const SectionWrapper = styled.div``;
 
 const UsersSection = ({ ContactsReducer: { contacts }, fetchContacts }) => {
   useEffect(() => {
