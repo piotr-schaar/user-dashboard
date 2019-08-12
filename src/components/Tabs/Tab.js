@@ -1,23 +1,46 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import styled, { css } from 'styled-components';
+
+const TabItem = styled.li`
+  display: block;
+  flex: 1;
+
+  list-style: none;
+  margin-bottom: -1px;
+  padding: 0.5rem 0.75rem;
+
+  ${({ isActive }) =>
+    isActive &&
+    css`
+      background: rgba(255, 255, 255, 0.1);
+    `}
+`;
+
+const TabButton = styled.button`
+  width: 100%;
+  color: white;
+  background: none;
+  border: none;
+  &:active,
+  &:focus {
+    outline: none;
+  }
+`;
 
 const Tab = ({ label, onClick, activeTab }) => {
-  const handleClick = () => {
-    onClick(label);
-  };
+  const [isActive, setActive] = useState(false);
 
-  let className = 'tab-list-item';
-
-  if (activeTab === label) {
-    className += ' tab-list-active';
-  }
+  useEffect(() => {
+    return activeTab === label ? setActive(true) : setActive(false);
+  }, [activeTab]);
 
   return (
-    <li className={className}>
-      <button type="button" onClick={handleClick}>
+    <TabItem isActive={isActive}>
+      <TabButton type="button" onClick={() => onClick(label)}>
         {label}
-      </button>
-    </li>
+      </TabButton>
+    </TabItem>
   );
 };
 

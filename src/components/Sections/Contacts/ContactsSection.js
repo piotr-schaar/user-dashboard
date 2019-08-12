@@ -10,6 +10,7 @@ import ContactsItem from 'components/Sections/Contacts/ContactsItem';
 import Tabs from 'components/Tabs/Tabs';
 
 const ContactsWrapper = styled.div`
+  width: 400px;
   height: 300px;
   overflow-y: scroll;
 `;
@@ -31,9 +32,7 @@ const UsersSection = ({ ContactsReducer: { contacts }, fetchContacts }) => {
                 <ContactsItem key={item.id} item={item} index={index} />
               ))}
             </div>
-            <div label="siema">
-              <h1>siema</h1>
-            </div>
+            <div label="Favorites" />
           </Tabs>
         </Card>
       </ContactsWrapper>
