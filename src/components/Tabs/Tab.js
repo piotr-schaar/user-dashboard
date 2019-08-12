@@ -5,7 +5,6 @@ import styled, { css } from 'styled-components';
 const TabItem = styled.li`
   display: block;
   flex: 1;
-
   list-style: none;
   margin-bottom: -1px;
   padding: 0.5rem 0.75rem;
@@ -20,6 +19,7 @@ const TabItem = styled.li`
 const TabButton = styled.button`
   width: 100%;
   color: white;
+  font-weight: 600;
   background: none;
   border: none;
   &:active,

@@ -8,14 +8,19 @@ import Heading from 'components/Heading';
 import Card from 'components/Card';
 import ContactsItem from 'components/Sections/Contacts/ContactsItem';
 import Tabs from 'components/Tabs/Tabs';
+import ContactAddForm from 'components/Sections/Contacts/ContactAddForm';
 
-const ContactsWrapper = styled.div`
+const SectionWrapper = styled.div`
   width: 400px;
-  height: 300px;
-  overflow-y: scroll;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  position: fixed;
 `;
-const SectionWrapper = styled.div``;
-
+const ContactsWrapper = styled.div`
+  height: 100vh;
+`;
+const TabContent = styled.div``;
 const UsersSection = ({ ContactsReducer: { contacts }, fetchContacts }) => {
   useEffect(() => {
     fetchContacts();
@@ -23,17 +28,22 @@ const UsersSection = ({ ContactsReducer: { contacts }, fetchContacts }) => {
 
   return (
     <SectionWrapper>
-      <Heading color="white">Contacts</Heading>
       <ContactsWrapper>
         <Card>
-          <Tabs>
-            <div label="All">
+          <Heading color="white">Contacts</Heading>
+          <Tabs scroll>
+            <TabContent label="All">
+              {contacts.map((item, index) => (
+                <ContactsItem key={item.id} item={item} index={index} />
+              ))}
+            </TabContent>
+            <div label="Favorites">
               {contacts.map((item, index) => (
                 <ContactsItem key={item.id} item={item} index={index} />
               ))}
             </div>
-            <div label="Favorites" />
           </Tabs>
+          <ContactAddForm />
         </Card>
       </ContactsWrapper>
     </SectionWrapper>

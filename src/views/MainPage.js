@@ -12,6 +12,7 @@ const MainPage = ({ UserReducer: { userID } }) => {
   }
   return (
     <DashboardTemlate>
+      <h1>siema</h1>
       <ContactsSection />
     </DashboardTemlate>
   );
