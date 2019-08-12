@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Tab = ({ label, onClick, activeTab }) => {
   const handleClick = () => {
@@ -18,6 +19,12 @@ const Tab = ({ label, onClick, activeTab }) => {
       </button>
     </li>
   );
+};
+
+Tab.propTypes = {
+  label: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  activeTab: PropTypes.string.isRequired,
 };
 
 export default Tab;

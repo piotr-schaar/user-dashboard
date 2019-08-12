@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { FaBeer, FaEnvelope } from 'react-icons/fa';
+import { FaEnvelope } from 'react-icons/fa';
 
 const WrapperStyled = styled.div`
   padding: 12px;
