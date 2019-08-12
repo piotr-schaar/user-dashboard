@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { fetchContacts as fetchContactsAction } from 'actions/ContactsActions';
 
 import Heading from 'components/Heading';
-import Card from 'components/Card';
 import ContactsItem from 'components/Sections/Contacts/ContactsItem';
 import Tabs from 'components/Tabs/Tabs';
 import ContactAddForm from 'components/Sections/Contacts/ContactAddForm';
@@ -14,8 +13,12 @@ const SectionWrapper = styled.div`
   width: 400px;
   top: 0;
   right: 0;
+  padding: 15px 20px;
   height: 100vh;
   position: fixed;
+  z-index: 10;
+  background: rgba(54, 64, 99, 1);
+  color: white;
 `;
 const ContactsWrapper = styled.div`
   height: 100vh;
@@ -29,22 +32,20 @@ const UsersSection = ({ ContactsReducer: { contacts }, fetchContacts }) => {
   return (
     <SectionWrapper>
       <ContactsWrapper>
-        <Card>
-          <Heading color="white">Contacts</Heading>
-          <Tabs scroll>
-            <TabContent label="All">
-              {contacts.map((item, index) => (
-                <ContactsItem key={item.id} item={item} index={index} />
-              ))}
-            </TabContent>
-            <div label="Favorites">
-              {contacts.map((item, index) => (
-                <ContactsItem key={item.id} item={item} index={index} />
-              ))}
-            </div>
-          </Tabs>
-          <ContactAddForm />
-        </Card>
+        <Heading color="white">Contacts</Heading>
+        <Tabs scroll>
+          <TabContent label="All">
+            {contacts.map((item, index) => (
+              <ContactsItem key={item.id} item={item} index={index} />
+            ))}
+          </TabContent>
+          <div label="Favorites">
+            {contacts.map((item, index) => (
+              <ContactsItem key={item.id} item={item} index={index} />
+            ))}
+          </div>
+        </Tabs>
+        <ContactAddForm />
       </ContactsWrapper>
     </SectionWrapper>
   );

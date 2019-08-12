@@ -55,6 +55,7 @@ const AuthPage = ({ authLogin, authRegister }) => {
   });
   const [authType, setAuthType] = useState(loginType);
   const [isRegister, setRegister] = useState(false);
+
   const submitFunc = e => {
     e.preventDefault();
     submitForm();

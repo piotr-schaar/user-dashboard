@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { FaEnvelope } from 'react-icons/fa';
+import { FaEnvelope, FaUser } from 'react-icons/fa';
 
 const WrapperStyled = styled.div`
   padding: 12px;
@@ -34,6 +34,9 @@ const AvatarWrapper = styled.div`
   height: 40px;
   border-radius: 50%;
   background: grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 const LinkStyled = styled.a`
   color: white;
@@ -46,7 +49,9 @@ const LinkStyled = styled.a`
 const ContactsItem = ({ item: { name, email }, index }) => {
   return (
     <WrapperStyled index={index}>
-      <AvatarWrapper />
+      <AvatarWrapper>
+        <FaUser />
+      </AvatarWrapper>
       <DescWrapper>
         <ParagraphStyled big>{name}</ParagraphStyled>
         <ParagraphStyled>{email}</ParagraphStyled>
