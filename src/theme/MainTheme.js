@@ -3,9 +3,9 @@ export const theme = {
   green: '#78B15C',
   greenOpacity: 'rgba(120,177,92,0.7)',
   white: '#ffffff',
-  grey: '##787774',
+  grey: '#787774',
+  lightGrey: 'rgba(0, 0, 0, 0.1)',
   warning: '#EDF5E1',
-
   fontSize: {
     xxs: '1rem',
     xs: '1.2rem',

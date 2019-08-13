@@ -1,21 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { FaEnvelope, FaUser } from 'react-icons/fa';
+import { FaEnvelope, FaUser, FaHeart } from 'react-icons/fa';
 
 const WrapperStyled = styled.div`
   padding: 12px;
-  width: 100%;
+  width: 50%;
   display: grid;
-  grid-template-columns: 1fr 5fr 1fr;
-  grid-gap: 30px;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-gap: 5px;
   align-items: center;
+  box-shadow: 5px 6px 7px -7px rgba(0, 0, 0, 0.2);
+  margin: 5px 0;
   :last-of-type {
     border: 0;
   }
 `;
 const ParagraphStyled = styled.div`
-  font-weight: ${({ big }) => (big ? '600' : '300')}
+  font-weight: ${({ big }) => (big ? '600' : '300')};
   font-size: ${({ theme, big }) => (big ? theme.fontSize.s : theme.fontSize.xs)};
   padding-bottom: ${({ big }) => big && '10px'};
   color: #4a4c4d;
@@ -29,20 +31,30 @@ const AvatarWrapper = styled.div`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 2px solid black;
+  color: ${({ theme }) => theme.grey};
+  border: 2px solid ${({ theme }) => theme.greenOpacity};
   background: ${({ theme }) => theme.white};
   display: flex;
   justify-content: center;
   align-items: center;
 `;
-const LinkStyled = styled.a`
+
+const IconWrapper = styled.div`
+  padding: 5px;
+  cursor: pointer;
+  margin: 0 5px;
   color: ${({ theme }) => theme.green};
   opacity: 0.5;
+  a {
+    color: inherit;
+  }
   &:hover {
     opacity: 1;
   }
 `;
-
+const IconsWrapper = styled.div`
+  display: flex;
+`;
 const ContactsItem = ({ item: { name, email }, index }) => {
   return (
     <WrapperStyled index={index}>
@@ -53,9 +65,16 @@ const ContactsItem = ({ item: { name, email }, index }) => {
         <ParagraphStyled big>{name}</ParagraphStyled>
         <ParagraphStyled>{email}</ParagraphStyled>
       </DescWrapper>
-      <LinkStyled href={`mailto:${email}`}>
-        <FaEnvelope />
-      </LinkStyled>
+      <IconsWrapper>
+        <IconWrapper>
+          <FaHeart />
+        </IconWrapper>
+        <IconWrapper>
+          <a href={`mailto:${email}`}>
+            <FaEnvelope />
+          </a>
+        </IconWrapper>
+      </IconsWrapper>
     </WrapperStyled>
   );
 };

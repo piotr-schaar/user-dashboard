@@ -1,9 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import { routes } from 'routes';
+
 import { FaAddressBook, FaUser, FaTasks, FaFile, FaCogs, FaSignOutAlt } from 'react-icons/fa';
 
 const SidebarWrapper = styled.div`
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   width: 150px;
@@ -12,7 +16,6 @@ const SidebarWrapper = styled.div`
   background: ${({ theme }) => theme.white};
   border-right: 2px solid rgba(0, 0, 0, 0.1);
   box-shadow: 9px 9px 4px -12px rgba(0, 0, 0, 0.2);
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -31,39 +34,52 @@ const ItemStyled = styled.li`
 `;
 
 const IconWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #b8b4cb;
-  padding: 20px;
+  width: 75px;
+  height: 75px;
   border-radius: 15%;
   font-size: 22px;
   cursor: pointer;
   &:hover {
-    padding: 18px;
     border: 2px solid ${({ theme }) => theme.greenOpacity};
     color: ${({ theme }) => theme.green};
     box-shadow: 9px 9px 4px -12px rgba(0, 0, 0, 0.4);
+  }
+  a {
+    color: inherit;
   }
 `;
 const AvatarWrapper = styled.div`
   color: #b8b4cb;
   border: 2px solid ${({ theme }) => theme.greenOpacity};
-  padding: 25px;
+  width: 75px;
+  height: 75px;
   border-radius: 20px;
+  background-image: ${({ avatar }) => `url(${avatar})`};
+  background-position: 50% 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
 `;
 
-const Sidebar = () => {
+const Sidebar = ({ avatar }) => {
   return (
     <SidebarWrapper>
       <>
         <ListStyled>
           <ItemStyled>
-            <AvatarWrapper>
-              <FaUser />
-            </AvatarWrapper>
+            <NavLink to="/">
+              <AvatarWrapper avatar={avatar}>{!avatar && <FaUser />}</AvatarWrapper>
+            </NavLink>
           </ItemStyled>
           <ItemStyled>
-            <IconWrapper>
-              <FaAddressBook />
-            </IconWrapper>
+            <NavLink to={routes.contacts}>
+              <IconWrapper>
+                <FaAddressBook />
+              </IconWrapper>
+            </NavLink>
           </ItemStyled>
           <ItemStyled>
             <IconWrapper>
@@ -81,9 +97,11 @@ const Sidebar = () => {
             </IconWrapper>
           </ItemStyled>
           <ItemStyled>
-            <IconWrapper>
-              <FaSignOutAlt />
-            </IconWrapper>
+            <NavLink to="/user/logout">
+              <IconWrapper>
+                <FaSignOutAlt />
+              </IconWrapper>
+            </NavLink>
           </ItemStyled>
         </ListStyled>
       </>
@@ -91,4 +109,6 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+const mapStateToProps = ({ UserReducer }) => UserReducer;
+
+export default connect(mapStateToProps)(Sidebar);

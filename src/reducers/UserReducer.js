@@ -1,9 +1,13 @@
 import { AUTH_SUCCESS, REGISTER_USER_FAILURE } from 'actions/UserActions';
 import { REGISTER_USER_SUCCESS } from '../actions/UserActions';
 
+// dummy
+import avatar from '../placeholder/avatar.jpg';
+
 const initialState = {
-  userID: `5d4b4033d0286511d04940e4`,
+  userID: `5d0e44b4033d0286511d0494`,
   isError: false,
+  avatar,
 };
 
 const userReducer = (state = initialState, action) => {

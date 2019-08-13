@@ -9,24 +9,16 @@ import Button from 'components/Button';
 import useForm from 'hooks/useForm';
 
 const WrapperStyled = styled.div`
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  z-index: 0;
-  width: 100%;
+  border: 2px solid ${({ theme }) => theme.green};
+  border-radius: 15px;
+  padding: 15px;
+  margin: 0 25px;
 `;
 
 const FormStyled = styled.form`
-  position: relative;
-  z-index: -100;
-  transform: translateY(100%);
-  transition: all 0.3s ease-in;
-  border-top: 2px solid ${({ theme }) => theme.green};
-  background: ${({ theme }) => theme.white};
   display: flex;
   flex-direction: column;
-  width: 100%;
-  padding: 15px;
+  flex-wrap: wrap;
   ${({ isShown }) =>
     isShown &&
     css`
@@ -34,43 +26,18 @@ const FormStyled = styled.form`
     `}
 `;
 
-const FormInput = styled.input`
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-  margin-bottom: 10px;
-  border: 2px solid ${({ theme }) => theme.green};
-  width: 100%;
-`;
+const FormInput = styled.input``;
 
-const ToolsWrapper = styled.div`
-  position: relative;
-  cursor: pointer;
-  background: ${({ theme }) => theme.green};
-  padding: 15px;
-  display: flex;
-  justify-content: center;
-`;
+const ToolsWrapper = styled.div``;
 
-const ToolButton = styled.button`
-  background: none;
-  border: none;
-  color: white;
-  font-size: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  &:hover {
-    color: #232a40;
-  }
-`;
+const ToolButton = styled.button``;
 
 const ContactAddForm = ({ addContact }) => {
   const [isFormShown, setShow] = useState(false);
   const [updateValue, values, submitForm] = useForm({
     name: '',
     email: '',
+    city: '',
   });
   const submitFunc = e => {
     e.preventDefault();
@@ -96,6 +63,13 @@ const ContactAddForm = ({ addContact }) => {
           onChange={updateValue}
           onBlur={updateValue}
           placeholder="email"
+        />
+        <FormInput
+          name="city"
+          type="text"
+          onChange={updateValue}
+          onBlur={updateValue}
+          placeholder="city"
         />
         <Button type="submit">add</Button>
       </FormStyled>
