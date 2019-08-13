@@ -17,8 +17,7 @@ const SectionWrapper = styled.div`
   height: 100vh;
   position: fixed;
   z-index: 10;
-  background: rgba(54, 64, 99, 1);
-  color: white;
+  background: #f6f5fa;
 `;
 const ContactsWrapper = styled.div`
   height: 100vh;
@@ -32,8 +31,10 @@ const UsersSection = ({ ContactsReducer: { contacts }, fetchContacts }) => {
   return (
     <SectionWrapper>
       <ContactsWrapper>
-        <Heading color="white">Contacts</Heading>
-        <Tabs scroll>
+        <Heading small color="grey">
+          Contacts
+        </Heading>
+        <Tabs color="#78B15C" scroll>
           <TabContent label="All">
             {contacts.map((item, index) => (
               <ContactsItem key={item.id} item={item} index={index} />

@@ -20,16 +20,24 @@ const TabContent = styled.div`
       overflow-y: auto;
     `}
 `;
-const Tabs = ({ children, scroll }) => {
+const Tabs = ({ children, scroll, color }) => {
   const [activeTab, setActive] = useState(children[0].props.label);
 
   const onClickTabItem = tab => setActive(tab);
-
+  console.log(color);
   return (
     <WrapperStyled>
       <TabsListStyled>
         {children.map(({ props: { label } }) => {
-          return <Tab activeTab={activeTab} key={label} label={label} onClick={onClickTabItem} />;
+          return (
+            <Tab
+              color={color}
+              activeTab={activeTab}
+              key={label}
+              label={label}
+              onClick={onClickTabItem}
+            />
+          );
         })}
       </TabsListStyled>
       <TabContent scroll={scroll}>

@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import Sidebar from '../components/Sidebar';
 
 const WrapperStyled = styled.div`
-  background: #151A28;
   width: 100%;
+  background: ${({ theme }) => theme.white};
   padding: 20px 50px;
   min-height: 100vh;
   display: flex;

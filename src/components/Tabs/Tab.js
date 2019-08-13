@@ -8,6 +8,12 @@ const TabItem = styled.li`
   list-style: none;
   margin-bottom: -1px;
   padding: 0.5rem 0.75rem;
+  border: 1px solid black;
+
+  &:hover,
+  &:active {
+    background: ${({ theme }) => theme.blue};
+  }
 
   ${({ isActive }) =>
     isActive &&
@@ -18,17 +24,18 @@ const TabItem = styled.li`
 
 const TabButton = styled.button`
   width: 100%;
-  color: white;
+  color: ${({ color }) => color}
   font-weight: 600;
   background: none;
   border: none;
+  cursor:pointer;
   &:active,
   &:focus {
     outline: none;
   }
 `;
 
-const Tab = ({ label, onClick, activeTab }) => {
+const Tab = ({ label, onClick, activeTab, color }) => {
   const [isActive, setActive] = useState(false);
 
   useEffect(() => {
@@ -37,7 +44,7 @@ const Tab = ({ label, onClick, activeTab }) => {
 
   return (
     <TabItem isActive={isActive}>
-      <TabButton type="button" onClick={() => onClick(label)}>
+      <TabButton color={color} type="button" onClick={() => onClick(label)}>
         {label}
       </TabButton>
     </TabItem>

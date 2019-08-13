@@ -1,7 +1,9 @@
 export const theme = {
   blue: '#180D33',
-  light: '#EDF5E1',
+  green: '#78B15C',
+  greenOpacity: 'rgba(120,177,92,0.7)',
   white: '#ffffff',
+  grey: '##787774',
   warning: '#EDF5E1',
 
   fontSize: {

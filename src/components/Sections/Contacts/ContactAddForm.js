@@ -21,7 +21,8 @@ const FormStyled = styled.form`
   z-index: -100;
   transform: translateY(100%);
   transition: all 0.3s ease-in;
-  background: #394053;
+  border-top: 2px solid ${({ theme }) => theme.green};
+  background: ${({ theme }) => theme.white};
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -38,12 +39,14 @@ const FormInput = styled.input`
   border-radius: 10px;
   border: none;
   margin-bottom: 10px;
+  border: 2px solid ${({ theme }) => theme.green};
   width: 100%;
 `;
 
 const ToolsWrapper = styled.div`
   position: relative;
-  background: #394053;
+  cursor: pointer;
+  background: ${({ theme }) => theme.green};
   padding: 15px;
   display: flex;
   justify-content: center;

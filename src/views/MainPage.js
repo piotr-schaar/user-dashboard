@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
+import Sidebar from 'components/Sidebar';
 import DashboardTemlate from '../templates/DashboardTemplate';
 import ContactsSection from '../components/Sections/Contacts/ContactsSection';
 
@@ -12,8 +13,7 @@ const MainPage = ({ UserReducer: { userID } }) => {
   }
   return (
     <DashboardTemlate>
-      <h1>siema</h1>
-      <ContactsSection />
+      <Sidebar />
     </DashboardTemlate>
   );
 };

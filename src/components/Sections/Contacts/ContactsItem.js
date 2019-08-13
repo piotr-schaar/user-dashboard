@@ -6,7 +6,6 @@ import { FaEnvelope, FaUser } from 'react-icons/fa';
 const WrapperStyled = styled.div`
   padding: 12px;
   width: 100%;
-  border-bottom: 2px solid rgba(73, 85, 124, 0.4);
   display: grid;
   grid-template-columns: 1fr 5fr 1fr;
   grid-gap: 30px;
@@ -14,15 +13,12 @@ const WrapperStyled = styled.div`
   :last-of-type {
     border: 0;
   }
-  &:hover,
-  &:active {
-    background: rgba(54, 64, 99, 0.8);
-  }
 `;
 const ParagraphStyled = styled.div`
-  font-weight: 400;
+  font-weight: ${({ big }) => (big ? '600' : '300')}
   font-size: ${({ theme, big }) => (big ? theme.fontSize.s : theme.fontSize.xs)};
   padding-bottom: ${({ big }) => big && '10px'};
+  color: #4a4c4d;
 `;
 
 const DescWrapper = styled.div`
@@ -33,13 +29,14 @@ const AvatarWrapper = styled.div`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: grey;
+  border: 2px solid black;
+  background: ${({ theme }) => theme.white};
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 const LinkStyled = styled.a`
-  color: white;
+  color: ${({ theme }) => theme.green};
   opacity: 0.5;
   &:hover {
     opacity: 1;
