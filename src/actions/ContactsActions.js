@@ -9,20 +9,32 @@ export const fetchContacts = () => dispatch => {
   dispatch({ type: FETCH_REQUEST });
   return axios
     .get(`https://jsonplaceholder.typicode.com/users`)
-    .then(payload =>
+    .then(({ data }) => {
+      const contactsList = [];
+      data.map(item => {
+        let newItem = {};
+        newItem = {
+          name: item.name,
+          email: item.email,
+          city: item.address.city,
+        };
+        return contactsList.push(newItem);
+      });
       dispatch({
         type: FETCH_CONTACTS,
-        payload,
-      }),
-    )
+        payload: contactsList,
+      });
+    })
+
     .catch(err => console.log(err));
 };
 
-export const addContact = (username, email) => ({
+export const addContact = (name, email, city) => ({
   type: 'ADD_CONTACT',
   id: uuid(),
   payload: {
-    username,
+    name,
     email,
+    city,
   },
 });

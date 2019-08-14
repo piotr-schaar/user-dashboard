@@ -8,7 +8,6 @@ import { fetchContacts as fetchContactsAction } from 'actions/ContactsActions';
 import DashboardTemplate from 'templates/DashboardTemplate';
 import ContactsList from 'components/Sections/Contacts/ContactsList';
 import Tools from 'components/Sections/Contacts/Tools';
-import AddContactForm from 'components/Sections/Contacts/Form';
 
 const WrapperStyled = styled.div`
   width: 100%;
@@ -30,7 +29,6 @@ const ContactsPage = ({ ContactsReducer: { contacts }, fetchContacts }) => {
           <ContactsList />
           <div>
             <Tools />
-            <AddContactForm />
           </div>
         </FlexWrapper>
       </WrapperStyled>

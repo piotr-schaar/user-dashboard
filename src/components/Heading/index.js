@@ -8,6 +8,7 @@ const Heading = styled.h2`
     small &&
     css`
       font-size: 15px;
+      padding: 0;
     `}
 `;
 

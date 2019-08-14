@@ -4,9 +4,9 @@ const Input = styled.input`
   padding: 10px 15px;
   font-size: 15px;
   font-weight: 400;
-  position: relative;
-  border: none;
-  border-bottom: ${({ theme }) => `2px solid ${theme.blue}`};
+  margin: 5px 0;
+  border-radius: 10px;
+  border: 1px solid ${({ theme }) => theme.green};
 `;
 
 export default Input;

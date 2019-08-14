@@ -4,18 +4,28 @@ import styled, { css } from 'styled-components';
 import { connect } from 'react-redux';
 import { addContact as addContactAction } from 'actions/ContactsActions';
 import { FaUserPlus } from 'react-icons/fa';
+
+import { Form } from 'components/Form';
+import Heading from 'components/Heading';
+import Input from 'components/Input';
+
 import Button from 'components/Button';
 
 import useForm from 'hooks/useForm';
 
 const WrapperStyled = styled.div`
   border: 2px solid ${({ theme }) => theme.green};
-  border-radius: 15px;
-  padding: 15px;
-  margin: 0 25px;
+  border-bottom: none;
+  border-radius: 15px 15px 0 0;
+  padding: 10px 25px;
+  ${({ isShown }) =>
+    isShown &&
+    css`
+      transform: translateY(0);
+    `}
 `;
 
-const FormStyled = styled.form`
+const FormStyled = styled(Form)`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -26,11 +36,10 @@ const FormStyled = styled.form`
     `}
 `;
 
-const FormInput = styled.input``;
-
-const ToolsWrapper = styled.div``;
-
-const ToolButton = styled.button``;
+const SubmitButton = styled(Button)`
+  margin-top: 15px;
+  width: 50%;
+`;
 
 const ContactAddForm = ({ addContact }) => {
   const [isFormShown, setShow] = useState(false);
@@ -49,35 +58,35 @@ const ContactAddForm = ({ addContact }) => {
 
   return (
     <WrapperStyled>
+      <Heading small>Add contact</Heading>
       <FormStyled isShown={isFormShown} onSubmit={submitFunc}>
-        <FormInput
+        <Input
+          id="name"
           name="name"
           type="text"
           placeholder="name"
+          required
           onChange={updateValue}
           onBlur={updateValue}
         />
-        <FormInput
+        <Input
           name="email"
           type="text"
+          required
           onChange={updateValue}
           onBlur={updateValue}
           placeholder="email"
         />
-        <FormInput
+        <Input
           name="city"
           type="text"
           onChange={updateValue}
           onBlur={updateValue}
           placeholder="city"
         />
-        <Button type="submit">add</Button>
+
+        <SubmitButton type="submit">add</SubmitButton>
       </FormStyled>
-      <ToolsWrapper>
-        <ToolButton type="button" onClick={() => setShow(!isFormShown)}>
-          <FaUserPlus />
-        </ToolButton>
-      </ToolsWrapper>
     </WrapperStyled>
   );
 };

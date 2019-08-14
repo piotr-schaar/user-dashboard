@@ -2,15 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { FaEnvelope, FaUser, FaHeart } from 'react-icons/fa';
+import Card from 'components/Card';
 
-const WrapperStyled = styled.div`
-  padding: 12px;
+const WrapperStyled = styled(Card)`
   width: 50%;
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
   grid-gap: 5px;
+  height: 120px;
   align-items: center;
-  box-shadow: 5px 6px 7px -7px rgba(0, 0, 0, 0.2);
   margin: 5px 0;
   :last-of-type {
     border: 0;
@@ -55,7 +55,7 @@ const IconWrapper = styled.div`
 const IconsWrapper = styled.div`
   display: flex;
 `;
-const ContactsItem = ({ item: { name, email }, index }) => {
+const ContactsItem = ({ item: { name, email, city }, index }) => {
   return (
     <WrapperStyled index={index}>
       <AvatarWrapper>
@@ -64,6 +64,7 @@ const ContactsItem = ({ item: { name, email }, index }) => {
       <DescWrapper>
         <ParagraphStyled big>{name}</ParagraphStyled>
         <ParagraphStyled>{email}</ParagraphStyled>
+        <ParagraphStyled>{city}</ParagraphStyled>
       </DescWrapper>
       <IconsWrapper>
         <IconWrapper>

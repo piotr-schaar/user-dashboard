@@ -15,7 +15,7 @@ const ContactsReducer = (state = initialState, action) => {
     case FETCH_CONTACTS:
       return {
         ...state,
-        contacts: [...action.payload.data],
+        contacts: [...action.payload],
         isLoading: true,
       };
     case ADD_CONTACT:
