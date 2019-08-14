@@ -1,12 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { FaEnvelope, FaUser, FaHeart } from 'react-icons/fa';
 import Card from 'components/Card';
 
+import { addContactToFavorites as addToFavoriteAction } from 'actions/ContactsActions';
+
 const WrapperStyled = styled(Card)`
-  width: 50%;
   display: grid;
+  width: 50%;
   grid-template-columns: 1fr 3fr 1fr;
   grid-gap: 5px;
   height: 120px;
@@ -55,7 +58,7 @@ const IconWrapper = styled.div`
 const IconsWrapper = styled.div`
   display: flex;
 `;
-const ContactsItem = ({ item: { name, email, city }, index }) => {
+const ContactsItem = ({ addToFavorite, item: { name, email, city, isFavorite }, index }) => {
   return (
     <WrapperStyled index={index}>
       <AvatarWrapper>
@@ -65,10 +68,11 @@ const ContactsItem = ({ item: { name, email, city }, index }) => {
         <ParagraphStyled big>{name}</ParagraphStyled>
         <ParagraphStyled>{email}</ParagraphStyled>
         <ParagraphStyled>{city}</ParagraphStyled>
+        <ParagraphStyled>{isFavorite && 'siema'}</ParagraphStyled>
       </DescWrapper>
       <IconsWrapper>
         <IconWrapper>
-          <FaHeart />
+          <FaHeart onClick={() => addToFavorite(name, email, city)} />
         </IconWrapper>
         <IconWrapper>
           <a href={`mailto:${email}`}>
@@ -83,6 +87,7 @@ const ContactsItem = ({ item: { name, email, city }, index }) => {
 ContactsItem.defaultProps = {
   name: '',
   email: '',
+  isFavorite: false,
 };
 
 ContactsItem.propTypes = {
@@ -90,6 +95,15 @@ ContactsItem.propTypes = {
   name: PropTypes.string,
   email: PropTypes.string,
   index: PropTypes.number.isRequired,
+  isFavorite: PropTypes.bool,
+  addToFavorite: PropTypes.func.isRequired,
 };
 
-export default ContactsItem;
+const mapDispatchToProps = dispatch => ({
+  addToFavorite: name => dispatch(addToFavoriteAction(name)),
+});
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(ContactsItem);

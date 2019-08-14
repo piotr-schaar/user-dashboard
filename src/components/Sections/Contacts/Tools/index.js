@@ -30,6 +30,7 @@ const ToolWrapper = styled.button`
     background: ${({ theme }) => theme.greenOpacity};
     cursor: pointer;
     color: white;
+    outline: none;
     svg {
       color: white;
     }

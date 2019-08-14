@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { connect } from 'react-redux';
 import { addContact as addContactAction } from 'actions/ContactsActions';
-import { FaUserPlus } from 'react-icons/fa';
 
 import { Form } from 'components/Form';
 import Heading from 'components/Heading';
@@ -52,38 +51,31 @@ const ContactAddForm = ({ addContact }) => {
     e.preventDefault();
     submitForm();
 
-    const { name, email } = values;
-    addContact(name, email);
+    const { name, email, city } = values;
+    addContact(name, email, city);
+  };
+
+  const renderInputs = () => {
+    const valuesArray = Object.keys(values);
+    return valuesArray.map(value => (
+      <Input
+        key={value}
+        id={value}
+        name={value}
+        type="text"
+        required
+        placeholder={value}
+        onChange={updateValue}
+        onBlur={updateValue}
+      />
+    ));
   };
 
   return (
     <WrapperStyled>
       <Heading small>Add contact</Heading>
       <FormStyled isShown={isFormShown} onSubmit={submitFunc}>
-        <Input
-          id="name"
-          name="name"
-          type="text"
-          placeholder="name"
-          required
-          onChange={updateValue}
-          onBlur={updateValue}
-        />
-        <Input
-          name="email"
-          type="text"
-          required
-          onChange={updateValue}
-          onBlur={updateValue}
-          placeholder="email"
-        />
-        <Input
-          name="city"
-          type="text"
-          onChange={updateValue}
-          onBlur={updateValue}
-          placeholder="city"
-        />
+        {renderInputs()}
 
         <SubmitButton type="submit">add</SubmitButton>
       </FormStyled>
@@ -92,7 +84,7 @@ const ContactAddForm = ({ addContact }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  addContact: (username, email) => dispatch(addContactAction(username, email)),
+  addContact: (username, email, city) => dispatch(addContactAction(username, email, city)),
 });
 
 ContactAddForm.propTypes = {

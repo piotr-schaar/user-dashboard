@@ -2,25 +2,28 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchContacts as fetchContactsAction } from 'actions/ContactsActions';
-
+import { fetchDummyContacts as fetchContactsAction } from 'actions/ContactsActions';
+import { getFilterContacts, byFavorites } from 'reducers/ContactsReducer';
 import ContactsItem from 'components/Sections/Contacts/ContactsItem';
 
 const WrapperStyled = styled.div`
   display: flex;
-  width: 60%;
   flex-wrap: wrap;
+  align-content: baseline;
 `;
 
-const ContactsList = ({ ContactsReducer: { contacts }, fetchContacts }) => {
+const Gugu = styled.div``;
+
+const ContactsList = ({ ContactsReducer: { contacts }, fetchContacts, filteredList }) => {
   useEffect(() => {
     fetchContacts();
   }, [fetchContacts]);
-
   return (
     <WrapperStyled>
+      {filteredList &&
+        filteredList.map((item, index) => <ContactsItem key={index} item={item} index={index} />)}
       {contacts.map((item, index) => (
-        <ContactsItem key={item.id} item={item} index={index} />
+        <ContactsItem key={index} item={item} index={index} />
       ))}
     </WrapperStyled>
   );
@@ -35,7 +38,12 @@ ContactsList.propTypes = {
   ContactsReducer: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => state;
+const mapStateToProps = state => {
+  return {
+    ...state,
+    filteredList: getFilterContacts(state.ContactsReducer.contacts, byFavorites),
+  };
+};
 const mapDispatchToProps = dispatch => ({
   fetchContacts: () => dispatch(fetchContactsAction()),
 });
