@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchDummyContacts as fetchContactsAction } from 'actions/ContactsActions';
-import { getFilterContacts, byFavorites } from 'reducers/ContactsReducer';
 import ContactsItem from 'components/Sections/Contacts/ContactsItem';
 
 const WrapperStyled = styled.div`
@@ -12,9 +11,7 @@ const WrapperStyled = styled.div`
   align-content: baseline;
 `;
 
-const Gugu = styled.div``;
-
-const ContactsList = ({ ContactsReducer: { contacts }, fetchContacts, filteredList }) => {
+const ContactsList = ({ ContactsReducer: { contacts, filteredList }, fetchContacts }) => {
   useEffect(() => {
     fetchContacts();
   }, [fetchContacts]);
@@ -41,7 +38,6 @@ ContactsList.propTypes = {
 const mapStateToProps = state => {
   return {
     ...state,
-    filteredList: getFilterContacts(state.ContactsReducer.contacts, byFavorites),
   };
 };
 const mapDispatchToProps = dispatch => ({

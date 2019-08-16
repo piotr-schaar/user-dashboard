@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 import { FaPlus, FaSlidersH, FaHeart, FaChartPie } from 'react-icons/fa';
+import { filterListByType as filterListByTypeAction } from 'actions/ContactsActions';
+import { byFavorites } from 'reducers/ContactsReducer';
+
 import Form from 'components/Sections/Contacts/Form';
 
 const WrapperStyled = styled.div`
@@ -52,7 +56,7 @@ const settings = {
   favorites: 'favorites',
 };
 
-const Tools = () => {
+const Tools = ({ filterListByType }) => {
   const { newContact, filter, statistics, favorites } = settings;
 
   const [setting, setSetting] = useState(null);
@@ -61,6 +65,9 @@ const Tools = () => {
     switch (sets) {
       case newContact:
         return <Form />;
+      case favorites:
+        filterListByType(byFavorites);
+        break;
       default:
         return null;
     }
@@ -100,4 +107,11 @@ const Tools = () => {
   );
 };
 
-export default Tools;
+const mapDispatchToProps = dispatch => ({
+  filterListByType: type => dispatch(filterListByTypeAction(type)),
+});
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(Tools);

@@ -3,12 +3,16 @@ import {
   FETCH_REQUEST,
   ADD_CONTACT,
   ADD_CONTACT_TO_FAVORITES,
+  FILTER_LIST_BY_TYPE,
 } from 'actions/ContactsActions';
 
 const initialState = {
   contacts: [],
   isLoading: false,
+  filteredList: [],
+  isFilter: false,
 };
+export const byFavorites = 'favorites';
 
 const ContactsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -39,18 +43,20 @@ const ContactsReducer = (state = initialState, action) => {
         ),
       };
     }
+    case FILTER_LIST_BY_TYPE: {
+      switch (action.payload.filterType) {
+        case byFavorites:
+          return {
+            ...state,
+            isFilter: true,
+            filteredList: state.contacts.filter(contact => contact.isFavorite),
+          };
+        default:
+          return state;
+      }
+    }
     default:
       return state;
-  }
-};
-export const byFavorites = 'favorites';
-
-export const getFilterContacts = (state, filter) => {
-  switch (filter) {
-    case byFavorites:
-      return state.filter(item => item.isFavorite);
-    default:
-      return null;
   }
 };
 

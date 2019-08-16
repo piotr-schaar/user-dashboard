@@ -5,7 +5,7 @@ export const FETCH_CONTACTS = 'FETCH_CONTACTS';
 export const FETCH_REQUEST = 'FETCH_REQUEST';
 export const ADD_CONTACT = 'ADD_CONTACT';
 export const ADD_CONTACT_TO_FAVORITES = 'ADD_CONTACT_TO_FAVORITES';
-export const FILTER_LIST = 'ADD_CONTACT_TO_FAVORITES';
+export const FILTER_LIST_BY_TYPE = 'FILTER_LIST_BY_TYPE';
 
 export const fetchDummyContacts = () => dispatch => {
   dispatch({ type: FETCH_REQUEST });
@@ -45,5 +45,12 @@ export const addContact = (name, email, city) => ({
     name,
     email,
     city,
+  },
+});
+
+export const filterListByType = filterType => ({
+  type: FILTER_LIST_BY_TYPE,
+  payload: {
+    filterType,
   },
 });
