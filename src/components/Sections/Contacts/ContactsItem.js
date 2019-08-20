@@ -46,7 +46,7 @@ const IconWrapper = styled.div`
   padding: 5px;
   cursor: pointer;
   margin: 0 5px;
-  color: ${({ theme }) => theme.green};
+  color: ${({ theme, isFavorite }) => (isFavorite ? 'red' : theme.green)};
   opacity: 0.5;
   a {
     color: inherit;
@@ -68,10 +68,9 @@ const ContactsItem = ({ handleFavorite, item: { name, email, city, isFavorite },
         <ParagraphStyled big>{name}</ParagraphStyled>
         <ParagraphStyled>{email}</ParagraphStyled>
         <ParagraphStyled>{city}</ParagraphStyled>
-        <ParagraphStyled>{isFavorite && 'siema'}</ParagraphStyled>
       </DescWrapper>
       <IconsWrapper>
-        <IconWrapper>
+        <IconWrapper isFavorite={isFavorite}>
           <FaHeart onClick={() => handleFavorite(name, isFavorite)} />
         </IconWrapper>
         <IconWrapper>
@@ -94,8 +93,8 @@ ContactsItem.propTypes = {
   item: PropTypes.object.isRequired,
   name: PropTypes.string,
   email: PropTypes.string,
-  index: PropTypes.number.isRequired,
   isFavorite: PropTypes.bool,
+  index: PropTypes.number.isRequired,
   handleFavorite: PropTypes.func.isRequired,
 };
 

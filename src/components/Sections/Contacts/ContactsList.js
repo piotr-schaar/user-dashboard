@@ -11,17 +11,18 @@ const WrapperStyled = styled.div`
   align-content: baseline;
 `;
 
-const ContactsList = ({ ContactsReducer: { contacts, filteredList }, fetchContacts }) => {
+const ContactsList = ({
+  ContactsReducer: { contacts, filteredList, isFiltered },
+  fetchContacts,
+}) => {
   useEffect(() => {
     fetchContacts();
   }, [fetchContacts]);
   return (
     <WrapperStyled>
-      {filteredList &&
-        filteredList.map((item, index) => <ContactsItem key={index} item={item} index={index} />)}
-      {contacts.map((item, index) => (
-        <ContactsItem key={index} item={item} index={index} />
-      ))}
+      {isFiltered
+        ? filteredList.map((item, index) => <ContactsItem key={index} item={item} index={index} />)
+        : contacts.map((item, index) => <ContactsItem key={index} item={item} index={index} />)}
     </WrapperStyled>
   );
 };

@@ -5,14 +5,23 @@ import {
   HANDLE_CONTACT_TO_FAVORITES,
   FILTER_LIST_BY_TYPE,
 } from 'actions/ContactsActions';
+import { SHOW_FILTERED_RESULTS } from '../actions/ContactsActions';
 
 const initialState = {
   contacts: [],
   isLoading: false,
   filteredList: [],
-  isFilter: false,
+  isFiltered: false,
+  subtitle: '',
 };
 export const byFavorites = 'favorites';
+
+const setSubtitle = (name, cond) => {
+  if (cond) {
+    return name;
+  }
+  return null;
+};
 
 const ContactsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -44,12 +53,20 @@ const ContactsReducer = (state = initialState, action) => {
         ),
       };
     }
+    case SHOW_FILTERED_RESULTS: {
+      const { isFiltered } = state;
+      return {
+        ...state,
+        isFiltered: !isFiltered,
+      };
+    }
+
     case FILTER_LIST_BY_TYPE: {
       switch (action.payload.filterType) {
         case byFavorites:
           return {
             ...state,
-            isFilter: true,
+            subtitle: setSubtitle(byFavorites, state.isFiltered),
             filteredList: state.contacts.filter(contact => contact.isFavorite),
           };
         default:

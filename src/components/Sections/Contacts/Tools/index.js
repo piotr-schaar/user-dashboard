@@ -57,52 +57,49 @@ const settings = {
 };
 
 const Tools = ({ filterListByType }) => {
-  const { newContact, filter, statistics, favorites } = settings;
-
   const [setting, setSetting] = useState(null);
 
-  const showSettings = sets => {
+  const { newContact, filter, statistics, favorites } = settings;
+
+  const showToolbox = sets => {
     switch (sets) {
       case newContact:
         return <Form />;
-      case favorites:
-        filterListByType(byFavorites);
-        break;
       default:
         return null;
     }
   };
 
-  const handleSettings = set => (setting === set ? setSetting(null) : setSetting(set));
+  const handleToolbox = set => (setting === set ? setSetting(null) : setSetting(set));
   return (
     <WrapperStyled>
       <ToolsList>
         <ToolItem>
-          <ToolWrapper onClick={() => handleSettings(newContact)}>
+          <ToolWrapper onClick={() => handleToolbox(newContact)}>
             <FaPlus />
             New contact
           </ToolWrapper>
         </ToolItem>
         <ToolItem>
-          <ToolWrapper onClick={() => handleSettings(favorites)}>
+          <ToolWrapper onClick={() => filterListByType('favorites')}>
             <FaHeart />
             Favorites
           </ToolWrapper>
         </ToolItem>
         <ToolItem>
-          <ToolWrapper onClick={() => handleSettings(filter)}>
+          <ToolWrapper>
             <FaSlidersH />
             Filter
           </ToolWrapper>
         </ToolItem>
         <ToolItem>
-          <ToolWrapper onClick={() => handleSettings(statistics)}>
+          <ToolWrapper>
             <FaChartPie />
             Statistics
           </ToolWrapper>
         </ToolItem>
       </ToolsList>
-      <Toolbox>{showSettings(setting)}</Toolbox>
+      <Toolbox>{showToolbox(setting)}</Toolbox>
     </WrapperStyled>
   );
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 import Heading from 'components/Heading';
 
 import DashboardTemplate from 'templates/DashboardTemplate';
@@ -20,11 +21,16 @@ const FlexWrapper = styled.div`
   }
 `;
 
-const ContactsPage = () => {
+const BreadcrumbStyled = styled.span`
+  color: grey;
+`;
+const ContactsPage = ({ subtitle }) => {
   return (
     <DashboardTemplate>
       <WrapperStyled>
-        <Heading>Contacts</Heading>
+        <Heading>
+          Contacts {subtitle && <BreadcrumbStyled> &gt; {subtitle}</BreadcrumbStyled>}
+        </Heading>
         <FlexWrapper>
           <ContactsList />
           <Tools />
@@ -34,4 +40,6 @@ const ContactsPage = () => {
   );
 };
 
-export default ContactsPage;
+const mapStateToProps = ({ ContactsReducer }) => ContactsReducer;
+
+export default connect(mapStateToProps)(ContactsPage);
