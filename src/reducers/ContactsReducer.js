@@ -2,7 +2,7 @@ import {
   FETCH_CONTACTS,
   FETCH_REQUEST,
   ADD_CONTACT,
-  ADD_CONTACT_TO_FAVORITES,
+  HANDLE_CONTACT_TO_FAVORITES,
   FILTER_LIST_BY_TYPE,
 } from 'actions/ContactsActions';
 
@@ -33,13 +33,14 @@ const ContactsReducer = (state = initialState, action) => {
         ...state,
         contacts: [...state.contacts, action.payload],
       };
-    case ADD_CONTACT_TO_FAVORITES: {
-      const selectedItem = state.contacts.find(x => x.name === action.payload.name);
+    case HANDLE_CONTACT_TO_FAVORITES: {
+      const { isFavorite, name } = action.payload;
+      const selectedItem = state.contacts.find(x => x.name === name);
       const idx = state.contacts.indexOf(selectedItem);
       return {
         ...state,
         contacts: state.contacts.map((content, i) =>
-          i === idx ? { ...content, isFavorite: true } : content,
+          i === idx ? { ...content, isFavorite: !isFavorite } : content,
         ),
       };
     }

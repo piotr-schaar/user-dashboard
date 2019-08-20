@@ -24,11 +24,11 @@ const TabItem = styled.li`
 
 const TabButton = styled.button`
   width: 100%;
-  color: ${({ color }) => color}
+  color: ${({ color }) => color};
   font-weight: 600;
   background: none;
   border: none;
-  cursor:pointer;
+  cursor: pointer;
   &:active,
   &:focus {
     outline: none;

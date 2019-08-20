@@ -4,7 +4,7 @@ import uuid from 'uuid/v4';
 export const FETCH_CONTACTS = 'FETCH_CONTACTS';
 export const FETCH_REQUEST = 'FETCH_REQUEST';
 export const ADD_CONTACT = 'ADD_CONTACT';
-export const ADD_CONTACT_TO_FAVORITES = 'ADD_CONTACT_TO_FAVORITES';
+export const HANDLE_CONTACT_TO_FAVORITES = 'ADD_CONTACT_TO_FAVORITES';
 export const FILTER_LIST_BY_TYPE = 'FILTER_LIST_BY_TYPE';
 
 export const fetchDummyContacts = () => dispatch => {
@@ -31,10 +31,11 @@ export const fetchDummyContacts = () => dispatch => {
     .catch(err => console.log(err));
 };
 
-export const addContactToFavorites = name => ({
-  type: ADD_CONTACT_TO_FAVORITES,
+export const handleContactToFavorites = (name, isFavorite) => ({
+  type: HANDLE_CONTACT_TO_FAVORITES,
   payload: {
     name,
+    isFavorite,
   },
 });
 

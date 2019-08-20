@@ -13,6 +13,11 @@ const WrapperStyled = styled.div`
 const FlexWrapper = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr;
+
+  /* developmnent maxwidth for doublescreen */
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const ContactsPage = () => {
