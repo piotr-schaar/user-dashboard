@@ -6,6 +6,7 @@ import { filterListByType as filterListByTypeAction } from 'actions/ContactsActi
 import { byFavorites } from 'reducers/ContactsReducer';
 
 import Form from 'components/Sections/Contacts/Form';
+import Fitlers from 'components/Sections/Contacts/Filters';
 
 const WrapperStyled = styled.div`
   margin: 0 15px;
@@ -57,7 +58,7 @@ const settings = {
 };
 
 const Tools = ({ filterListByType }) => {
-  const [setting, setSetting] = useState(null);
+  const [setting, setSetting] = useState('filter');
 
   const { newContact, filter, statistics, favorites } = settings;
 
@@ -65,6 +66,8 @@ const Tools = ({ filterListByType }) => {
     switch (sets) {
       case newContact:
         return <Form />;
+      case filter:
+        return <Fitlers />;
       default:
         return null;
     }
@@ -87,7 +90,7 @@ const Tools = ({ filterListByType }) => {
           </ToolWrapper>
         </ToolItem>
         <ToolItem>
-          <ToolWrapper>
+          <ToolWrapper onClick={() => handleToolbox(filter)}>
             <FaSlidersH />
             Filter
           </ToolWrapper>

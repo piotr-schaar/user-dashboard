@@ -11,18 +11,7 @@ import Input from 'components/Input';
 import Button from 'components/Button';
 
 import useForm from 'hooks/useForm';
-
-const WrapperStyled = styled.div`
-  border: 2px solid ${({ theme }) => theme.green};
-  border-bottom: none;
-  border-radius: 15px 15px 0 0;
-  padding: 10px 25px;
-  ${({ isShown }) =>
-    isShown &&
-    css`
-      transform: translateY(0);
-    `}
-`;
+import Card from 'components/Card';
 
 const FormStyled = styled(Form)`
   display: flex;
@@ -72,14 +61,14 @@ const ContactAddForm = ({ addContact }) => {
   };
 
   return (
-    <WrapperStyled>
+    <Card>
       <Heading small>Add contact</Heading>
       <FormStyled isShown={isFormShown} onSubmit={submitFunc}>
         {renderInputs()}
 
         <SubmitButton type="submit">add</SubmitButton>
       </FormStyled>
-    </WrapperStyled>
+    </Card>
   );
 };
 
