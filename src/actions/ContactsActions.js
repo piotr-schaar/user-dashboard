@@ -1,6 +1,6 @@
 import axios from 'axios';
 import uuid from 'uuid/v4';
-import { byFavorites } from 'reducers/ContactsReducer';
+import { filtersTypes } from 'reducers/ContactsReducer';
 
 export const FETCH_CONTACTS = 'FETCH_CONTACTS';
 export const FETCH_REQUEST = 'FETCH_REQUEST';
@@ -38,7 +38,7 @@ export const handleContactToFavorites = (name, isFavorite) => dispatch => {
     type: FILTER_LIST_BY_TYPE,
     payload: {
       name,
-      filterType: byFavorites,
+      filterType: filtersTypes.byFavorites,
     },
   });
 
@@ -61,13 +61,14 @@ export const addContact = (name, email, city) => ({
   },
 });
 
-export const filterListByType = filterType => dispatch => {
+export const filterListByType = (filterType, value) => dispatch => {
   dispatch({ type: SHOW_FILTERED_RESULTS });
 
   dispatch({
     type: FILTER_LIST_BY_TYPE,
     payload: {
       filterType,
+      value,
     },
   });
 };

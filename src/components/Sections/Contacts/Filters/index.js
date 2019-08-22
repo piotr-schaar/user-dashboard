@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
-import useSelectOptions from 'hooks/useSelectOptions';
+import { filterListByType as filterListByTypeAction } from 'actions/ContactsActions';
 import Card from 'components/Card';
 import Heading from 'components/Heading';
 import Switch from '../../../SwitchInput';
+import Select from '../../../Select';
 
 const MainWrapper = styled.div``;
 
@@ -15,10 +16,25 @@ const SwitchWrapper = styled.div`
   align-items: center;
 `;
 
-const Fitlers = ({ contacts }) => {
+const Filters = ({ contacts, filterListByType }) => {
   const [availableCities, setAvailableCties] = useState([]);
-  const [city, citySelect] = useSelectOptions('', availableCities);
-  useEffect(() => {}, [contacts]);
+  const [cityValue, setCityValue] = useState(String);
+
+  useEffect(() => {
+    let cities = contacts.map(item => item.city);
+    cities = cities.reduce(
+      (unique, item) => (unique.includes(item) ? unique : [...unique, item]),
+      [],
+    );
+    setAvailableCties(cities);
+    filterListByType('cities', cityValue);
+  }, [contacts, cityValue]);
+
+  const handleChange = e => {
+    setCityValue(e.target.value);
+    filterListByType('cities', cityValue);
+  };
+
   return (
     <Card>
       <Heading small>Filters</Heading>
@@ -29,10 +45,13 @@ const Fitlers = ({ contacts }) => {
         </SwitchWrapper>
         <SwitchWrapper>
           <p>Cities</p>
-          <select name="city">
-            <option>Poznań</option>
-            <option>Wrocław</option>
-          </select>
+          {cityValue}
+          <Select
+            value={cityValue}
+            name="city"
+            options={availableCities}
+            handleChange={handleChange}
+          />
         </SwitchWrapper>
         <SwitchWrapper>
           <p>Mens</p>
@@ -44,5 +63,11 @@ const Fitlers = ({ contacts }) => {
 };
 
 const mapStateToProps = ({ ContactsReducer }) => ContactsReducer;
+const mapDispatchToProps = dispatch => ({
+  filterListByType: (type, value) => dispatch(filterListByTypeAction(type, value)),
+});
 
-export default connect(mapStateToProps)(Fitlers);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Filters);

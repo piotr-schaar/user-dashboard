@@ -14,14 +14,15 @@ const initialState = {
   isFiltered: false,
   subtitle: '',
 };
-export const byFavorites = 'favorites';
 
-const setSubtitle = (name, cond) => {
-  if (cond) {
-    return name;
-  }
-  return null;
+export const filtersTypes = {
+  byFavorites: 'favorites',
+  byCities: 'cities',
 };
+
+const { byFavorites, byCities } = filtersTypes;
+
+const setSubtitle = (name, cond) => cond && name;
 
 const ContactsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -68,6 +69,11 @@ const ContactsReducer = (state = initialState, action) => {
             ...state,
             subtitle: setSubtitle(byFavorites, state.isFiltered),
             filteredList: state.contacts.filter(contact => contact.isFavorite),
+          };
+        case byCities:
+          return {
+            ...state,
+            filteredList: state.contacts.filter(contact => contact.city === action.payload.value),
           };
         default:
           return state;

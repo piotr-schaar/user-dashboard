@@ -18,10 +18,10 @@ const LabelStyled = styled.label`
     }
   }
   input:checked + span {
-    background-color: #2196f3;
+    background-color: ${({ theme }) => theme.green};
   }
   input:focus + span {
-    box-shadow: 0 0 1px #2196f3;
+    box-shadow: 0 0 1px ${({ theme }) => theme.green};
   }
   input:checked + span:before {
     -webkit-transform: translateX(26px);
