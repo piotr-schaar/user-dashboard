@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { filterListByType as filterListByTypeAction } from 'actions/ContactsActions';
 import Card from 'components/Card';
@@ -16,23 +16,26 @@ const SwitchWrapper = styled.div`
   align-items: center;
 `;
 
-const Filters = ({ contacts, filterListByType }) => {
+const Filters = () => {
   const [availableCities, setAvailableCties] = useState([]);
   const [cityValue, setCityValue] = useState(String);
 
+  const store = useSelector(({ ContactsReducer }) => ContactsReducer);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    let cities = contacts.map(item => item.city);
+    let cities = store.contacts.map(item => item.city);
     cities = cities.reduce(
       (unique, item) => (unique.includes(item) ? unique : [...unique, item]),
       [],
     );
     setAvailableCties(cities);
-    filterListByType('cities', cityValue);
-  }, [contacts, cityValue]);
+    dispatch(filterListByTypeAction('cities', cityValue));
+  }, [store.contacts, cityValue]);
 
   const handleChange = e => {
     setCityValue(e.target.value);
-    filterListByType('cities', cityValue);
+    dispatch(filterListByTypeAction('cities', cityValue));
   };
 
   return (
@@ -62,12 +65,4 @@ const Filters = ({ contacts, filterListByType }) => {
   );
 };
 
-const mapStateToProps = ({ ContactsReducer }) => ContactsReducer;
-const mapDispatchToProps = dispatch => ({
-  filterListByType: (type, value) => dispatch(filterListByTypeAction(type, value)),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Filters);
+export default Filters;
