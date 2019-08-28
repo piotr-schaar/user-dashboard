@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { fetchDummyContacts as fetchContactsAction } from 'actions/ContactsActions';
 import ContactsItem from 'components/Sections/Contacts/ContactsItem';
 
@@ -11,13 +10,16 @@ const WrapperStyled = styled.div`
   align-content: baseline;
 `;
 
-const ContactsList = ({
-  ContactsReducer: { contacts, filteredList, isFiltered },
-  fetchContacts,
-}) => {
+const ContactsList = () => {
+  const contactsStore = useSelector(({ ContactsReducer }) => ContactsReducer);
+  const { contacts, filteredList, isFiltered } = contactsStore;
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    fetchContacts();
-  }, [fetchContacts]);
+    dispatch(fetchContactsAction());
+  }, []);
+
   return (
     <WrapperStyled>
       {isFiltered
@@ -30,22 +32,5 @@ const ContactsList = ({
 ContactsList.defaultProps = {
   contacts: [],
 };
-ContactsList.propTypes = {
-  contacts: PropTypes.array,
-  fetchContacts: PropTypes.func.isRequired,
-  ContactsReducer: PropTypes.object.isRequired,
-};
 
-const mapStateToProps = state => {
-  return {
-    ...state,
-  };
-};
-const mapDispatchToProps = dispatch => ({
-  fetchContacts: () => dispatch(fetchContactsAction()),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ContactsList);
+export default ContactsList;

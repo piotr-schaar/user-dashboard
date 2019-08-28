@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Heading from 'components/Heading';
 
 import DashboardTemplate from 'templates/DashboardTemplate';
@@ -24,7 +24,9 @@ const FlexWrapper = styled.div`
 const BreadcrumbStyled = styled.span`
   color: grey;
 `;
-const ContactsPage = ({ subtitle }) => {
+const ContactsPage = props => {
+  const subtitle = useSelector(({ ContactsReducer }) => ContactsReducer.subtitle);
+
   return (
     <DashboardTemplate>
       <WrapperStyled>
@@ -40,6 +42,4 @@ const ContactsPage = ({ subtitle }) => {
   );
 };
 
-const mapStateToProps = ({ ContactsReducer }) => ContactsReducer;
-
-export default connect(mapStateToProps)(ContactsPage);
+export default ContactsPage;

@@ -32,6 +32,9 @@ const Filters = () => {
     filtersTypes: null,
   });
 
+  const store = useSelector(({ ContactsReducer }) => ContactsReducer);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     let cities = store.contacts.map(item => item.city);
     cities = cities.reduce(
