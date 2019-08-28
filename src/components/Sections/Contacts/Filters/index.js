@@ -32,13 +32,10 @@ const Filters = () => {
     filtersTypes: null,
   });
 
-  const store = useSelector(({ ContactsReducer }) => ContactsReducer);
-  const dispatch = useDispatch();
-
   useEffect(() => {
     let cities = store.contacts.map(item => item.city);
     cities = cities.reduce(
-      (unique, item) => (unique.includes(item) ? unique : [...unique, item]),
+      (newArr, item) => (newArr.includes(item) ? newArr : [...newArr, item]),
       [],
     );
     setAvailableCties(availableCities.concat(cities));
