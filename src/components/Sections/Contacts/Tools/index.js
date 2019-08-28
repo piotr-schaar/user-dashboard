@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { FaPlus, FaSlidersH, FaHeart, FaChartPie } from 'react-icons/fa';
-import { filterListByType as filterListByTypeAction } from 'actions/ContactsActions';
-import { byFavorites } from 'reducers/ContactsReducer';
+import { filterListByType } from 'actions/ContactsActions';
 
 import Form from 'components/Sections/Contacts/Form';
 import Fitlers from 'components/Sections/Contacts/Filters';
+import Statistics from '../Statistics';
 
 const WrapperStyled = styled.div`
   margin: 0 15px;
@@ -57,10 +57,12 @@ const settings = {
   favorites: 'favorites',
 };
 
-const Tools = ({ filterListByType }) => {
+const Tools = () => {
+  const dispatch = useDispatch();
   const [setting, setSetting] = useState('filter');
 
-  const { newContact, filter, statistics, favorites } = settings;
+  // statistics, favorites;
+  const { newContact, filter, statistics } = settings;
 
   const showToolbox = sets => {
     switch (sets) {
@@ -68,6 +70,8 @@ const Tools = ({ filterListByType }) => {
         return <Form />;
       case filter:
         return <Fitlers />;
+      case statistics:
+        return <Statistics />;
       default:
         return null;
     }
@@ -84,7 +88,7 @@ const Tools = ({ filterListByType }) => {
           </ToolWrapper>
         </ToolItem>
         <ToolItem>
-          <ToolWrapper onClick={() => filterListByType('favorites')}>
+          <ToolWrapper onClick={() => dispatch(filterListByType('favorites'))}>
             <FaHeart />
             Favorites
           </ToolWrapper>
@@ -96,7 +100,7 @@ const Tools = ({ filterListByType }) => {
           </ToolWrapper>
         </ToolItem>
         <ToolItem>
-          <ToolWrapper>
+          <ToolWrapper onClick={() => handleToolbox(statistics)}>
             <FaChartPie />
             Statistics
           </ToolWrapper>
@@ -107,11 +111,4 @@ const Tools = ({ filterListByType }) => {
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  filterListByType: type => dispatch(filterListByTypeAction(type)),
-});
-
-export default connect(
-  null,
-  mapDispatchToProps,
-)(Tools);
+export default Tools;

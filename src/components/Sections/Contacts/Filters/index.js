@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { filterListByType as filterListByTypeAction } from 'actions/ContactsActions';
+import { filterListByType } from 'actions/ContactsActions';
 import Card from 'components/Card';
 import Heading from 'components/Heading';
 import Switch from '../../../SwitchInput';
@@ -16,32 +16,59 @@ const SwitchWrapper = styled.div`
   align-items: center;
 `;
 
-const Filters = ({ contacts, filterListByType }) => {
-  const [availableCities, setAvailableCties] = useState([]);
+const filtersTypes = {
+  byAlphabetic: 'byAlphabetic',
+  byCities: 'byCities',
+  byGender: 'byGender',
+};
+
+const Filters = () => {
+  const store = useSelector(({ ContactsReducer }) => ContactsReducer);
+  const dispatch = useDispatch();
+  const [availableCities, setAvailableCties] = useState(['none']);
   const [cityValue, setCityValue] = useState(String);
+  const [activeFilter, setActiveFilter] = useState({
+    isActive: false,
+    filtersTypes: null,
+  });
 
   useEffect(() => {
-    let cities = contacts.map(item => item.city);
+    let cities = store.contacts.map(item => item.city);
     cities = cities.reduce(
       (unique, item) => (unique.includes(item) ? unique : [...unique, item]),
       [],
     );
-    setAvailableCties(cities);
-    filterListByType('cities', cityValue);
-  }, [contacts, cityValue]);
+    setAvailableCties(availableCities.concat(cities));
+  }, [store.contacts]);
+
+  const filterDispatch = (filter, value) =>
+    activeFilter.isActive ? dispatch(filterListByType(filter, value)) : null;
 
   const handleChange = e => {
-    setCityValue(e.target.value);
-    filterListByType('cities', cityValue);
+    if (activeFilter.isActive) {
+      setCityValue(e.target.value);
+      filterDispatch(activeFilter.filtersTypes, e.target.value);
+    } else {
+      return null;
+    }
   };
+  const filterToggle = e => {
+    setActiveFilter({
+      isActive: !activeFilter.isActive,
+      filtersTypes: filtersTypes[e.target.name],
+    });
 
+    return activeFilter.isActive ? filterDispatch(activeFilter.filtersTypes, cityValue) : null;
+  };
   return (
     <Card>
       <Heading small>Filters</Heading>
+      {cityValue}
+      {activeFilter.filtersTypes}
       <MainWrapper>
         <SwitchWrapper>
           <p>Alphabetic order</p>
-          <Switch value="alphabeticAZ" />
+          <Switch value="alphabetic" />
         </SwitchWrapper>
         <SwitchWrapper>
           <p>Cities</p>
@@ -52,6 +79,7 @@ const Filters = ({ contacts, filterListByType }) => {
             options={availableCities}
             handleChange={handleChange}
           />
+          <Switch value={filtersTypes.byCities} handleChange={filterToggle} />
         </SwitchWrapper>
         <SwitchWrapper>
           <p>Mens</p>
@@ -62,12 +90,4 @@ const Filters = ({ contacts, filterListByType }) => {
   );
 };
 
-const mapStateToProps = ({ ContactsReducer }) => ContactsReducer;
-const mapDispatchToProps = dispatch => ({
-  filterListByType: (type, value) => dispatch(filterListByTypeAction(type, value)),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Filters);
+export default Filters;

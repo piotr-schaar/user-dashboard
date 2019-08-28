@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { FaEnvelope, FaUser, FaHeart } from 'react-icons/fa';
@@ -58,7 +58,9 @@ const IconWrapper = styled.div`
 const IconsWrapper = styled.div`
   display: flex;
 `;
-const ContactsItem = ({ handleFavorite, item: { name, email, city, isFavorite }, index }) => {
+const ContactsItem = ({ item: { name, email, city, isFavorite }, index }) => {
+  const dispatch = useDispatch();
+
   return (
     <WrapperStyled index={index}>
       <AvatarWrapper>
@@ -71,7 +73,7 @@ const ContactsItem = ({ handleFavorite, item: { name, email, city, isFavorite },
       </DescWrapper>
       <IconsWrapper>
         <IconWrapper isFavorite={isFavorite}>
-          <FaHeart onClick={() => handleFavorite(name, isFavorite)} />
+          <FaHeart onClick={() => dispatch(handleFavoriteAction(name, isFavorite))} />
         </IconWrapper>
         <IconWrapper>
           <a href={`mailto:${email}`}>
@@ -95,14 +97,6 @@ ContactsItem.propTypes = {
   email: PropTypes.string,
   isFavorite: PropTypes.bool,
   index: PropTypes.number.isRequired,
-  handleFavorite: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = dispatch => ({
-  handleFavorite: (name, isFavorite) => dispatch(handleFavoriteAction(name, isFavorite)),
-});
-
-export default connect(
-  null,
-  mapDispatchToProps,
-)(ContactsItem);
+export default ContactsItem;
