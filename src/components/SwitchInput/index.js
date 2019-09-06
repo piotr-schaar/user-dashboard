@@ -55,9 +55,9 @@ const SpanStyled = styled.span`
 
 const InputStyled = styled.input``;
 
-const Switch = ({ value }) => (
+const Switch = ({ value, handleChange }) => (
   <LabelStyled>
-    <InputStyled type="checkbox" name={value} />
+    <InputStyled type="checkbox" name={value} onChange={handleChange} />
     <SpanStyled />
   </LabelStyled>
 );

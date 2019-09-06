@@ -10,7 +10,7 @@ const initialState = {
 
 export const filtersTypes = {
   byFavorites: 'favorites',
-  byCities: 'cities',
+  byCities: 'byCities',
 };
 
 const { byFavorites, byCities } = filtersTypes;
@@ -48,10 +48,9 @@ const ContactsReducer = (state = initialState, action) => {
       };
     }
     case types.SHOW_FILTERED_RESULTS: {
-      const { isFiltered } = state;
       return {
         ...state,
-        isFiltered: !isFiltered,
+        isFiltered: !state.isFiltered,
       };
     }
 

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'redux';
 import styled, { css } from 'styled-components';
-import { connect } from 'react-redux';
 import { addContact as addContactAction } from 'redux/Contacts/Contacts.actions';
 
 import { Form } from 'components/Form';
@@ -29,19 +29,21 @@ const SubmitButton = styled(Button)`
   width: 50%;
 `;
 
-const ContactAddForm = ({ addContact }) => {
-  const [isFormShown, setShow] = useState(false);
+const ContactAddForm = () => {
+  const dispatch = useDispatch();
+
   const [updateValue, values, submitForm] = useForm({
     name: '',
     email: '',
     city: '',
   });
+
   const submitFunc = e => {
     e.preventDefault();
     submitForm();
 
     const { name, email, city } = values;
-    addContact(name, email, city);
+    dispatch(addContactAction(name, email, city));
   };
 
   const renderInputs = () => {
@@ -63,7 +65,7 @@ const ContactAddForm = ({ addContact }) => {
   return (
     <Card>
       <Heading small>Add contact</Heading>
-      <FormStyled isShown={isFormShown} onSubmit={submitFunc}>
+      <FormStyled onSubmit={submitFunc}>
         {renderInputs()}
 
         <SubmitButton type="submit">add</SubmitButton>
@@ -72,14 +74,7 @@ const ContactAddForm = ({ addContact }) => {
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  addContact: (username, email, city) => dispatch(addContactAction(username, email, city)),
-});
-
 ContactAddForm.propTypes = {
   addContact: PropTypes.func.isRequired,
 };
-export default connect(
-  null,
-  mapDispatchToProps,
-)(ContactAddForm);
+export default ContactAddForm;

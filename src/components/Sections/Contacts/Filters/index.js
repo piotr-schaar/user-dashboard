@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { filterListByType as filterListByTypeAction } from 'redux/Contacts/Contacts.actions';
+import { filterListByType } from 'redux/Contacts/Contacts.actions';
 import Card from 'components/Card';
 import Heading from 'components/Heading';
 import Switch from '../../../SwitchInput';
@@ -16,35 +16,59 @@ const SwitchWrapper = styled.div`
   align-items: center;
 `;
 
-const Filters = () => {
-  const [availableCities, setAvailableCties] = useState([]);
-  const [cityValue, setCityValue] = useState(String);
+const filtersTypes = {
+  byAlphabetic: 'byAlphabetic',
+  byCities: 'byCities',
+  byGender: 'byGender',
+};
 
+const Filters = () => {
   const store = useSelector(({ ContactsReducer }) => ContactsReducer);
   const dispatch = useDispatch();
+  const [availableCities, setAvailableCties] = useState(['none']);
+  const [cityValue, setCityValue] = useState(String);
+  const [activeFilter, setActiveFilter] = useState({
+    isActive: false,
+    filtersTypes: null,
+  });
 
   useEffect(() => {
     let cities = store.contacts.map(item => item.city);
     cities = cities.reduce(
-      (unique, item) => (unique.includes(item) ? unique : [...unique, item]),
+      (newArr, item) => (newArr.includes(item) ? newArr : [...newArr, item]),
       [],
     );
-    setAvailableCties(cities);
-    dispatch(filterListByTypeAction('cities', cityValue));
-  }, [store.contacts, cityValue]);
+    setAvailableCties(availableCities.concat(cities));
+  }, [store.contacts]);
+
+  const filterDispatch = (filter, value) =>
+    activeFilter.isActive ? dispatch(filterListByType(filter, value)) : null;
 
   const handleChange = e => {
-    setCityValue(e.target.value);
-    dispatch(filterListByTypeAction('cities', cityValue));
+    if (activeFilter.isActive) {
+      setCityValue(e.target.value);
+      filterDispatch(activeFilter.filtersTypes, e.target.value);
+    } else {
+      return null;
+    }
   };
+  const filterToggle = e => {
+    setActiveFilter({
+      isActive: !activeFilter.isActive,
+      filtersTypes: filtersTypes[e.target.name],
+    });
 
+    return activeFilter.isActive ? filterDispatch(activeFilter.filtersTypes, cityValue) : null;
+  };
   return (
     <Card>
       <Heading small>Filters</Heading>
+      {cityValue}
+      {activeFilter.filtersTypes}
       <MainWrapper>
         <SwitchWrapper>
           <p>Alphabetic order</p>
-          <Switch value="alphabeticAZ" />
+          <Switch value="alphabetic" />
         </SwitchWrapper>
         <SwitchWrapper>
           <p>Cities</p>
@@ -55,6 +79,7 @@ const Filters = () => {
             options={availableCities}
             handleChange={handleChange}
           />
+          <Switch value={filtersTypes.byCities} handleChange={filterToggle} />
         </SwitchWrapper>
         <SwitchWrapper>
           <p>Mens</p>
