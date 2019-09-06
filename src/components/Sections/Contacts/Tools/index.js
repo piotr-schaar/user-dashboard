@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { FaPlus, FaSlidersH, FaHeart, FaChartPie } from 'react-icons/fa';
-import { filterListByType as filterListByTypeAction } from 'actions/ContactsActions';
-import { byFavorites } from 'reducers/ContactsReducer';
+import { filterListByType as filterListByTypeAction } from 'redux/Contacts/Contacts.actions';
+import { byFavorites } from 'redux/Contacts/Contacts.reducer';
 
 import Form from 'components/Sections/Contacts/Form';
 import Fitlers from 'components/Sections/Contacts/Filters';

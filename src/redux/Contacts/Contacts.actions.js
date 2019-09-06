@@ -1,16 +1,10 @@
 import axios from 'axios';
 import uuid from 'uuid/v4';
-import { filtersTypes } from 'reducers/ContactsReducer';
-
-export const FETCH_CONTACTS = 'FETCH_CONTACTS';
-export const FETCH_REQUEST = 'FETCH_REQUEST';
-export const ADD_CONTACT = 'ADD_CONTACT';
-export const HANDLE_CONTACT_TO_FAVORITES = 'ADD_CONTACT_TO_FAVORITES';
-export const FILTER_LIST_BY_TYPE = 'FILTER_LIST_BY_TYPE';
-export const SHOW_FILTERED_RESULTS = 'SHOW_FILTERED_RESULTS';
+import { filtersTypes } from './Contacts.reducer';
+import types from './Contacts.types';
 
 export const fetchDummyContacts = () => dispatch => {
-  dispatch({ type: FETCH_REQUEST });
+  dispatch({ type: types.FETCH_REQUEST });
   return axios
     .get(`https://jsonplaceholder.typicode.com/users`)
     .then(({ data }) => {
@@ -25,7 +19,7 @@ export const fetchDummyContacts = () => dispatch => {
         return contactsList.push(newItem);
       });
       dispatch({
-        type: FETCH_CONTACTS,
+        type: types.FETCH_CONTACTS,
         payload: contactsList.slice(0, 4),
       });
     })
@@ -35,7 +29,7 @@ export const fetchDummyContacts = () => dispatch => {
 
 export const handleContactToFavorites = (name, isFavorite) => dispatch => {
   dispatch({
-    type: FILTER_LIST_BY_TYPE,
+    type: types.FILTER_LIST_BY_TYPE,
     payload: {
       name,
       filterType: filtersTypes.byFavorites,
@@ -43,7 +37,7 @@ export const handleContactToFavorites = (name, isFavorite) => dispatch => {
   });
 
   dispatch({
-    type: HANDLE_CONTACT_TO_FAVORITES,
+    type: types.HANDLE_CONTACT_TO_FAVORITES,
     payload: {
       name,
       isFavorite,
@@ -52,7 +46,7 @@ export const handleContactToFavorites = (name, isFavorite) => dispatch => {
 };
 
 export const addContact = (name, email, city) => ({
-  type: ADD_CONTACT,
+  type: types.ADD_CONTACT,
   id: uuid(),
   payload: {
     name,
@@ -62,10 +56,10 @@ export const addContact = (name, email, city) => ({
 });
 
 export const filterListByType = (filterType, value) => dispatch => {
-  dispatch({ type: SHOW_FILTERED_RESULTS });
+  dispatch({ type: types.SHOW_FILTERED_RESULTS });
 
   dispatch({
-    type: FILTER_LIST_BY_TYPE,
+    type: types.FILTER_LIST_BY_TYPE,
     payload: {
       filterType,
       value,

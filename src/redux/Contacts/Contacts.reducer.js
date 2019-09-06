@@ -1,11 +1,4 @@
-import {
-  FETCH_CONTACTS,
-  FETCH_REQUEST,
-  ADD_CONTACT,
-  HANDLE_CONTACT_TO_FAVORITES,
-  FILTER_LIST_BY_TYPE,
-} from 'actions/ContactsActions';
-import { SHOW_FILTERED_RESULTS } from '../actions/ContactsActions';
+import types from './Contacts.types';
 
 const initialState = {
   contacts: [],
@@ -26,24 +19,24 @@ const setSubtitle = (name, cond) => cond && name;
 
 const ContactsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_REQUEST:
+    case types.FETCH_REQUEST:
       return {
         ...state,
         isLoading: true,
       };
 
-    case FETCH_CONTACTS:
+    case types.FETCH_CONTACTS:
       return {
         ...state,
         contacts: [...action.payload],
         isLoading: true,
       };
-    case ADD_CONTACT:
+    case types.ADD_CONTACT:
       return {
         ...state,
         contacts: [...state.contacts, action.payload],
       };
-    case HANDLE_CONTACT_TO_FAVORITES: {
+    case types.HANDLE_CONTACT_TO_FAVORITES: {
       const { isFavorite, name } = action.payload;
       const selectedItem = state.contacts.find(x => x.name === name);
       const idx = state.contacts.indexOf(selectedItem);
@@ -54,7 +47,7 @@ const ContactsReducer = (state = initialState, action) => {
         ),
       };
     }
-    case SHOW_FILTERED_RESULTS: {
+    case types.SHOW_FILTERED_RESULTS: {
       const { isFiltered } = state;
       return {
         ...state,
@@ -62,7 +55,7 @@ const ContactsReducer = (state = initialState, action) => {
       };
     }
 
-    case FILTER_LIST_BY_TYPE: {
+    case types.FILTER_LIST_BY_TYPE: {
       switch (action.payload.filterType) {
         case byFavorites:
           return {

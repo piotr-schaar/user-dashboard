@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { connect } from 'react-redux';
-import { addContact as addContactAction } from 'actions/ContactsActions';
+import { addContact as addContactAction } from 'redux/Contacts/Contacts.actions';
 
 import { Form } from 'components/Form';
 import Heading from 'components/Heading';

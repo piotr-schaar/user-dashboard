@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { routes } from 'routes';
 import { Provider } from 'react-redux';
-import store from 'store';
+import store from 'redux/store';
 import AuthPage from 'views/AuthPage';
 import MainTemplate from 'templates/MainTemplate';
 import MainPage from 'views/MainPage';

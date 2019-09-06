@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchDummyContacts as fetchContactsAction } from 'actions/ContactsActions';
+import { fetchDummyContacts as fetchContactsAction } from 'redux/Contacts/Contacts.actions';
 import ContactsItem from 'components/Sections/Contacts/ContactsItem';
 
 const WrapperStyled = styled.div`

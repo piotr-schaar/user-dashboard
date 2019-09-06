@@ -1,8 +1,7 @@
-import { AUTH_SUCCESS, REGISTER_USER_FAILURE } from 'actions/UserActions';
-import { REGISTER_USER_SUCCESS } from '../actions/UserActions';
+import types from './User.types';
 
 // dummy
-import avatar from '../placeholder/avatar.jpg';
+import avatar from '../../placeholder/avatar.jpg';
 
 const initialState = {
   userID: `5d0e44b4033d0286511d0494`,
@@ -12,17 +11,17 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case AUTH_SUCCESS:
+    case types.AUTH_SUCCESS:
       return {
         ...state,
         userID: action.payload.data._id,
       };
-    case REGISTER_USER_SUCCESS:
+    case types.REGISTER_USER_SUCCESS:
       return {
         ...state,
         isError: false,
       };
-    case REGISTER_USER_FAILURE:
+    case types.REGISTER_USER_FAILURE:
       return {
         ...state,
         isError: true,

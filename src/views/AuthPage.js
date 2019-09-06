@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components';
 import PropTypes from 'prop-types';
 
 import Input from 'components/Input';
-import { registerUser as registerAction, auth as authAction } from 'actions/UserActions';
+import { registerUser as registerAction, auth as authAction } from 'redux/User/User.actions';
 import { connect } from 'react-redux';
 import Heading from 'components/Heading';
 import Button from 'components/Button';

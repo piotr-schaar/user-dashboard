@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { FaEnvelope, FaUser, FaHeart } from 'react-icons/fa';
 import Card from 'components/Card';
 
-import { handleContactToFavorites as handleFavoriteAction } from 'actions/ContactsActions';
+import { handleContactToFavorites as handleFavoriteAction } from 'redux/Contacts/Contacts.actions';
 
 const WrapperStyled = styled(Card)`
   display: grid;
