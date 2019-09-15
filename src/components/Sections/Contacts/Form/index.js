@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { useDispatch } from 'redux';
+import { useDispatch } from 'react-redux';
 import styled, { css } from 'styled-components';
 import { addContact as addContactAction } from 'redux/Contacts/Contacts.actions';
 
@@ -31,7 +30,6 @@ const SubmitButton = styled(Button)`
 
 const ContactAddForm = () => {
   const dispatch = useDispatch();
-
   const [updateValue, values, submitForm] = useForm({
     name: '',
     email: '',
@@ -74,7 +72,4 @@ const ContactAddForm = () => {
   );
 };
 
-ContactAddForm.propTypes = {
-  addContact: PropTypes.func.isRequired,
-};
 export default ContactAddForm;

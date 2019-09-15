@@ -24,7 +24,9 @@ const filtersTypes = {
 
 const Filters = () => {
   const store = useSelector(({ ContactsReducer }) => ContactsReducer);
+
   const dispatch = useDispatch();
+
   const [availableCities, setAvailableCties] = useState(['none']);
   const [cityValue, setCityValue] = useState(String);
   const [activeFilter, setActiveFilter] = useState({
