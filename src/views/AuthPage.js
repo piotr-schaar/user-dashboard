@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
+import { connect } from 'react-redux';
+
 import PropTypes from 'prop-types';
 
-import Input from 'components/Input';
 import { registerUser as registerAction, auth as authAction } from 'redux/User/User.actions';
-import { connect } from 'react-redux';
-import Heading from 'components/Heading';
-import Button from 'components/Button';
+import Input from 'components/Layout/Input';
+import Heading from 'components/Layout/Heading';
+import Button from 'components/Layout/Button';
 import AuthTemplate from 'templates/AuthTemplate';
 import useForm from 'hooks/useForm';
-import Alert from '../components/Alert';
+import Alert from '../components/Layout/Alert';
 
 const fadeIn = keyframes`
    from {

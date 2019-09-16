@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import Heading from 'components/Heading';
+import Heading from 'components/Layout/Heading';
 
 import DashboardTemplate from 'templates/DashboardTemplate';
 import ContactsList from 'components/Sections/Contacts/ContactsList';
