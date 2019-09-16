@@ -5,12 +5,12 @@ import { addContact as addContactAction } from 'redux/Contacts/Contacts.actions'
 
 import { Form } from 'components/Layout/Form';
 import Heading from 'components/Layout/Heading';
-import Input from 'components/Layout/Input';
 
 import Button from 'components/Layout/Button';
 
 import useForm from 'hooks/useForm';
 import Card from 'components/Layout/Card';
+import useInputs from './useInputs/useInputs';
 
 const FormStyled = styled(Form)`
   display: flex;
@@ -30,13 +30,15 @@ const SubmitButton = styled(Button)`
 
 const ContactAddForm = () => {
   const dispatch = useDispatch();
-  const [updateValue, values, submitForm] = useForm({
+  const [updateValue, values, submitForm, errors] = useForm({
     name: '',
     email: '',
     city: '',
   });
 
-  const submitFunc = e => {
+  const FormInputs = useInputs(values, updateValue);
+
+  const handleSubmit = e => {
     e.preventDefault();
     submitForm();
 
@@ -44,28 +46,12 @@ const ContactAddForm = () => {
     dispatch(addContactAction(name, email, city));
   };
 
-  const renderInputs = () => {
-    const valuesArray = Object.keys(values);
-    return valuesArray.map(value => (
-      <Input
-        key={value}
-        id={value}
-        name={value}
-        type="text"
-        required
-        placeholder={value}
-        onChange={updateValue}
-        onBlur={updateValue}
-      />
-    ));
-  };
-
   return (
     <Card>
+      {errors && errors.map(error => <p>{error}</p>)}
       <Heading small>Add contact</Heading>
-      <FormStyled onSubmit={submitFunc}>
-        {renderInputs()}
-
+      <FormStyled onSubmit={handleSubmit}>
+        {FormInputs}
         <SubmitButton type="submit">add</SubmitButton>
       </FormStyled>
     </Card>

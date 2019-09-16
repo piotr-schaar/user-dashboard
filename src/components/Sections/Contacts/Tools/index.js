@@ -77,35 +77,41 @@ const Tools = () => {
         return null;
     }
   };
-
   const handleToolbox = set => (setting === set ? setSetting(null) : setSetting(set));
+
+  const settingsList = [
+    {
+      name: 'New Contact',
+      icon: () => <FaPlus />,
+      callback: () => handleToolbox(newContact),
+    },
+    {
+      name: 'Favorites',
+      icon: () => <FaHeart />,
+      callback: () => dispatch(filterListByType('favorites')),
+    },
+    {
+      name: 'Filter',
+      icon: () => <FaSlidersH />,
+      callback: () => handleToolbox(filter),
+    },
+    {
+      name: 'Statistics',
+      icon: () => <FaChartPie />,
+      callback: () => null,
+    },
+  ];
   return (
     <WrapperStyled>
       <ToolsList>
-        <ToolItem>
-          <ToolWrapper onClick={() => handleToolbox(newContact)}>
-            <FaPlus />
-            New contact
-          </ToolWrapper>
-        </ToolItem>
-        <ToolItem>
-          <ToolWrapper onClick={() => dispatch(filterListByType('favorites'))}>
-            <FaHeart />
-            Favorites
-          </ToolWrapper>
-        </ToolItem>
-        <ToolItem>
-          <ToolWrapper onClick={() => handleToolbox(filter)}>
-            <FaSlidersH />
-            Filter
-          </ToolWrapper>
-        </ToolItem>
-        <ToolItem>
-          <ToolWrapper onClick={() => handleToolbox(statistics)}>
-            <FaChartPie />
-            Statistics
-          </ToolWrapper>
-        </ToolItem>
+        {settingsList.map(({ callback, icon, name }) => (
+          <ToolItem>
+            <ToolWrapper onClick={callback}>
+              {console.log(icon)}
+              {name}
+            </ToolWrapper>
+          </ToolItem>
+        ))}
       </ToolsList>
       <Toolbox>{showToolbox(setting)}</Toolbox>
     </WrapperStyled>
