@@ -3,14 +3,14 @@ import { useDispatch } from 'react-redux';
 import styled, { css } from 'styled-components';
 import { addContact as addContactAction } from 'redux/Contacts/Contacts.actions';
 
-import { Form } from 'components/Form';
-import Heading from 'components/Heading';
-import Input from 'components/Input';
+import { Form } from 'components/Layout/Form';
+import Heading from 'components/Layout/Heading';
+import Input from 'components/Layout/Input';
 
-import Button from 'components/Button';
+import Button from 'components/Layout/Button';
 
 import useForm from 'hooks/useForm';
-import Card from 'components/Card';
+import Card from 'components/Layout/Card';
 
 const FormStyled = styled(Form)`
   display: flex;

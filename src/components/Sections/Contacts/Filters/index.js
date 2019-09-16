@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { filterListByType } from 'redux/Contacts/Contacts.actions';
-import Card from 'components/Card';
-import Heading from 'components/Heading';
+import Card from 'components/Layout/Card';
+import Heading from 'components/Layout/Heading';
 import Switch from '../../../SwitchInput';
 import Select from '../../../Select';
 
