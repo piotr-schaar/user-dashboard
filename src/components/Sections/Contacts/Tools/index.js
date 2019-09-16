@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { FaPlus, FaSlidersH, FaHeart, FaChartPie } from 'react-icons/fa';
 import { filterListByType } from 'redux/Contacts/Contacts.actions';
-import { byFavorites } from 'redux/Contacts/Contacts.reducer';
 
 import Form from 'components/Sections/Contacts/Form';
 import Fitlers from 'components/Sections/Contacts/Filters';
@@ -104,10 +103,10 @@ const Tools = () => {
   return (
     <WrapperStyled>
       <ToolsList>
-        {settingsList.map(({ callback, icon, name }) => (
-          <ToolItem>
+        {settingsList.map(({ name, icon, callback }) => (
+          <ToolItem key={name}>
             <ToolWrapper onClick={callback}>
-              {console.log(icon)}
+              {icon()}
               {name}
             </ToolWrapper>
           </ToolItem>

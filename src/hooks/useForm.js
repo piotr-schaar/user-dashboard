@@ -1,28 +1,37 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const validateForm = values => {
   const errors = [];
 
   switch (values) {
     case !values.username:
-      return errors.push('Please enter username');
+      errors.push('Please enter username');
+      break;
     case values.name.length < 3:
-      return errors.push('Name should contain at least 3 letters');
+      errors.push('Name should contain at least 3 letters');
+      break;
     default:
       return errors;
   }
+  return errors;
 };
 
 const useForm = initialValues => {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState([]);
-  const updateValue = e => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
 
   const submitForm = () => {
     setErrors(validateForm(values));
   };
+
+  useEffect(() => {
+    submitForm();
+  }, [values]);
+
+  const updateValue = e => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
   console.log(errors);
 
   return [updateValue, values, submitForm, errors];
