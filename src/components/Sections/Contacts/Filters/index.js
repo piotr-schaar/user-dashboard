@@ -7,6 +7,7 @@ import Card from 'components/Layout/Card';
 import Heading from 'components/Layout/Heading';
 import Switch from '../../../SwitchInput';
 import Select from '../../../Select';
+import useCitiesList from '../../../../hooks/useCitiesList';
 
 const MainWrapper = styled.div``;
 
@@ -24,41 +25,33 @@ const filtersTypes = {
 
 const Filters = () => {
   const store = useSelector(({ ContactsReducer }) => ContactsReducer);
-
   const dispatch = useDispatch();
 
-  const [availableCities, setAvailableCties] = useState(['none']);
+  const cities = useCitiesList(store.contacts);
   const [cityValue, setCityValue] = useState(String);
+
   const [activeFilter, setActiveFilter] = useState({
     isActive: false,
     filtersTypes: null,
   });
 
+  const filterDispatch = (filter, value, isUpdate) =>
+    activeFilter.isActive ? dispatch(filterListByType(filter, value, isUpdate)) : null;
+
   useEffect(() => {
-    let cities = store.contacts.map(item => item.city);
-    cities = cities.reduce(
-      (newArr, item) => (newArr.includes(item) ? newArr : [...newArr, item]),
-      [],
-    );
-    setAvailableCties(availableCities.concat(cities));
-  }, [store.contacts]);
+    const checkFiltering = () => (store.isFiltered ? store.isFiltered : false);
+    filterDispatch(activeFilter.filtersTypes, cityValue, checkFiltering());
+  }, [cityValue]);
 
-  const filterDispatch = (filter, value) =>
-    activeFilter.isActive ? dispatch(filterListByType(filter, value)) : null;
-
-  const handleChange = e =>
-    activeFilter.isActive
-      ? (setCityValue(e.target.value), filterDispatch(activeFilter.filtersTypes, e.target.value))
-      : null;
+  const handleChange = e => activeFilter.isActive && setCityValue(e.target.value);
 
   const filterToggle = e => {
     setActiveFilter({
       isActive: !activeFilter.isActive,
       filtersTypes: filtersTypes[e.target.name],
     });
-
-    return activeFilter.isActive ? filterDispatch(activeFilter.filtersTypes, cityValue) : null;
   };
+
   return (
     <Card>
       <Heading small>Filters</Heading>
@@ -72,12 +65,10 @@ const Filters = () => {
         <SwitchWrapper>
           <p>Cities</p>
           {cityValue}
-          <Select
-            value={cityValue}
-            name="city"
-            options={availableCities}
-            handleChange={handleChange}
-          />
+          {cities && (
+            <Select value={cityValue} name="city" options={cities} handleChange={handleChange} />
+          )}
+
           <Switch value={filtersTypes.byCities} handleChange={filterToggle} />
         </SwitchWrapper>
         <SwitchWrapper>

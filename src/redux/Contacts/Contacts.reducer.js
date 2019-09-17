@@ -48,9 +48,11 @@ const ContactsReducer = (state = initialState, action) => {
       };
     }
     case types.SHOW_FILTERED_RESULTS: {
+      const checkIsUpdateActualValue = () =>
+        action.isUpdateActualValue ? true : !state.isFiltered;
       return {
         ...state,
-        isFiltered: !state.isFiltered,
+        isFiltered: checkIsUpdateActualValue(),
       };
     }
 

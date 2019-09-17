@@ -55,9 +55,8 @@ export const addContact = (name, email, city) => ({
   },
 });
 
-export const filterListByType = (filterType, value) => dispatch => {
-  dispatch({ type: types.SHOW_FILTERED_RESULTS });
-
+export const filterListByType = (filterType, value, isUpdateActualValue) => dispatch => {
+  dispatch({ type: types.SHOW_FILTERED_RESULTS, isUpdateActualValue });
   dispatch({
     type: types.FILTER_LIST_BY_TYPE,
     payload: {
