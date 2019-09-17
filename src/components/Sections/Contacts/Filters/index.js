@@ -36,14 +36,14 @@ const Filters = () => {
   });
 
   const filterDispatch = (filter, value, isUpdate) =>
-    activeFilter.isActive ? dispatch(filterListByType(filter, value, isUpdate)) : null;
+    activeFilter.isActive && dispatch(filterListByType(filter, value, isUpdate));
 
   useEffect(() => {
-    const checkFiltering = () => (store.isFiltered ? store.isFiltered : false);
-    filterDispatch(activeFilter.filtersTypes, cityValue, checkFiltering());
+    const checkIsFiltering = store.isFiltered ? store.isFiltered : false;
+    filterDispatch(activeFilter.filtersTypes, cityValue, checkIsFiltering);
   }, [cityValue]);
 
-  const handleChange = e => activeFilter.isActive && setCityValue(e.target.value);
+  const cityChangeHandler = e => activeFilter.isActive && setCityValue(e.target.value);
 
   const filterToggle = e => {
     setActiveFilter({
@@ -51,29 +51,34 @@ const Filters = () => {
       filtersTypes: filtersTypes[e.target.name],
     });
   };
+  const byAlphabeticFilter = () => {
+    filterToggle();
+  };
 
   return (
     <Card>
       <Heading small>Filters</Heading>
-      {cityValue}
-      {activeFilter.filtersTypes}
       <MainWrapper>
         <SwitchWrapper>
           <p>Alphabetic order</p>
-          <Switch value="alphabetic" />
+          <Switch value={filtersTypes.byAlphabetic} handleChange={filterToggle} />
         </SwitchWrapper>
         <SwitchWrapper>
           <p>Cities</p>
-          {cityValue}
           {cities && (
-            <Select value={cityValue} name="city" options={cities} handleChange={handleChange} />
+            <Select
+              value={cityValue}
+              name="city"
+              options={cities}
+              handleChange={cityChangeHandler}
+            />
           )}
 
-          <Switch value={filtersTypes.byCities} handleChange={filterToggle} />
+          <Switch value={filtersTypes.byCities} handleChange={byAlphabeticFilter} />
         </SwitchWrapper>
         <SwitchWrapper>
           <p>Mens</p>
-          <Switch value="Mens" />
+          <Switch value="Men" />
         </SwitchWrapper>
       </MainWrapper>
     </Card>

@@ -26,6 +26,7 @@ const ToolWrapper = styled.button`
   align-items: center;
   padding: 20px 15px;
   border-radius: 10px;
+  height: 100%;
   background: white;
   width: 100%;
   font-size: 20px;
