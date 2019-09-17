@@ -97,7 +97,7 @@ const Tools = () => {
     {
       name: 'Statistics',
       icon: () => <FaChartPie />,
-      callback: () => null,
+      callback: () => handleToolbox(statistics),
     },
   ];
   return (

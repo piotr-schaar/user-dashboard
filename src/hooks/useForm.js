@@ -24,12 +24,9 @@ const useForm = initialValues => {
     setErrors(validateForm(values));
   };
 
-  useEffect(() => {
-    submitForm();
-  }, [values]);
-
   const updateValue = e => {
     setValues({ ...values, [e.target.name]: e.target.value });
+    submitForm();
   };
 
   console.log(errors);

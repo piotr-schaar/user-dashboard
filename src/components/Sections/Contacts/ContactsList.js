@@ -18,7 +18,7 @@ const ContactsList = () => {
 
   useEffect(() => {
     dispatch(fetchContactsAction());
-  }, []);
+  }, [dispatch]);
 
   return (
     <WrapperStyled>

@@ -1,12 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { getContactsList } from 'selectors/ContactsFilters';
-
-const mapStateToProps = ({ ContactsReducer: { contacts } }) => {
-  return {
-    contacts: getContactsList({ contacts }),
-  };
-};
 
 const Statistics = props => {
   return (
@@ -16,4 +8,4 @@ const Statistics = props => {
   );
 };
 
-export default connect(mapStateToProps)(Statistics);
+export default Statistics;

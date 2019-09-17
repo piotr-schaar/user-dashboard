@@ -46,14 +46,11 @@ const Filters = () => {
   const filterDispatch = (filter, value) =>
     activeFilter.isActive ? dispatch(filterListByType(filter, value)) : null;
 
-  const handleChange = e => {
-    if (activeFilter.isActive) {
-      setCityValue(e.target.value);
-      filterDispatch(activeFilter.filtersTypes, e.target.value);
-    } else {
-      return null;
-    }
-  };
+  const handleChange = e =>
+    activeFilter.isActive
+      ? (setCityValue(e.target.value), filterDispatch(activeFilter.filtersTypes, e.target.value))
+      : null;
+
   const filterToggle = e => {
     setActiveFilter({
       isActive: !activeFilter.isActive,
