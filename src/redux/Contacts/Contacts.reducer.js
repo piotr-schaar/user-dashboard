@@ -1,7 +1,11 @@
 import types from './Contacts.types';
 
 const initialState = {
-  contacts: [],
+  contacts: [
+    {
+      city: 'South Elvis',
+    },
+  ],
   isLoading: false,
   filteredList: [],
   isFiltered: false,
@@ -28,7 +32,7 @@ const ContactsReducer = (state = initialState, action) => {
     case types.FETCH_CONTACTS:
       return {
         ...state,
-        contacts: [...action.payload],
+        contacts: [...state.contacts, ...action.payload],
         isLoading: true,
       };
     case types.ADD_CONTACT:

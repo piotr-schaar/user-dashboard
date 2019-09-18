@@ -1,10 +1,13 @@
 import React from 'react';
 
+import Card from 'components/Layout/Card';
+import Chart from './Chart';
+
 const Statistics = props => {
   return (
-    <div>
-      <h1>siemka</h1>
-    </div>
+    <Card>
+      <Chart />
+    </Card>
   );
 };
 
