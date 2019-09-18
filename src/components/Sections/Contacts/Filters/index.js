@@ -51,18 +51,11 @@ const Filters = () => {
       filtersTypes: filtersTypes[e.target.name],
     });
   };
-  const byAlphabeticFilter = () => {
-    filterToggle();
-  };
 
   return (
     <Card>
       <Heading small>Filters</Heading>
       <MainWrapper>
-        <SwitchWrapper>
-          <p>Alphabetic order</p>
-          <Switch value={filtersTypes.byAlphabetic} handleChange={filterToggle} />
-        </SwitchWrapper>
         <SwitchWrapper>
           <p>Cities</p>
           {cities && (
@@ -74,11 +67,7 @@ const Filters = () => {
             />
           )}
 
-          <Switch value={filtersTypes.byCities} handleChange={byAlphabeticFilter} />
-        </SwitchWrapper>
-        <SwitchWrapper>
-          <p>Mens</p>
-          <Switch value="Men" />
+          <Switch value={filtersTypes.byCities} handleChange={filterToggle} />
         </SwitchWrapper>
       </MainWrapper>
     </Card>

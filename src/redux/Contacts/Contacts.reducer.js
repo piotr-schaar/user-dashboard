@@ -66,6 +66,7 @@ const ContactsReducer = (state = initialState, action) => {
         case byCities:
           return {
             ...state,
+            subtitle: setSubtitle(action.payload.value, state.isFiltered),
             filteredList: state.contacts.filter(contact => contact.city === action.payload.value),
           };
         default:
