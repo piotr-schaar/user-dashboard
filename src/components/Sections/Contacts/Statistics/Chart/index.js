@@ -3,12 +3,9 @@ import ReactMinimalPieChart from 'react-minimal-pie-chart';
 import { useSelector } from 'react-redux';
 
 const getRandomColor = () => {
-  const letters = '0123456789ABCDEF';
-  let color = '#';
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
+  const colors = ['#98FB98', '#8FBC8F', '#ADFF2F'];
+  const newColor = colors[Math.floor(Math.random() * colors.length)];
+  return newColor;
 };
 
 const getUnique = arr => {
@@ -39,9 +36,8 @@ const Chart = () => {
     [],
   );
 
-  console.log(getUnique(citiesCounter));
   return (
-    <ReactMinimalPieChart data={getUnique(citiesCounter)} lineWidth={15} paddingAngle={5} label />
+    <ReactMinimalPieChart data={getUnique(citiesCounter)} lineWidth={15} paddingAngle={5} animate />
   );
 };
 
