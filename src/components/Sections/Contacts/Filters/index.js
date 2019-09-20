@@ -28,7 +28,6 @@ const Filters = () => {
   const dispatch = useDispatch();
 
   const cities = useCitiesList(store.contacts);
-  console.log('TCL: Filters -> cities', cities);
   const [cityValue, setCityValue] = useState(String);
 
   const [activeFilter, setActiveFilter] = useState({
