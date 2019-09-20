@@ -1,9 +1,25 @@
 import types from './Contacts.types';
+import uuid from 'uuid';
 
 const initialState = {
   contacts: [
     {
-      city: 'South Elvis',
+      id: uuid(),
+      name: 'Piotr Szar',
+      email: 'piter@gmail.com',
+      city: 'Poznań',
+    },
+    {
+      id: uuid(),
+      name: 'Beata Skórcz',
+      email: 'becia@gmail.com',
+      city: 'Starogard Gdański',
+    },
+    {
+      id: uuid(),
+      name: 'Leonek Pieseński',
+      email: 'chi@gmail.com',
+      city: 'Mexico',
     },
   ],
   isLoading: false,
@@ -28,11 +44,10 @@ const ContactsReducer = (state = initialState, action) => {
         ...state,
         isLoading: true,
       };
-
     case types.FETCH_CONTACTS:
       return {
         ...state,
-        contacts: [...state.contacts, ...action.payload],
+        contacts: [...state.contact, action.payload],
         isLoading: true,
       };
     case types.ADD_CONTACT:

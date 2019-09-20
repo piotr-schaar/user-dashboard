@@ -8,7 +8,7 @@ const useCitiesList = contacts => {
       (newArr, item) => (newArr.includes(item) ? newArr : [...newArr, item]),
       [],
     );
-    setAvailableCties(availableCities.concat(cities));
+    setAvailableCties(cities);
   }, [contacts]);
 
   return availableCities;

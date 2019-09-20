@@ -1,6 +1,6 @@
-import React from 'react';
-import ReactMinimalPieChart from 'react-minimal-pie-chart';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import ReactMinimalPieChart from 'react-minimal-pie-chart';
 
 const getRandomColor = () => {
   const colors = ['#98FB98', '#8FBC8F', '#ADFF2F'];
@@ -18,11 +18,11 @@ const getUnique = arr => {
   return filteredArr;
 };
 
+const howManyTimesInArray = (value, arr) => arr.filter(i => i === value).length;
+
 const Chart = () => {
   const contactsList = useSelector(({ ContactsReducer }) => ContactsReducer.contacts);
   const reduceContactsToCities = contactsList.reduce((newArr, item) => [...newArr, item.city], []);
-
-  const howManyTimesInArray = (value, arr) => arr.filter(i => i === value).length;
 
   const citiesCounter = reduceContactsToCities.reduce(
     (newArr, item) => [
@@ -36,8 +36,18 @@ const Chart = () => {
     [],
   );
 
+  const test = (event, propsData, index) => {};
+
   return (
-    <ReactMinimalPieChart data={getUnique(citiesCounter)} lineWidth={15} paddingAngle={5} animate />
+    <>
+      <ReactMinimalPieChart
+        data={getUnique(citiesCounter)}
+        lineWidth={10}
+        paddingAngle={5}
+        animate
+        onClick={test}
+      />
+    </>
   );
 };
 

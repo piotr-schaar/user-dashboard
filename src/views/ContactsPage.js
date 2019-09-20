@@ -5,7 +5,7 @@ import Heading from 'components/Layout/Heading';
 
 import DashboardTemplate from 'templates/DashboardTemplate';
 import ContactsList from 'components/Sections/Contacts/ContactsList';
-import Tools from 'components/Sections/Contacts/Tools';
+import Toolbox from 'components/Sections/Contacts/Toolbox';
 
 const WrapperStyled = styled.div`
   width: 100%;
@@ -35,7 +35,7 @@ const ContactsPage = props => {
         </Heading>
         <FlexWrapper>
           <ContactsList />
-          <Tools />
+          <Toolbox />
         </FlexWrapper>
       </WrapperStyled>
     </DashboardTemplate>
