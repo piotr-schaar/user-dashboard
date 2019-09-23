@@ -64,45 +64,42 @@ const AvatarWrapper = styled.div`
   background-repeat: no-repeat;
 `;
 
+const navLinks = [
+  {
+    href: routes.contacts,
+    icon: () => <FaAddressBook />,
+  },
+  {
+    href: routes.tasks,
+    icon: () => <FaTasks />,
+  },
+  {
+    href: routes.settings,
+    icon: () => <FaCogs />,
+  },
+  {
+    href: routes.logout,
+    icon: () => <FaSignOutAlt />,
+  },
+];
+
 const Sidebar = ({ avatar }) => {
   return (
     <SidebarWrapper>
       <>
         <ListStyled>
           <ItemStyled>
-            <NavLink to="/">
+            <NavLink to={routes.home}>
               <AvatarWrapper avatar={avatar}>{!avatar && <FaUser />}</AvatarWrapper>
             </NavLink>
           </ItemStyled>
-          <ItemStyled>
-            <NavLink to={routes.contacts}>
-              <IconWrapper>
-                <FaAddressBook />
-              </IconWrapper>
-            </NavLink>
-          </ItemStyled>
-          <ItemStyled>
-            <IconWrapper>
-              <FaTasks />
-            </IconWrapper>
-          </ItemStyled>
-          <ItemStyled>
-            <IconWrapper>
-              <FaFile />
-            </IconWrapper>
-          </ItemStyled>
-          <ItemStyled>
-            <IconWrapper>
-              <FaCogs />
-            </IconWrapper>
-          </ItemStyled>
-          <ItemStyled>
-            <NavLink to="/user/logout">
-              <IconWrapper>
-                <FaSignOutAlt />
-              </IconWrapper>
-            </NavLink>
-          </ItemStyled>
+          {navLinks.map(item => (
+            <ItemStyled>
+              <NavLink to={item.href}>
+                <IconWrapper>{item.icon()}</IconWrapper>
+              </NavLink>
+            </ItemStyled>
+          ))}
         </ListStyled>
       </>
     </SidebarWrapper>
