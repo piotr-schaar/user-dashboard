@@ -29,7 +29,8 @@ const ToolWrapper = styled.button`
   height: 100%;
   background: white;
   width: 100%;
-  font-size: 20px;
+  font-size: ${({ theme }) => theme.fontSize.m};
+  font-weight: ${({ theme }) => theme.bold};
   border: 2px solid ${({ theme }) => theme.green};
   &:hover,
   &:focus {

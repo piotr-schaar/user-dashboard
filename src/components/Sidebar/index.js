@@ -94,7 +94,7 @@ const Sidebar = ({ avatar }) => {
             </NavLink>
           </ItemStyled>
           {navLinks.map(item => (
-            <ItemStyled>
+            <ItemStyled key={item.href}>
               <NavLink to={item.href}>
                 <IconWrapper>{item.icon()}</IconWrapper>
               </NavLink>

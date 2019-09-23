@@ -21,6 +21,12 @@ const initialState = {
       email: 'chi@gmail.com',
       city: 'Mexico',
     },
+    {
+      id: uuid(),
+      name: 'Leonek Pieseński',
+      email: 'chi@gmail.com',
+      city: 'Mexico',
+    },
   ],
   isLoading: false,
   filteredList: [],

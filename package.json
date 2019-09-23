@@ -4,7 +4,9 @@
   "private": true,
   "dependencies": {
     "axios": "^0.19.0",
+    "chart.js": "^2.8.0",
     "react": "^16.8.6",
+    "react-chartjs-2": "^2.8.0",
     "react-dom": "^16.8.6",
     "react-icons": "^3.7.0",
     "react-minimal-pie-chart": "^5.0.1",
