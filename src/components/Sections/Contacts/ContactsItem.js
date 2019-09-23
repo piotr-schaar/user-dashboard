@@ -9,10 +9,9 @@ import { handleContactToFavorites as handleFavoriteAction } from 'redux/Contacts
 
 const WrapperStyled = styled(Card)`
   display: grid;
-  width: 50%;
   grid-template-columns: 1fr 3fr 1fr;
   grid-gap: 5px;
-  height: 120px;
+  height: 150px;
   align-items: center;
   margin: 5px 0;
   :last-of-type {

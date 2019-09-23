@@ -13,8 +13,8 @@ const WrapperStyled = styled.div`
 
 const FlexWrapper = styled.div`
   display: grid;
-  grid-template-columns: 2fr 1fr;
-
+  grid-template-columns: 1fr;
+  grid-gap: 20px;
   /* developmnent maxwidth for doublescreen */
   @media (max-width: 900px) {
     grid-template-columns: 1fr;
@@ -24,18 +24,27 @@ const FlexWrapper = styled.div`
 const BreadcrumbStyled = styled.span`
   color: grey;
 `;
+
+const HeadingWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 const ContactsPage = props => {
   const subtitle = useSelector(({ ContactsReducer }) => ContactsReducer.subtitle);
 
   return (
     <DashboardTemplate>
       <WrapperStyled>
-        <Heading>
-          Contacts {subtitle && <BreadcrumbStyled> &gt; {subtitle}</BreadcrumbStyled>}
-        </Heading>
+        <HeadingWrapper>
+          <Heading>
+            Contacts {subtitle && <BreadcrumbStyled> &gt; {subtitle}</BreadcrumbStyled>}
+          </Heading>
+          <Toolbox />
+        </HeadingWrapper>
+
         <FlexWrapper>
           <ContactsList />
-          <Toolbox />
         </FlexWrapper>
       </WrapperStyled>
     </DashboardTemplate>

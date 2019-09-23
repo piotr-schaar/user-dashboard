@@ -4,53 +4,42 @@ import { useDispatch } from 'react-redux';
 import { FaPlus, FaSlidersH, FaHeart, FaChartPie } from 'react-icons/fa';
 import { filterListByType } from 'redux/Contacts/Contacts.actions';
 
+import Card from 'components/Layout/Card';
 import Form from 'components/Sections/Contacts/Form';
 import Fitlers from 'components/Sections/Contacts/Filters';
 import Statistics from '../Statistics';
 
-const WrapperStyled = styled.div`
-  margin: 0 15px;
-`;
+const WrapperStyled = styled.div``;
 const ToolsList = styled.ul`
-  list-style: none;
+  margin: 0;
   padding: 0;
+  list-style: none;
   display: flex;
-  flex-wrap: wrap;
 `;
-const ToolItem = styled.li`
-  width: 50%;
-  padding: 10px;
-`;
+const ToolItem = styled.li``;
 const ToolWrapper = styled.button`
   display: flex;
+  justify-content: center;
   align-items: center;
-  padding: 20px 15px;
-  border-radius: 10px;
+  border: 2px solid white;
+  padding: 15px 15px;
+  cursor: pointer;
   height: 100%;
-  background: white;
   width: 100%;
-  font-size: ${({ theme }) => theme.fontSize.m};
-  font-weight: ${({ theme }) => theme.bold};
-  border: 2px solid ${({ theme }) => theme.green};
-  &:hover,
-  &:focus {
-    background: ${({ theme }) => theme.greenOpacity};
-    cursor: pointer;
-    color: white;
-    outline: none;
-    svg {
-      color: white;
-    }
+  font-size: 20px;
+  color: grey;
+  background: none;
+  &:hover {
+    border: 2px solid ${({ theme }) => theme.greenOpacity};
+    color: ${({ theme }) => theme.green};
+    box-shadow: 9px 9px 4px -12px rgba(0, 0, 0, 0.4);
   }
-  svg {
-    color: grey;
-    margin-right: 15px;
+  a {
+    color: inherit;
   }
 `;
 
-const Toolbox = styled.div`
-  margin: 0 10px;
-`;
+const Toolbox = styled.div``;
 
 const settings = {
   newContact: 'newContact',
@@ -82,22 +71,18 @@ const Tools = () => {
 
   const settingsList = [
     {
-      name: 'New Contact',
       icon: () => <FaPlus />,
       callback: () => handleToolbox(newContact),
     },
     {
-      name: 'Favorites',
       icon: () => <FaHeart />,
       callback: () => dispatch(filterListByType('favorites')),
     },
     {
-      name: 'Filter',
       icon: () => <FaSlidersH />,
       callback: () => handleToolbox(filter),
     },
     {
-      name: 'Statistics',
       icon: () => <FaChartPie />,
       callback: () => handleToolbox(statistics),
     },
@@ -107,14 +92,11 @@ const Tools = () => {
       <ToolsList>
         {settingsList.map(({ name, icon, callback }) => (
           <ToolItem key={name}>
-            <ToolWrapper onClick={callback}>
-              {icon()}
-              {name}
-            </ToolWrapper>
+            <ToolWrapper onClick={callback}>{icon()}</ToolWrapper>
           </ToolItem>
         ))}
       </ToolsList>
-      <Toolbox>{showToolbox(setting)}</Toolbox>
+      {/* <Toolbox>{showToolbox(setting)}</Toolbox> */}
     </WrapperStyled>
   );
 };

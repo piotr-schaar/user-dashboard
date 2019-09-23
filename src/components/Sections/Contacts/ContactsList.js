@@ -5,8 +5,9 @@ import { useSelector } from 'react-redux';
 import ContactsItem from 'components/Sections/Contacts/ContactsItem';
 
 const WrapperStyled = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 10px;
   align-content: baseline;
 `;
 
