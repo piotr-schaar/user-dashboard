@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-// import { fetchDummyContacts as fetchContactsAction } from 'redux/Contacts/Contacts.actions';
 import ContactsItem from 'components/Sections/Contacts/ContactsItem';
 
 const WrapperStyled = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
   grid-gap: 10px;
+  margin: 0 -15px;
   align-content: baseline;
 `;
 

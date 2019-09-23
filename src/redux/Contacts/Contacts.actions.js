@@ -40,3 +40,7 @@ export const filterListByType = (filterType, value, isUpdateActualValue) => disp
     },
   });
 };
+
+export const hideFilteredList = () => ({
+  type: types.HIDE_FILTERED_RESULTS,
+});

@@ -8,7 +8,7 @@ const WrapperStyled = styled.div`
   min-height: 100vh;
   display: flex;
   flex-wrap: wrap;
-  padding: 20px 50px 20px 170px;
+  padding: 20px 50px 20px 200px;
 `;
 
 const DashboardTemlate = ({ children }) => {

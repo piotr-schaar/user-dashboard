@@ -8,7 +8,7 @@ import { filterListByType } from 'redux/Contacts/Contacts.actions';
 
 import Form from 'components/Sections/Contacts/Form';
 import Filters from 'components/Sections/Contacts/Filters';
-import Statistics from '../Statistics';
+import Statistics from 'components/Sections/Contacts/Statistics';
 
 const WrapperStyled = styled.div`
   position: relative;
@@ -42,8 +42,6 @@ const ToolWrapper = styled.button`
   }
 `;
 
-const Toolbox = styled.div``;
-
 const settings = {
   newContact: 'newContact',
   filter: 'filter',
@@ -51,7 +49,7 @@ const settings = {
   favorites: 'favorites',
 };
 
-const TestWrapper = styled.div`
+const Toolbox = styled.div`
   position: absolute;
   z-index: 10;
   background: white;
@@ -72,33 +70,50 @@ const Tools = () => {
       callback: () =>
         setOpenModal({
           cond: !modalOpen.cond,
-          type: 'form',
+          type: settings.newContact,
         }),
     },
     {
       icon: () => <FaHeart />,
-      callback: () => dispatch(filterListByType('favorites')),
+      callback: () => dispatch(filterListByType(settings.favorites)),
     },
     {
       icon: () => <FaSlidersH />,
       callback: () =>
         setOpenModal({
           cond: !modalOpen.cond,
-          type: 'Filters',
+          type: settings.filters,
         }),
     },
     {
       icon: () => <FaChartPie />,
+      callback: () =>
+        setOpenModal({
+          cond: !modalOpen.cond,
+          type: settings.statistics,
+        }),
     },
   ];
 
-  console.log(modalOpen.cond);
+  const renderTool = type => {
+    switch (type) {
+      case settings.newContact:
+        return <Form />;
+      case settings.filters:
+        return <Filters />;
+      case settings.statistics:
+        return <Statistics />;
+      default:
+        return <p>Something goes wrong</p>;
+    }
+  };
+
   return (
     <WrapperStyled>
       <OutsideClickHandler
         onOutsideClick={() =>
           setOpenModal({
-            cond: !modalOpen.cond,
+            cond: false,
             type: '',
           })
         }
@@ -110,10 +125,8 @@ const Tools = () => {
             </ToolItem>
           ))}
         </ToolsList>
+        {modalOpen.cond && <Toolbox>{renderTool(modalOpen.type)}</Toolbox>}
       </OutsideClickHandler>
-      {modalOpen.cond && (
-        <TestWrapper>{modalOpen.type === 'form' ? <Form /> : <Filters />}</TestWrapper>
-      )}
     </WrapperStyled>
   );
 };

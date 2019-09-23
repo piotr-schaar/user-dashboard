@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { filterListByType } from 'redux/Contacts/Contacts.actions';
+import { filterListByType, hideFilteredList } from 'redux/Contacts/Contacts.actions';
 import Card from 'components/Layout/Card';
 import Heading from 'components/Layout/Heading';
 import Switch from '../../../SwitchInput';
@@ -51,8 +51,11 @@ const Filters = () => {
       isActive: !activeFilter.isActive,
       filtersTypes: filtersTypes[e.target.name],
     });
-  };
 
+    if (activeFilter.isActive) {
+      dispatch(hideFilteredList());
+    }
+  };
   return (
     <Card>
       <Heading small>Filters</Heading>

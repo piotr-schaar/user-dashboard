@@ -84,7 +84,9 @@ const ContactsReducer = (state = initialState, action) => {
         isFiltered: checkIsUpdateActualValue,
       };
     }
-
+    case types.HIDE_FILTERED_RESULTS: {
+      return { ...state, isFiltered: false, subtitle: '' };
+    }
     case types.FILTER_LIST_BY_TYPE: {
       switch (action.payload.filterType) {
         case byFavorites:

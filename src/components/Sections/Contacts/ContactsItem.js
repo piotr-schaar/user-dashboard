@@ -12,8 +12,10 @@ const WrapperStyled = styled(Card)`
   grid-template-columns: 1fr 3fr 1fr;
   grid-gap: 5px;
   height: 150px;
+  padding: 0 15px;
   align-items: center;
-  margin: 5px 0;
+  width: 300px;
+  margin: 5px;
   :last-of-type {
     border: 0;
   }
