@@ -21,6 +21,11 @@ const getUnique = arr => {
 
 const howManyTimesInArray = (value, arr) => arr.filter(i => i === value).length;
 
+const chartCustomStyle = {
+  position: 'relative',
+  width: '250px',
+};
+
 const Chart = () => {
   const contactsList = useSelector(({ ContactsReducer }) => ContactsReducer.contacts);
   const reduceContactsToCities = contactsList.reduce((newArr, item) => [...newArr, item.city], []);
@@ -44,13 +49,18 @@ const Chart = () => {
   }, [contactsList]);
 
   const ChartWrapper = styled.div`
-    position: relative;
+    position: absolute;
     height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     p {
+      font-weight: 700;
+      font-size: 24px;
+      position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      position: absolute;
     }
   `;
 
@@ -69,7 +79,7 @@ const Chart = () => {
   };
 
   const onMouseOut = (event, propsData, index) => {
-    const data = propsData.map((entry, i) => {
+    const arrayWithSelectedItem = propsData.map((entry, i) => {
       return i === index
         ? {
             ...entry,
@@ -78,26 +88,28 @@ const Chart = () => {
         : entry;
     });
     setCurrentlyShowedCity('');
-    setCities(data);
+    setCities(arrayWithSelectedItem);
   };
 
-  console.log(cities);
   return (
-    <ReactMinimalPieChart
-      data={getUnique(cities)}
-      segmentsStyle={{ position: 'relative', transition: 'stroke .3s' }}
-      lineWidth={15}
-      paddingAngle={5}
-      onClick={onMouseOut}
-      onMouseOut={onMouseOut}
-      onBlur={onMouseOut}
-      onMouseOver={onMouseOver}
-      onFocus={onMouseOver}
-    >
-      <ChartWrapper>
-        <p>{currentlyShowedCity}</p>
-      </ChartWrapper>
-    </ReactMinimalPieChart>
+    <>
+      <ReactMinimalPieChart
+        style={chartCustomStyle}
+        data={getUnique(cities)}
+        segmentsStyle={{ position: 'relative', transition: 'stroke .3s' }}
+        lineWidth={20}
+        paddingAngle={5}
+        onClick={onMouseOut}
+        onMouseOut={onMouseOut}
+        onBlur={onMouseOut}
+        onMouseOver={onMouseOver}
+        onFocus={onMouseOver}
+      >
+        <ChartWrapper>
+          <p>{currentlyShowedCity}</p>
+        </ChartWrapper>
+      </ReactMinimalPieChart>
+    </>
   );
 };
 
