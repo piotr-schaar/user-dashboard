@@ -6,10 +6,12 @@ import { filterListByType } from 'redux/Contacts/Contacts.actions';
 
 import Card from 'components/Layout/Card';
 import Form from 'components/Sections/Contacts/Form';
-import Fitlers from 'components/Sections/Contacts/Filters';
+import Filters from 'components/Sections/Contacts/Filters';
 import Statistics from '../Statistics';
 
-const WrapperStyled = styled.div``;
+const WrapperStyled = styled.div`
+  position: relative;
+`;
 const ToolsList = styled.ul`
   margin: 0;
   padding: 0;
@@ -48,31 +50,29 @@ const settings = {
   favorites: 'favorites',
 };
 
+const TestWrapper = styled.div`
+  position: absolute;
+  z-index: 10;
+  background: white;
+  left: -100%;
+`;
+
 const Tools = () => {
   const dispatch = useDispatch();
-  const [setting, setSetting] = useState('filter');
 
-  // statistics, favorites;
-  const { newContact, filter, statistics } = settings;
-
-  const showToolbox = sets => {
-    switch (sets) {
-      case newContact:
-        return <Form />;
-      case filter:
-        return <Fitlers />;
-      case statistics:
-        return <Statistics />;
-      default:
-        return null;
-    }
-  };
-  const handleToolbox = set => (setting === set ? setSetting(null) : setSetting(set));
+  const [modalOpen, setOpenModal] = useState({
+    cond: false,
+    type: String,
+  });
 
   const settingsList = [
     {
       icon: () => <FaPlus />,
-      callback: () => handleToolbox(newContact),
+      callback: () =>
+        setOpenModal({
+          cond: !modalOpen.cond,
+          type: 'form',
+        }),
     },
     {
       icon: () => <FaHeart />,
@@ -80,11 +80,14 @@ const Tools = () => {
     },
     {
       icon: () => <FaSlidersH />,
-      callback: () => handleToolbox(filter),
+      callback: () =>
+        setOpenModal({
+          cond: !modalOpen.cond,
+          type: 'Filters',
+        }),
     },
     {
       icon: () => <FaChartPie />,
-      callback: () => handleToolbox(statistics),
     },
   ];
   return (
@@ -96,7 +99,9 @@ const Tools = () => {
           </ToolItem>
         ))}
       </ToolsList>
-      {/* <Toolbox>{showToolbox(setting)}</Toolbox> */}
+      {modalOpen.cond && (
+        <TestWrapper>{modalOpen.type === 'form' ? <Form /> : <Filters />}</TestWrapper>
+      )}
     </WrapperStyled>
   );
 };

@@ -1,5 +1,6 @@
-import types from './Contacts.types';
 import uuid from 'uuid';
+
+import types from './Contacts.types';
 
 const initialState = {
   contacts: [
@@ -8,24 +9,28 @@ const initialState = {
       name: 'Piotr Szar',
       email: 'piter@gmail.com',
       city: 'Poznań',
+      isFavorite: false,
     },
     {
       id: uuid(),
       name: 'Beata Skórcz',
       email: 'becia@gmail.com',
       city: 'Starogard Gdański',
+      isFavorite: true,
     },
     {
       id: uuid(),
       name: 'Leonek Pieseński',
       email: 'chi@gmail.com',
       city: 'Mexico',
+      isFavorite: false,
     },
     {
       id: uuid(),
-      name: 'Leonek Pieseński',
-      email: 'chi@gmail.com',
-      city: 'Mexico',
+      name: 'Białasek Sąsiedzki',
+      email: 'bialas@gmail.com',
+      city: 'Spokojowo',
+      isFavorite: true,
     },
   ],
   isLoading: false,
