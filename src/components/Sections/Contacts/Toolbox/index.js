@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
+import OutsideClickHandler from 'react-outside-click-handler';
+
 import { FaPlus, FaSlidersH, FaHeart, FaChartPie } from 'react-icons/fa';
 import { filterListByType } from 'redux/Contacts/Contacts.actions';
 
-import Card from 'components/Layout/Card';
 import Form from 'components/Sections/Contacts/Form';
 import Filters from 'components/Sections/Contacts/Filters';
 import Statistics from '../Statistics';
@@ -90,15 +91,26 @@ const Tools = () => {
       icon: () => <FaChartPie />,
     },
   ];
+
+  console.log(modalOpen.cond);
   return (
     <WrapperStyled>
-      <ToolsList>
-        {settingsList.map(({ name, icon, callback }) => (
-          <ToolItem key={name}>
-            <ToolWrapper onClick={callback}>{icon()}</ToolWrapper>
-          </ToolItem>
-        ))}
-      </ToolsList>
+      <OutsideClickHandler
+        onOutsideClick={() =>
+          setOpenModal({
+            cond: !modalOpen.cond,
+            type: '',
+          })
+        }
+      >
+        <ToolsList>
+          {settingsList.map(({ icon, callback }) => (
+            <ToolItem key={icon}>
+              <ToolWrapper onClick={callback}>{icon()}</ToolWrapper>
+            </ToolItem>
+          ))}
+        </ToolsList>
+      </OutsideClickHandler>
       {modalOpen.cond && (
         <TestWrapper>{modalOpen.type === 'form' ? <Form /> : <Filters />}</TestWrapper>
       )}

@@ -15,10 +15,6 @@ const FlexWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 20px;
-  /* developmnent maxwidth for doublescreen */
-  @media (max-width: 900px) {
-    grid-template-columns: 1fr;
-  }
 `;
 
 const BreadcrumbStyled = styled.span`
