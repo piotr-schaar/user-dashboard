@@ -10,7 +10,7 @@ const Statistics = () => {
 
   return (
     <Card>
-      <Chart data={cityData} />
+      <Chart data={cityData} type="pie" />
     </Card>
   );
 };

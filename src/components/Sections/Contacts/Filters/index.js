@@ -41,6 +41,7 @@ const Filters = () => {
   useEffect(() => {
     const checkIsFiltering = store.isFiltered ? store.isFiltered : false;
     filterDispatch(activeFilter.filtersTypes, cityValue, checkIsFiltering);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cityValue]);
 
   const cityChangeHandler = e => activeFilter.isActive && setCityValue(e.target.value);

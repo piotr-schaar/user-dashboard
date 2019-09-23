@@ -24,7 +24,6 @@ const useChartData = (arr, type) => {
   const reduceArrayToType = reduceArrayWithObjItem(arr, type);
   const [collection, setCollection] = useState([]);
   const [data, setData] = useState({});
-
   useEffect(() => {
     const reduceArrayToChartModel = reduceArrayToType.reduce(
       (newArr, item) => [
@@ -37,8 +36,8 @@ const useChartData = (arr, type) => {
       ],
       [],
     );
-
     setCollection(getUnique(reduceArrayToChartModel));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [arr]);
 
   useEffect(() => {

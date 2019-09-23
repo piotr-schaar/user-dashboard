@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { routes } from 'routes';
 
-import { FaAddressBook, FaUser, FaTasks, FaFile, FaCogs, FaSignOutAlt } from 'react-icons/fa';
+import { FaAddressBook, FaUser, FaTasks, FaCogs, FaSignOutAlt } from 'react-icons/fa';
 
 const SidebarWrapper = styled.div`
   position: fixed;
