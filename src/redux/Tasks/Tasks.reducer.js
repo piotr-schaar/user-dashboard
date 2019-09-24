@@ -7,21 +7,25 @@ const initialState = {
       id: uuid(),
       name: 'Create app 💻',
       completed: false,
+      category: 'home',
     },
     {
       id: uuid(),
       name: 'Throw out rubbish 🤟🏻',
       completed: false,
+      category: 'home',
     },
     {
       id: uuid(),
       name: 'Feed Leon before starving 🐕',
       completed: false,
+      category: 'home',
     },
     {
       id: uuid(),
       name: 'Drink a glass water 😭',
       completed: true,
+      category: 'home',
     },
   ],
 };
