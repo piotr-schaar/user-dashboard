@@ -1,0 +1,7 @@
+const TasksTypes = {
+  FETCH_TASKS: 'FETCH_TASKS',
+  FETCH_DUMMY_TASKS: 'FETCH_DUMMY_CONTACTS',
+  FETCH_REQUEST: 'FETCH_REQUEST',
+};
+
+export default TasksTypes;

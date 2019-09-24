@@ -8,6 +8,7 @@ import AuthPage from 'views/AuthPage';
 import MainTemplate from 'templates/MainTemplate';
 import MainPage from 'views/MainPage';
 import ContactsPage from './ContactsPage';
+import TasksPage from './TasksPage';
 
 const Root = () => (
   <Provider store={store}>
@@ -16,7 +17,8 @@ const Root = () => (
         <Switch>
           <Route exact path={routes.home} component={MainPage} />
           <Route exact path={routes.login} component={AuthPage} />
-          <Route path="/contacts" component={ContactsPage} />
+          <Route path={routes.contacts} component={ContactsPage} />
+          <Route path={routes.tasks} component={TasksPage} />
         </Switch>
       </MainTemplate>
     </BrowserRouter>

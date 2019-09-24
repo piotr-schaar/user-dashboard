@@ -6,30 +6,30 @@ const initialState = {
   contacts: [
     {
       id: uuid(),
-      name: 'Piotr Szar',
-      email: 'piter@gmail.com',
-      city: 'Poznań',
+      name: 'Tom Hanks',
+      email: 'tom@gmail.com',
+      city: 'New York',
       isFavorite: false,
     },
     {
       id: uuid(),
-      name: 'Beata Skórcz',
-      email: 'becia@gmail.com',
-      city: 'Starogard Gdański',
+      name: 'Kate Moss',
+      email: 'katem@gmail.com',
+      city: 'New York',
       isFavorite: true,
     },
     {
       id: uuid(),
-      name: 'Leonek Pieseński',
-      email: 'chi@gmail.com',
+      name: 'Pedro Cortez',
+      email: 'pedrocortez@gmail.com',
       city: 'Mexico',
       isFavorite: false,
     },
     {
       id: uuid(),
-      name: 'Białasek Sąsiedzki',
-      email: 'bialas@gmail.com',
-      city: 'Spokojowo',
+      name: 'Shinji Kagawashi',
+      email: 'shinji@gmail.com',
+      city: 'Tokyo',
       isFavorite: true,
     },
   ],
@@ -58,7 +58,7 @@ const ContactsReducer = (state = initialState, action) => {
     case types.FETCH_CONTACTS:
       return {
         ...state,
-        contacts: [...state.contact, action.payload],
+        contacts: [...state.contacts, action.payload],
         isLoading: true,
       };
     case types.ADD_CONTACT:
