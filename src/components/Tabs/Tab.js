@@ -26,6 +26,7 @@ const TabButton = styled.button`
   padding: 10px;
   background: none;
   border: none;
+  font-size: 18px;
   color: ${({ theme, isActive }) => isActive && theme.green};
   cursor: pointer;
   &:active,

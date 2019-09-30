@@ -23,13 +23,13 @@ const CategoriesWrapper = styled.div`
 `;
 const CategoriesItem = styled.button`
   background: white;
-  font-size: 22px;
-  padding: 10px 10px;
+  font-size: 18px;
+  padding: 5px 10px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   border-radius: 10px;
-  border: 3px solid ${({ theme }) => theme.greenOpacity};
+  border: 2px solid ${({ theme }) => theme.greenOpacity};
   cursor: pointer;
   svg {
     color: ${({ theme }) => theme.green};
@@ -37,8 +37,8 @@ const CategoriesItem = styled.button`
   p {
     padding: 10px 0 10px 15px;
     margin: 0;
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 400;
     color: ${({ theme }) => theme.grey};
   }
   &:hover {

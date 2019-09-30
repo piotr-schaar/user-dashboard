@@ -10,7 +10,7 @@ import { FaHome, FaBriefcase } from 'react-icons/fa';
 const isEven = n => n % 2 === 0;
 
 const CustomCard = styled(Card)`
-  padding: 5px 10px;
+  padding: 2px 10px;
   background: ${({ index, theme }) => (isEven(index) ? theme.lightGrey : 'white')};
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
 `;
