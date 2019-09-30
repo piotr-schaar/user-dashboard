@@ -7,13 +7,14 @@ const WrapperStyled = styled.div``;
 
 const TabsListStyled = styled.ol`
   display: flex;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 2px solid ${({ theme }) => theme.green};
   padding-left: 0;
-  height: 100%;
 `;
 
 const TabContent = styled.div`
-  transition: all 2s ease;
+  transition: all 0.3s ease;
+  opacity: ${({ toggle }) => (toggle ? 0 : 1)};
+
   ${({ scroll }) =>
     scroll &&
     css`
@@ -22,9 +23,16 @@ const TabContent = styled.div`
 `;
 const Tabs = ({ children, scroll, color }) => {
   const [activeTab, setActive] = useState(children[0].props.label);
+  const [toggleAnimation, setToggleAnimation] = useState(false);
 
-  const onClickTabItem = tab => setActive(tab);
-  console.log(color);
+  const onClickTabItem = tab => {
+    setToggleAnimation(true);
+    setTimeout(() => {
+      setActive(tab);
+      setToggleAnimation(false)
+    }, 300);
+  };
+
   return (
     <WrapperStyled>
       <TabsListStyled>
@@ -40,7 +48,7 @@ const Tabs = ({ children, scroll, color }) => {
           );
         })}
       </TabsListStyled>
-      <TabContent scroll={scroll}>
+      <TabContent toggle={toggleAnimation} scroll={scroll}>
         {children.map(({ props: { label, children: childs } }) => {
           if (label !== activeTab) return undefined;
           return childs;
@@ -51,12 +59,14 @@ const Tabs = ({ children, scroll, color }) => {
 };
 Tabs.defaultProps = {
   scroll: false,
+  color: 'red',
 };
 
 Tabs.propTypes = {
   children: PropTypes.oneOfType([PropTypes.array.isRequired, PropTypes.object.isRequired])
     .isRequired,
   scroll: PropTypes.bool,
+  color: PropTypes.string,
 };
 
 export default Tabs;

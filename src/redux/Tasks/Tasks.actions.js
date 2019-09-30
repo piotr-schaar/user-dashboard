@@ -16,3 +16,17 @@ export const fetchTasks = () => dispatch => {
 
     .catch(err => console.log(err));
 };
+
+export const toggleCompleteTask = id => ({
+  type: types.TOGGLE_TASK_COMPLETED,
+  payload: {
+    id,
+  },
+});
+
+export const addTask = (task) => ({
+  type: types.ADD_TASK,
+  payload: {
+    task,
+  }
+})

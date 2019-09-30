@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import styled, { css } from 'styled-components';
 import { addContact as addContactAction } from 'redux/Contacts/Contacts.actions';
 
-import { Form } from 'components/Layout/Form';
+import Form from 'components/Layout/Form';
 import Heading from 'components/Layout/Heading';
 
 import Button from 'components/Layout/Button';

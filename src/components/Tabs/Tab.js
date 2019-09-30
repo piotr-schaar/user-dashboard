@@ -6,36 +6,37 @@ const TabItem = styled.li`
   display: block;
   flex: 1;
   list-style: none;
-  margin-bottom: -1px;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid black;
-
   &:hover,
   &:active {
-    background: ${({ theme }) => theme.blue};
+    color: white;
+    background: ${({ theme }) => theme.green};
   }
 
   ${({ isActive }) =>
     isActive &&
     css`
-      background: rgba(255, 255, 255, 0.1);
+      color: ${({ theme }) => theme.green};
+      background: ${({ theme }) => theme.lightGrey};
     `}
 `;
 
 const TabButton = styled.button`
   width: 100%;
-  color: ${({ color }) => color};
   font-weight: 600;
+  padding: 10px;
   background: none;
   border: none;
+  color: ${({ theme, isActive }) => isActive && theme.green};
   cursor: pointer;
   &:active,
-  &:focus {
+  &:focus,
+  &:hover {
+    color: white;
     outline: none;
   }
 `;
 
-const Tab = ({ label, onClick, activeTab, color }) => {
+const Tab = ({ label, onClick, activeTab }) => {
   const [isActive, setActive] = useState(false);
 
   useEffect(() => {
@@ -44,7 +45,7 @@ const Tab = ({ label, onClick, activeTab, color }) => {
 
   return (
     <TabItem isActive={isActive}>
-      <TabButton color={color} type="button" onClick={() => onClick(label)}>
+      <TabButton isActive={isActive} type="button" onClick={() => onClick(label)}>
         {label}
       </TabButton>
     </TabItem>

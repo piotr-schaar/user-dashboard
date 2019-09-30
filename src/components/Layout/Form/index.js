@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
-export const Form = styled.form`
-  padding: 5px;
+const Form = styled.form`
+  width: ${({ width }) => width && `${width}px`};
+  height: ${({ height }) => height && `${height}px`};
 `;
+
+export default Form;
