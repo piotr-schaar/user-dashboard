@@ -1,21 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Sidebar from '../components/Sidebar';
 
 const WrapperStyled = styled.div`
   width: 100%;
   background: ${({ theme }) => theme.white};
+ 
+`;
+
+const AnimationWrapper = styled.div`
+  opacity: ${({ mounted }) => (mounted ? '1' : '0')};
+  transition: all ease-in 0.3s;
+`;
+
+const MainWrapper = styled.div`
+  width: 100%;
+  padding: 20px 50px 20px 200px;
   min-height: 100vh;
   display: flex;
   flex-wrap: wrap;
-  padding: 20px 50px 20px 200px;
 `;
-
 const DashboardTemlate = ({ children }) => {
+  const [Redirect, setRedirect] = useState(false);
+
+  useEffect(() => {
+    setRedirect(true);
+  }, []);
+
   return (
     <WrapperStyled>
       <Sidebar />
-      {children}
+      <AnimationWrapper mounted={Redirect}><MainWrapper>{children}</MainWrapper></AnimationWrapper>
     </WrapperStyled>
   );
 };

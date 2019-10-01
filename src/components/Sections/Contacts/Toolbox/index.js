@@ -54,6 +54,8 @@ const Toolbox = styled.div`
   z-index: 10;
   background: white;
   left: -100%;
+  opacity: ${({ active }) => (active ? '1' : '0')};
+  transition: all ease-in 0.2s;
 `;
 
 const Tools = () => {
@@ -107,7 +109,6 @@ const Tools = () => {
         return <p>Something goes wrong</p>;
     }
   };
-
   return (
     <WrapperStyled>
       <OutsideClickHandler
@@ -125,7 +126,7 @@ const Tools = () => {
             </ToolItem>
           ))}
         </ToolsList>
-        {modalOpen.cond && <Toolbox>{renderTool(modalOpen.type)}</Toolbox>}
+        <Toolbox active={modalOpen.cond}>{renderTool(modalOpen.type)}</Toolbox>
       </OutsideClickHandler>
     </WrapperStyled>
   );

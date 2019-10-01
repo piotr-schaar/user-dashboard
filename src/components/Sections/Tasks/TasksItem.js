@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { toggleCompleteTask } from 'redux/Tasks/Tasks.actions';
@@ -8,6 +8,12 @@ import Checkbox from 'components/Layout/Checkbox';
 import { FaHome, FaBriefcase } from 'react-icons/fa';
 
 const isEven = n => n % 2 === 0;
+
+const strikeAnimation = keyframes`
+  0%   { width : 0; }
+  100% { width: 100%; }
+
+`;
 
 const CustomCard = styled(Card)`
   padding: 2px 10px;
@@ -27,6 +33,7 @@ const ItemWrapper = styled.li`
 const TextStyled = styled.p`
   width: 80%;
   padding-left: 15px;
+  position: relative;
   text-decoration: ${({ isChecked }) => (isChecked ? 'line-through' : null)};
 `;
 
@@ -39,10 +46,10 @@ const TasksItem = ({ task: { name, completed, id, category }, index, lastAdded }
 
   useEffect(() => {
     setTimeout(() => {
-      setLast(false)
-    }, 0.3)
-  }, lastAdded)
-  
+      setLast(false);
+    }, 300);
+  }, lastAdded);
+
   const dispatch = useDispatch();
 
   const handleCheckbox = e => {

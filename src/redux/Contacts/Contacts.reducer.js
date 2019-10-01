@@ -64,7 +64,7 @@ const ContactsReducer = (state = initialState, action) => {
     case types.ADD_CONTACT:
       return {
         ...state,
-        contacts: [...state.contacts, action.payload],
+        contacts: [...state.contacts, {...action.payload, id: uuid()}],
       };
     case types.HANDLE_CONTACT_TO_FAVORITES: {
       const { isFavorite, name } = action.payload;
