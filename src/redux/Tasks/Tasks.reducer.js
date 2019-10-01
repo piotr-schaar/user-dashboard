@@ -66,7 +66,8 @@ const TasksReducer = (state = initialState, action) => {
       return {
         ...state,
         tasks: [...state.tasks, task],
-      };
+        isAddedNew: true
+      }
     }
 
     default:

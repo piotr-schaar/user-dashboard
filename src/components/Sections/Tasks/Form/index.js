@@ -22,7 +22,7 @@ const CategoriesWrapper = styled.div`
   grid-gap: 5px;
 `;
 const CategoriesItem = styled.button`
-  background: white;
+  background: ${({ set, value, theme }) => (set === value ? theme.greenOpacity : 'white')};
   font-size: 18px;
   padding: 5px 10px;
   display: flex;
@@ -32,19 +32,21 @@ const CategoriesItem = styled.button`
   border: 2px solid ${({ theme }) => theme.greenOpacity};
   cursor: pointer;
   svg {
-    color: ${({ theme }) => theme.green};
+    color: ${({ set, value, theme }) => (set === value ? 'white' : theme.greenOpacity)};
   }
   p {
     padding: 10px 0 10px 15px;
     margin: 0;
     font-size: 14px;
     font-weight: 400;
-    color: ${({ theme }) => theme.grey};
+    color: ${({ set, value, theme }) => (set === value ? 'white' : theme.greenOpacity)};
+    pointer-events: none;
   }
   &:hover {
     background: ${({ theme }) => theme.greenOpacity};
     color: white;
-    svg {
+ 
+    svg, p {
       color: white;
     }
   }
@@ -74,6 +76,11 @@ const TaskForm = () => {
   const submitHandler = e => {
     e.preventDefault();
     dispatch(addTask(newTask));
+    setNewTask({
+        name: '',
+        category: 'home',
+        completed: false
+    })
   };
 
   return (
@@ -88,11 +95,21 @@ const TaskForm = () => {
           placeholder="name"
         />
         <CategoriesWrapper>
-          <CategoriesItem name="category" onClick={handleChange} value="home">
+          <CategoriesItem
+            set={newTask.category}
+            name="category"
+            onClick={handleChange}
+            value="home"
+          >
             <FaHome />
             <p>Home</p>
           </CategoriesItem>
-          <CategoriesItem name="category" onClick={handleChange} value="work">
+          <CategoriesItem
+            set={newTask.category}
+            name="category"
+            onClick={handleChange}
+            value="work"
+          >
             <FaBriefcase />
             <p>Work</p>
           </CategoriesItem>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
@@ -13,6 +13,8 @@ const CustomCard = styled(Card)`
   padding: 2px 10px;
   background: ${({ index, theme }) => (isEven(index) ? theme.lightGrey : 'white')};
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
+  opacity: ${({ index, last }) => (index === last ? '0' : '1')};
+  transition: all ease-in 0.3s;
 `;
 
 const ItemWrapper = styled.li`
@@ -32,7 +34,15 @@ const CategoryIconWrapper = styled.div`
   color: ${({ theme }) => theme.grey};
 `;
 
-const TasksItem = ({ task: { name, completed, id, category }, index }) => {
+const TasksItem = ({ task: { name, completed, id, category }, index, lastAdded }) => {
+  const [last, setLast] = useState(lastAdded);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLast(false)
+    }, 0.3)
+  }, lastAdded)
+  
   const dispatch = useDispatch();
 
   const handleCheckbox = e => {
@@ -51,7 +61,7 @@ const TasksItem = ({ task: { name, completed, id, category }, index }) => {
   };
 
   return (
-    <CustomCard index={index}>
+    <CustomCard index={index} last={last}>
       <ItemWrapper>
         <CategoryIconWrapper>{categoryIcon(category)}</CategoryIconWrapper>
         <TextStyled isChecked={completed}>{name}</TextStyled>

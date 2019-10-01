@@ -17,6 +17,7 @@ const TasksList = () => {
   const [tasksHome, setTasksHome] = useState([]);
   const [tasksWork, setTasksWork] = useState([]);
 
+
   const filterTasks = (arr, type) => arr.filter(item => item.category === type);
 
   useEffect(() => {
@@ -25,6 +26,7 @@ const TasksList = () => {
     setTasksWork(filterTasks(store.tasks, 'work'));
   }, [store]);
 
+ 
   return (
     <>
       <Tabs>
@@ -37,6 +39,7 @@ const TasksList = () => {
               id={task.id}
               task={task}
               completed={task.completed}
+              lastAdded={tasksAll.length - 1}
             />
           ))}
         </UlStyled>
