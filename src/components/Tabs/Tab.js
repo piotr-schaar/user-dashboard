@@ -42,7 +42,7 @@ const Tab = ({ label, onClick, activeTab }) => {
 
   useEffect(() => {
     return activeTab === label ? setActive(true) : setActive(false);
-  }, [activeTab]);
+  }, [activeTab, label]);
 
   return (
     <TabItem isActive={isActive}>

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { routes } from 'routes';
 
 import { FaAddressBook, FaUser, FaTasks, FaCogs, FaSignOutAlt } from 'react-icons/fa';
@@ -51,6 +51,14 @@ const IconWrapper = styled.div`
   a {
     color: inherit;
   }
+
+  ${({ active }) =>
+    active &&
+    css`
+      border: 2px solid ${({ theme }) => theme.greenOpacity};
+      color: ${({ theme }) => theme.green};
+      box-shadow: 9px 9px 4px -12px rgba(0, 0, 0, 0.4);
+    `}
 `;
 const AvatarWrapper = styled.div`
   color: #b8b4cb;
@@ -66,24 +74,37 @@ const AvatarWrapper = styled.div`
 
 const navLinks = [
   {
+    name: 'contacts',
     href: routes.contacts,
     icon: () => <FaAddressBook />,
   },
   {
+    name: 'tasks',
     href: routes.tasks,
     icon: () => <FaTasks />,
   },
   {
+    name: 'settings',
     href: routes.settings,
     icon: () => <FaCogs />,
   },
   {
+    name: 'logout',
     href: routes.logout,
     icon: () => <FaSignOutAlt />,
   },
 ];
 
 const Sidebar = ({ avatar }) => {
+  const [pathname, setPathname] = useState();
+
+  useEffect(() => {
+    const path = window.location.pathname.split('/').pop();
+    setPathname(path);
+  }, []);
+
+  const isActive = compare => pathname === compare;
+
   return (
     <SidebarWrapper>
       <>
@@ -96,7 +117,7 @@ const Sidebar = ({ avatar }) => {
           {navLinks.map(item => (
             <ItemStyled key={item.href}>
               <NavLink to={item.href}>
-                <IconWrapper>{item.icon()}</IconWrapper>
+                <IconWrapper active={isActive(item.name)}>{item.icon()}</IconWrapper>
               </NavLink>
             </ItemStyled>
           ))}

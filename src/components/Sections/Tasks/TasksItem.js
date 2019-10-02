@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { toggleCompleteTask } from 'redux/Tasks/Tasks.actions';
@@ -8,12 +8,6 @@ import Checkbox from 'components/Layout/Checkbox';
 import { FaHome, FaBriefcase } from 'react-icons/fa';
 
 const isEven = n => n % 2 === 0;
-
-const strikeAnimation = keyframes`
-  0%   { width : 0; }
-  100% { width: 100%; }
-
-`;
 
 const CustomCard = styled(Card)`
   padding: 2px 10px;
@@ -48,7 +42,7 @@ const TasksItem = ({ task: { name, completed, id, category }, index, lastAdded }
     setTimeout(() => {
       setLast(false);
     }, 300);
-  }, lastAdded);
+  }, [lastAdded]);
 
   const dispatch = useDispatch();
 
