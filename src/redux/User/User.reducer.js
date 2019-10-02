@@ -7,6 +7,7 @@ const initialState = {
   userID: `5d0e44b4033d0286511d0494`,
   isError: false,
   avatar,
+  name: 'Kevin'
 };
 
 const userReducer = (state = initialState, action) => {

@@ -3,10 +3,17 @@ import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import WeatherWidget from 'components/Sections/Main/WeatherWidget';
+import TasksWidget from 'components/Sections/Main/TasksWidget';
+
 import DashboardTemplate from 'templates/DashboardTemplate';
+import Heading from 'components/Layout/Heading';
 
 const WrapperStyled = styled.div`
   width: 100%;
+`;
+
+const CustomHeading = styled(Heading)`
+  font-size: 42px;
 `;
 
 const MainPage = () => {
@@ -18,9 +25,10 @@ const MainPage = () => {
 
   return (
     <DashboardTemplate>
-      <h1>Main</h1>
+      <CustomHeading>Hi {store.name}!</CustomHeading>
       <WrapperStyled>
         <WeatherWidget />
+        <TasksWidget />
       </WrapperStyled>
     </DashboardTemplate>
   );
