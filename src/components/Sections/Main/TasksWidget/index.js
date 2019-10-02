@@ -10,11 +10,13 @@ const WidgetWrapper = styled.div`
   border-radius: 20px;
   width: 100%;
 `;
-
 const TaskItem = styled.div``;
 
 const TasksWidget = () => {
-  const tasks = useSelector(({ TasksReducer }) => TasksReducer.tasks);
+  const tasks = useSelector(({ TasksReducer }) =>
+    TasksReducer.tasks.filter(item => !item.completed),
+  );
+
   const [currentTask, setCurrentTask] = useState(tasks[0].name);
 
   useEffect(() => {
@@ -33,6 +35,7 @@ const TasksWidget = () => {
   return (
     <WidgetWrapper>
       <Heading>What to do today?</Heading>
+      <p>becia</p>
       <TaskItem>{currentTask}</TaskItem>
     </WidgetWrapper>
   );

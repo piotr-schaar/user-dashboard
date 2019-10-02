@@ -7,6 +7,8 @@ import store from 'redux/store';
 import AuthPage from 'views/AuthPage';
 import MainTemplate from 'templates/MainTemplate';
 import MainPage from 'views/MainPage';
+import SettingsPage from 'views/SettingsPage';
+
 import ContactsPage from './ContactsPage';
 import TasksPage from './TasksPage';
 
@@ -19,6 +21,7 @@ const Root = () => (
           <Route exact path={routes.login} component={AuthPage} />
           <Route path={routes.contacts} component={ContactsPage} />
           <Route path={routes.tasks} component={TasksPage} />
+          <Route path={routes.settings} component={SettingsPage} />
         </Switch>
       </MainTemplate>
     </BrowserRouter>
