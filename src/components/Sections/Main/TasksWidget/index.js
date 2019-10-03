@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import Heading from 'components/Layout/Heading';
@@ -13,14 +13,18 @@ const WidgetWrapper = styled.div`
 `;
 
 const TasksWidget = () => {
-  const tasks = useSelector(({ TasksReducer }) =>
-    TasksReducer.tasks.filter(item => !item.completed),
-  );
+  const store = useSelector(({ TasksReducer }) => TasksReducer.tasks);
+
+  const [tasks, setTasks] = useState([])
+
+  useEffect(() => {
+    setTasks(store.filter(item => !item.completed))
+  }, [store])
 
   return (
     <WidgetWrapper>
       <Heading>What to do today?</Heading>
-        <ChangingWords words={tasks} />
+      <ChangingWords words={tasks} />
     </WidgetWrapper>
   );
 };

@@ -43,13 +43,14 @@ const ChangingWord = ({ words }) => {
   const [length, setLength] = useState(Number);
   const [arr, setArr] = useState([]);
 
+
   useEffect(() => {
     setArr(words);
-  }, []);
+  }, [words]);
 
   useEffect(() => {
     setLength(arr.length);
-  }, [words]);
+  }, [arr]);
 
   const AnimationWrapper = styled.div`
     position: relative;
@@ -64,6 +65,7 @@ const ChangingWord = ({ words }) => {
       ${getAnimation(length)}
     }
   `;
+
   return (
     <AnimationWrapper>
       {arr.map(item => (
