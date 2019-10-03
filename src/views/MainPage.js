@@ -10,6 +10,7 @@ import Heading from 'components/Layout/Heading';
 
 const WrapperStyled = styled.div`
   width: 100%;
+  display:flex;
 `;
 
 const CustomHeading = styled(Heading)`
@@ -27,8 +28,8 @@ const MainPage = () => {
     <DashboardTemplate>
       <CustomHeading>Hi {store.name}!</CustomHeading>
       <WrapperStyled>
-        <WeatherWidget />
-        <TasksWidget />
+          <WeatherWidget />
+          <TasksWidget />
       </WrapperStyled>
     </DashboardTemplate>
   );

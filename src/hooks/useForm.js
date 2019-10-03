@@ -29,7 +29,6 @@ const useForm = initialValues => {
     submitForm();
   };
 
-  console.log(errors);
 
   return [updateValue, values, submitForm, errors];
 };

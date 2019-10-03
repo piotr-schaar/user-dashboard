@@ -1,42 +1,83 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { useSelector } from 'react-redux';
 import Heading from 'components/Layout/Heading';
 
+const animate = keyframes`
+  0% {
+    opacity: 0;
+    transform:translateY(-50%);
+  }
+  2% {
+    opacity: 1;
+    transform:translateY(0);
+  }
+  18% {
+    opacity: 1;
+    transform:translateY(0px);
+  }
+  20% {
+    opacity: 0;
+    transform:translateY(50px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(50px)
+  }
+`;
+
 const WidgetWrapper = styled.div`
-  margin: 15px 0;
+  margin: 0 15px;
   padding: 10px;
   border: 2px solid ${({ theme }) => theme.greenOpacity};
   border-radius: 20px;
   width: 100%;
 `;
-const TaskItem = styled.div``;
+
+const animationChilds = (i, duration) => {
+  return `
+    &:nth-child(${i + 1}) {
+      animation-delay: ${(duration) * 2}s;
+    }
+  `;
+};
+
+const getAnimation = length => {
+  let str = '';
+  for (let index = 0; index < length; index += 1) {
+    str += animationChilds(index, index);
+  }
+  return str;
+};
+
+
 
 const TasksWidget = () => {
   const tasks = useSelector(({ TasksReducer }) =>
     TasksReducer.tasks.filter(item => !item.completed),
   );
 
-  const [currentTask, setCurrentTask] = useState(tasks[0].name);
-
-  useEffect(() => {
-    let i = 1;
-    let task;
-    setInterval(() => {
-      task = tasks[i];
-      i++;
-      if (i > tasks.length - 1) {
-        i = 0;
-      }
-      setCurrentTask(task.name);
-    }, 3000);
-  }, []);
+  const AnimationWrapper = styled.div`
+    position: relative;
+    padding: 20px;
+    span {
+      position: absolute;
+      top: 0;
+      overflow: hidden;
+      animation: ${animate} ${tasks.length *2}s linear infinite;
+      opacity: 0;
+      ${getAnimation(tasks.length)}
+    }
+  `;
 
   return (
     <WidgetWrapper>
       <Heading>What to do today?</Heading>
-      <p>becia</p>
-      <TaskItem>{currentTask}</TaskItem>
+      <AnimationWrapper>
+        {tasks.map(item => (
+          <span key={item.id}>{item.name}</span>
+        ))}
+      </AnimationWrapper>
     </WidgetWrapper>
   );
 };

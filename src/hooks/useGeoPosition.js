@@ -13,6 +13,7 @@ export const usePosition = () => {
   const onError = error => {
     setError(error.message);
   };
+
   useEffect(() => {
     const geo = navigator.geolocation;
     if (!geo) {
@@ -22,6 +23,7 @@ export const usePosition = () => {
     const watcher = geo.watchPosition(onChange, onError);
     return () => geo.clearWatch(watcher);
   }, []);
+
   return { position, error };
 };
 
