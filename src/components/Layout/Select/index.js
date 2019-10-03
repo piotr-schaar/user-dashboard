@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const SelectStyled = styled.select`
@@ -7,12 +8,11 @@ const SelectStyled = styled.select`
   font-size: 15px;
   border-radius: 10px;
   border: none;
-  border: 1px solid ${({theme}) => theme.green};
+  border: 1px solid ${({ theme }) => theme.green};
   font-size: 15px;
 `;
 
-const LabelStyled = styled.label``
-
+const LabelStyled = styled.label``;
 
 const Select = ({ value, options, name, handleChange }) => {
   const [opts, setOpts] = useState([]);
@@ -43,6 +43,11 @@ const Select = ({ value, options, name, handleChange }) => {
   );
 };
 
-Select.propTypes = {};
+Select.propTypes = {
+  value: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  options: PropTypes.array.isRequired,
+  handleChange: PropTypes.func.isRequired,
+};
 
 export default Select;
