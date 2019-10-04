@@ -6,7 +6,7 @@ const Input = styled.input`
   font-weight: 400;
   margin: 5px 0;
   border-radius: 10px;
-  border: 1px solid ${({ theme }) => theme.green};
+  border: 2px solid ${({ theme }) => theme.green};
 `;
 
 export default Input;

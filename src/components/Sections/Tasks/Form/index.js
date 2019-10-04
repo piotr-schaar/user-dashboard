@@ -30,21 +30,21 @@ const CategoriesItem = styled.button`
   justify-content: flex-start;
   align-items: center;
   border-radius: 10px;
-  border: 2px solid ${({ theme }) => theme.greenOpacity};
+  border: 2px solid ${({ theme }) => theme.green};
   cursor: pointer;
   svg {
-    color: ${({ set, value, theme }) => (set === value ? 'white' : theme.greenOpacity)};
+    color: ${({ set, value, theme }) => (set === value ? 'white' : theme.green)};
   }
   p {
     padding: 10px 0 10px 15px;
     margin: 0;
     font-size: 14px;
-    font-weight: 400;
-    color: ${({ set, value, theme }) => (set === value ? 'white' : theme.greenOpacity)};
+    font-weight: 700;
+    color: ${({ set, value, theme }) => (set === value ? 'white' : theme.green)};
     pointer-events: none;
   }
   &:hover {
-    background: ${({ theme }) => theme.greenOpacity};
+    background: ${({ theme }) => theme.green};
     color: white;
 
     svg,
