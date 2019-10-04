@@ -1,37 +1,14 @@
 import uuid from 'uuid';
 
+import { Contact } from 'constants/index';
 import types from './Contacts.types';
 
 const initialState = {
   contacts: [
-    {
-      id: uuid(),
-      name: 'Tom Hanks',
-      email: 'tom@gmail.com',
-      city: 'New York',
-      isFavorite: false,
-    },
-    {
-      id: uuid(),
-      name: 'Kate Moss',
-      email: 'katem@gmail.com',
-      city: 'New York',
-      isFavorite: true,
-    },
-    {
-      id: uuid(),
-      name: 'Pedro Cortez',
-      email: 'pedrocortez@gmail.com',
-      city: 'Mexico',
-      isFavorite: false,
-    },
-    {
-      id: uuid(),
-      name: 'Shinji Kagawashi',
-      email: 'shinji@gmail.com',
-      city: 'Tokyo',
-      isFavorite: true,
-    },
+    new Contact(uuid(), 'Tom Hanks', 'tom@gmail.com', 'New York', false),
+    new Contact(uuid(), 'Kate Moss', 'katem@gmail.com', 'New York', true),
+    new Contact(uuid(), 'Pedro Cortez', 'pedrocortez@gmail.com', 'Mexico', false),
+    new Contact(uuid(), 'Shinji Kagawashi', 'shinji@gmail.com', 'Tokyo', true),
   ],
   isLoading: false,
   filteredList: [],
@@ -64,7 +41,7 @@ const ContactsReducer = (state = initialState, action) => {
     case types.ADD_CONTACT:
       return {
         ...state,
-        contacts: [...state.contacts, {...action.payload, id: uuid()}],
+        contacts: [...state.contacts, { ...action.payload, id: uuid() }],
       };
     case types.HANDLE_CONTACT_TO_FAVORITES: {
       const { isFavorite, name } = action.payload;

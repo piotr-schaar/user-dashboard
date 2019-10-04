@@ -1,44 +1,16 @@
 import uuid from 'uuid';
+import { Task } from 'constants/index';
 import types from './Tasks.types';
+
 
 const initialState = {
   tasks: [
-    {
-      id: uuid(),
-      name: 'Create app 💻',
-      completed: true,
-      category: 'home',
-    },
-    {
-      id: uuid(),
-      name: 'Throw out rubbish 🤟🏻',
-      completed: false,
-      category: 'home',
-    },
-    {
-      id: uuid(),
-      name: 'Feed Leon before starving 🐕',
-      completed: false,
-      category: 'home',
-    },
-    {
-      id: uuid(),
-      name: 'Drink a glass water 😭',
-      completed: true,
-      category: 'home',
-    },
-    {
-      id: uuid(),
-      name: 'test-work 💻',
-      completed: true,
-      category: 'work',
-    },
-    {
-      id: uuid(),
-      name: 'test-work 2 🤟🏻',
-      completed: false,
-      category: 'work',
-    },
+    new Task(uuid(), 'Create app 💻', 'home', true),
+    new Task(uuid(), 'Throw out rubbish 🤟🏻', 'home', false),
+    new Task(uuid(), 'Feed Leon before starving 🐕', 'home', false),
+    new Task(uuid(), 'Drink a glass of water', 'home', true),
+    new Task(uuid(), 'Fix bugs in project', 'work', true),
+    new Task(uuid(), 'Conference with customer', 'work', true),
   ],
 };
 
@@ -66,8 +38,8 @@ const TasksReducer = (state = initialState, action) => {
       return {
         ...state,
         tasks: [...state.tasks, task],
-        isAddedNew: true
-      }
+        isAddedNew: true,
+      };
     }
 
     default:

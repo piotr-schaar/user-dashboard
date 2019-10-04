@@ -8,6 +8,7 @@ import Input from 'components/Layout/Input';
 import Button from 'components/Layout/Button';
 import { FaHome, FaBriefcase } from 'react-icons/fa';
 import { addTask } from 'redux/Tasks/Tasks.actions';
+import { Task } from 'constants/index';
 
 const AddTaskForm = styled(Form)`
   display: flex;
@@ -45,8 +46,9 @@ const CategoriesItem = styled.button`
   &:hover {
     background: ${({ theme }) => theme.greenOpacity};
     color: white;
- 
-    svg, p {
+
+    svg,
+    p {
       color: white;
     }
   }
@@ -57,11 +59,7 @@ const CustomCard = styled(Card)`
 `;
 
 const TaskForm = () => {
-  const [newTask, setNewTask] = useState({
-    name: '',
-    category: 'home',
-    completed: false,
-  });
+  const [newTask, setNewTask] = useState(new Task());
 
   const dispatch = useDispatch();
 
@@ -76,11 +74,7 @@ const TaskForm = () => {
   const submitHandler = e => {
     e.preventDefault();
     dispatch(addTask(newTask));
-    setNewTask({
-        name: '',
-        category: 'home',
-        completed: false
-    })
+    setNewTask(new Task());
   };
 
   return (

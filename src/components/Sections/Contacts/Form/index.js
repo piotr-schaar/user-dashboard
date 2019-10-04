@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import styled, { css } from 'styled-components';
+import { Contact } from 'constants/index';
 import { addContact as addContactAction } from 'redux/Contacts/Contacts.actions';
 
 import Form from 'components/Layout/Form';
@@ -30,20 +31,14 @@ const SubmitButton = styled(Button)`
 
 const ContactAddForm = () => {
   const dispatch = useDispatch();
-  const [updateValue, values, submitForm, errors] = useForm({
-    name: '',
-    email: '',
-    city: '',
-  });
+  const [updateValue, values, submitForm, errors] = useForm(new Contact());
 
   const FormInputs = useInputs(values, updateValue);
 
   const handleSubmit = e => {
     e.preventDefault();
     submitForm();
-
-    const { name, email, city } = values;
-    dispatch(addContactAction(name, email, city));
+    dispatch(addContactAction(values));
   };
 
   return (

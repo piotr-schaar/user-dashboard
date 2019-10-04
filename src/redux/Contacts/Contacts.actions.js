@@ -20,13 +20,11 @@ export const handleContactToFavorites = (name, isFavorite) => dispatch => {
   });
 };
 
-export const addContact = (name, email, city) => ({
+export const addContact = contact => ({
   type: types.ADD_CONTACT,
   id: uuid(),
   payload: {
-    name,
-    email,
-    city,
+    ...contact,
   },
 });
 
