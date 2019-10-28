@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Input from 'components/Layout/Input';
 
-const useInputs = (values, callback) => {
+const disallowedValues = ['id'];
+
+const useInputs = (values, callback, disallowed) => {
+  const forbiddenWords = Array.isArray(disallowed) ? [...disallowed] : disallowed;
+
   const valuesArray = Object.keys(values);
+  const [disallowedWords] = useState([...disallowedValues, forbiddenWords]);
 
   return valuesArray.map(value => {
-    if (value === 'id' || value === 'isFavorite') {
+    if (disallowedWords.indexOf(value) >= 0) {
       return null;
     }
     return (

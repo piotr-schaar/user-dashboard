@@ -33,7 +33,7 @@ const ContactAddForm = () => {
   const dispatch = useDispatch();
   const [updateValue, values, submitForm, errors] = useForm(new Contact());
 
-  const FormInputs = useInputs(values, updateValue);
+  const FormInputs = useInputs(values, updateValue, 'isFavorite');
 
   const handleSubmit = e => {
     e.preventDefault();
