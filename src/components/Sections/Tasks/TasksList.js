@@ -10,6 +10,13 @@ const UlStyled = styled.ul`
   padding: 0;
 `;
 
+const getTasksWithNameAsCategory = (name, tasks) => ({
+  name,
+  tasks,
+});
+
+const filterTasks = (arr, type) => arr.filter(item => item.category === type);
+
 const TasksList = () => {
   const store = useSelector(reducers => reducers.TasksReducer);
 
@@ -17,56 +24,35 @@ const TasksList = () => {
   const [tasksHome, setTasksHome] = useState([]);
   const [tasksWork, setTasksWork] = useState([]);
 
-
-  const filterTasks = (arr, type) => arr.filter(item => item.category === type);
-
   useEffect(() => {
     setTaskAll(store.tasks);
     setTasksHome(filterTasks(store.tasks, 'home'));
     setTasksWork(filterTasks(store.tasks, 'work'));
   }, [store]);
 
- 
+  const tasksAllCategories = [
+    getTasksWithNameAsCategory('All', tasksAll),
+    getTasksWithNameAsCategory('Home', tasksHome),
+    getTasksWithNameAsCategory('Work', tasksWork),
+  ];
+
   return (
     <>
       <Tabs>
-        <UlStyled label="all">
-          {tasksAll.map((task, index) => (
-            <TasksItem
-              key={task.id}
-              index={index}
-              category={task.category}
-              id={task.id}
-              task={task}
-              completed={task.completed}
-              lastAdded={tasksAll.length - 1}
-            />
-          ))}
-        </UlStyled>
-        <UlStyled label="home">
-          {tasksHome.map((task, index) => (
-            <TasksItem
-              key={task.id}
-              index={index}
-              category={task.category}
-              id={task.id}
-              task={task}
-              completed={task.completed}
-            />
-          ))}
-        </UlStyled>
-        <UlStyled label="work">
-          {tasksWork.map((task, index) => (
-            <TasksItem
-              key={task.id}
-              index={index}
-              category={task.category}
-              id={task.id}
-              task={task}
-              completed={task.completed}
-            />
-          ))}
-        </UlStyled>
+        {tasksAllCategories.map(({ name, tasks }) => {
+          return (
+            <UlStyled label={name}>
+              {tasks.map((task, index) => (
+                <TasksItem
+                  key={task.id}
+                  index={index}
+                  task={task}
+                  lastAdded={tasksAll.length - 1}
+                />
+              ))}
+            </UlStyled>
+          );
+        })}
       </Tabs>
     </>
   );

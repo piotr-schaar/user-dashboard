@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import styled, { css } from 'styled-components';
 import { Contact } from 'constants/index';
@@ -11,7 +11,7 @@ import Button from 'components/Layout/Button';
 
 import useForm from 'hooks/useForm';
 import Card from 'components/Layout/Card';
-import useInputs from './useInputs/useInputs';
+import useInputs from 'hooks/useInputs';
 
 const FormStyled = styled(Form)`
   display: flex;

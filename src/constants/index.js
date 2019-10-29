@@ -4,12 +4,12 @@ export class Contact {
     this.name = name;
     this.email = email;
     this.city = city;
-    this.isFavorite  = isFavorite
+    this.isFavorite = isFavorite;
   }
 }
 
 export class Task {
-  constructor(id, name = '', category = '', completed = false) {
+  constructor(id, name = '', category = 'home', completed = false) {
     this.id = id;
     this.name = name;
     this.category = category;

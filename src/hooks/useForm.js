@@ -22,7 +22,6 @@ const useForm = initialValues => {
 
   const submitForm = () => {
     setErrors(validateForm(values));
-
     setValues(initialValues);
   };
 

@@ -87,6 +87,7 @@ const TaskForm = () => {
           value={newTask.name}
           onChange={handleChange}
           placeholder="name"
+          required
         />
         <CategoriesWrapper>
           <CategoriesItem

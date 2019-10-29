@@ -31,7 +31,7 @@ const IconWrapper = styled.div`
 
 const WeatherWidget = () => {
   const store = useSelector(({ WeatherReducer }) => WeatherReducer);
-  const { position, error } = useGeoPosition();
+  const { position } = useGeoPosition();
   const dispatch = useDispatch();
 
   const [data, setData] = useState();
