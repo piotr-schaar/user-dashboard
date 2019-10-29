@@ -15,15 +15,14 @@ const ContactsList = () => {
   const contactsStore = useSelector(({ ContactsReducer }) => ContactsReducer);
   const { contacts, filteredList, isFiltered } = contactsStore;
 
+  const renderArr = () => {
+    const shownContacts = isFiltered ? filteredList : contacts;
+    return shownContacts.map((item, index) => (
+      <ContactsItem key={item.id} item={item} index={index} />
+    ));
+  };
 
-  return (
-    <WrapperStyled >
-      {isFiltered &&
-        filteredList.map((item, index) => <ContactsItem key={item.id} item={item} index={index} />)}
-      {!isFiltered &&
-        contacts.map((item, index) => <ContactsItem key={item.id} item={item} index={index} />)}
-    </WrapperStyled>
-  );
+  return <WrapperStyled>{renderArr()}</WrapperStyled>;
 };
 
 export default ContactsList;
