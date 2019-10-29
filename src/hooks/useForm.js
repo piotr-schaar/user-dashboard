@@ -22,13 +22,13 @@ const useForm = initialValues => {
 
   const submitForm = () => {
     setErrors(validateForm(values));
+
+    setValues(initialValues);
   };
 
   const updateValue = e => {
     setValues({ ...values, [e.target.name]: e.target.value });
-    submitForm();
   };
-
 
   return [updateValue, values, submitForm, errors];
 };

@@ -6,16 +6,18 @@ const disallowedValues = ['id'];
 const useInputs = (values, callback, disallowed) => {
   const forbiddenWords = Array.isArray(disallowed) ? [...disallowed] : disallowed;
 
-  const valuesArray = Object.keys(values);
+  const valuesKeys = Object.keys(values);
+  const valuesEntries = Object.values(values);
   const [disallowedWords] = useState([...disallowedValues, forbiddenWords]);
 
-  return valuesArray.map(value => {
+  return valuesKeys.map((value, index) => {
     if (disallowedWords.indexOf(value) >= 0) {
       return null;
     }
     return (
       <Input
         key={value}
+        value={valuesEntries[index]}
         id={value}
         name={value}
         type="text"

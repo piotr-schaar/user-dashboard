@@ -1,12 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const LabelStyled = styled.label`
   position: relative;
   display: block;
-  height: 30px;
-  width: 30px;
+  height: 20px;
+  width: 20px;
   input {
     opacity: 0;
     height: 0;
@@ -27,8 +27,8 @@ const CheckmarkIcon = styled.div`
   &:after {
     content: '';
     display: block;
-    width: 10px;
-    height: 20px;
+    width: 5px;
+    height: 10px;
     border: solid ${({ theme }) => theme.white};
     border-width: 0 2px 2px 0;
     transform: translateY(-20px);
@@ -72,7 +72,7 @@ Checkbox.propTypes = {
   name: PropTypes.string.isRequired,
   callback: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
-  isChecked: PropTypes.bool.isRequired
-}
+  isChecked: PropTypes.bool.isRequired,
+};
 
 export default Checkbox;
