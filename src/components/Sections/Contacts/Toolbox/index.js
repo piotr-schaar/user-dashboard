@@ -66,12 +66,6 @@ const Tools = () => {
     type: String,
   });
 
-  // const modalSetter = type => {
-  //   setOpenModal({
-  //     cond: !modalOpen.cond,
-  //     type,
-  //   });
-  // };
   const settingItem = (iconComponent, type) => {
     const settingFn = () =>
       type === settings.favorites

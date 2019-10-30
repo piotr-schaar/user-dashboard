@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const SelectStyled = styled.select`
   background: white;
@@ -8,11 +9,10 @@ const SelectStyled = styled.select`
   border: 2px solid ${({ theme }) => theme.greenOpacity};
 `;
 
-const Select = ({ value, options, name, form, handleChange }) => {
-  console.log(form);
+const Select = ({ value, options, name, handleChange }) => {
   return (
     <form>
-      <SelectStyled value={value} name={name} form={form} onChange={handleChange}>
+      <SelectStyled value={value} name={name} onChange={handleChange}>
         {options.map(option => (
           <option value={option} key={option}>
             {option}
@@ -21,6 +21,13 @@ const Select = ({ value, options, name, form, handleChange }) => {
       </SelectStyled>
     </form>
   );
+};
+
+Select.propTypes = {
+  options: PropTypes.array.isRequired,
+  name: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
 };
 
 export default Select;
