@@ -6,11 +6,11 @@ import WeatherWidget from 'components/Sections/Main/WeatherWidget';
 import TasksWidget from 'components/Sections/Main/TasksWidget';
 
 import DashboardTemplate from 'templates/DashboardTemplate';
-import Heading from 'components/Layout/Heading';
+import { Heading } from 'components/Layout';
+import ContactsWidget from '../components/Sections/Main/ContactsWidget';
 
 const WrapperStyled = styled.div`
   width: 100%;
-  display:flex;
 `;
 
 const CustomHeading = styled(Heading)`
@@ -28,8 +28,9 @@ const MainPage = () => {
     <DashboardTemplate>
       <CustomHeading>Hi {store.name}!</CustomHeading>
       <WrapperStyled>
-          <WeatherWidget />
-          <TasksWidget />
+        <WeatherWidget />
+        <TasksWidget />
+        <ContactsWidget />
       </WrapperStyled>
     </DashboardTemplate>
   );

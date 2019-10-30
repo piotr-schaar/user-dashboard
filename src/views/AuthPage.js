@@ -6,11 +6,9 @@ import PropTypes from 'prop-types';
 
 import { registerUser as registerAction, auth as authAction } from 'redux/User/User.actions';
 import Input from 'components/Layout/Input';
-import Heading from 'components/Layout/Heading';
-import Button from 'components/Layout/Button';
+import { Heading, Button, Alert } from 'components/Layout';
 import AuthTemplate from 'templates/AuthTemplate';
 import useForm from 'hooks/useForm';
-import Alert from '../components/Layout/Alert';
 
 const fadeIn = keyframes`
    from {

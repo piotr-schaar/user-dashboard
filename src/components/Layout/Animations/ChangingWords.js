@@ -43,7 +43,6 @@ const ChangingWord = ({ words }) => {
   const [length, setLength] = useState(Number);
   const [arr, setArr] = useState([]);
 
-
   useEffect(() => {
     setArr(words);
   }, [words]);

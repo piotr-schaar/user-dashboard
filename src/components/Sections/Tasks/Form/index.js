@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import Card from 'components/Layout/Card';
-import Form from 'components/Layout/Form';
-import Heading from 'components/Layout/Heading';
-import Input from 'components/Layout/Input';
-import Button from 'components/Layout/Button';
+import { Card, Form, Heading, Input, Button } from 'components/Layout';
 import { FaHome, FaBriefcase } from 'react-icons/fa';
 import { addTask } from 'redux/Tasks/Tasks.actions';
 import { Task } from 'constants/index';

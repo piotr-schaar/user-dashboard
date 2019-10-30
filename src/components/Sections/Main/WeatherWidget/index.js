@@ -4,23 +4,13 @@ import styled from 'styled-components';
 import useGeoPosition from 'hooks/useGeoPosition';
 import { fetch } from 'redux/Weather/Weather.actions';
 import { FaCloudSunRain } from 'react-icons/fa';
+import { Widget } from 'components/Layout';
 
 const convertKelvinsToCelcius = temp => (temp - 273.15).toFixed();
 
-const WidgetWrapper = styled.div`
-  width: 200px;
-  padding: 10px;
-  border: 2px solid ${({ theme }) => theme.greenOpacity};
-  border-radius: 20px;
+const FlexWrapper = styled.div`
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  p {
-    font-weight: 700;
-    font-size: 20px;
-  }
 `;
-
 const IconWrapper = styled.div`
   color: ${({ theme }) => theme.lightGrey};
   font-size: 40px;
@@ -49,12 +39,14 @@ const WeatherWidget = () => {
   }, [store]);
 
   return (
-    <WidgetWrapper>
-      <IconWrapper>
-        <FaCloudSunRain />
-      </IconWrapper>
-      <p>{data && convertKelvinsToCelcius(data.temp)}°</p>
-    </WidgetWrapper>
+    <Widget>
+      <FlexWrapper>
+        <IconWrapper>
+          <FaCloudSunRain />
+        </IconWrapper>
+        <p>{data && convertKelvinsToCelcius(data.temp)}°</p>
+      </FlexWrapper>
+    </Widget>
   );
 };
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import Tabs from 'components/Tabs/Tabs';
+import { Tabs } from 'components/Layout';
 import TasksItem from './TasksItem';
 
 const UlStyled = styled.ul`
@@ -41,12 +41,13 @@ const TasksList = () => {
       <Tabs>
         {tasksAllCategories.map(({ name, tasks }) => {
           return (
-            <UlStyled label={name}>
+            <UlStyled label={name} key={name}>
               {tasks.map((task, index) => (
                 <TasksItem
                   key={task.id}
                   index={index}
                   task={task}
+                  completed={task.completed}
                   lastAdded={tasksAll.length - 1}
                 />
               ))}

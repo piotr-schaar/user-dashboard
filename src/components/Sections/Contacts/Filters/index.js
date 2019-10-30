@@ -5,8 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { filterListByType, hideFilteredList } from 'redux/Contacts/Contacts.actions';
 import Card from 'components/Layout/Card';
 import Heading from 'components/Layout/Heading';
-import Switch from '../../../SwitchInput';
-import Select from '../../../Select';
+import Switch from '../../../Layout/SwitchInput';
+import Select from '../../../Layout/Select';
 import useCitiesList from '../../../../hooks/useCitiesList';
 
 const MainWrapper = styled.div``;

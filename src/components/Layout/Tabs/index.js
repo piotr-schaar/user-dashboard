@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
-import Tab from './Tab';
+import Tab from '../Tab';
 
 const WrapperStyled = styled.div``;
 
@@ -29,7 +29,7 @@ const Tabs = ({ children, scroll, color }) => {
     setToggleAnimation(true);
     setTimeout(() => {
       setActive(tab);
-      setToggleAnimation(false)
+      setToggleAnimation(false);
     }, 300);
   };
 

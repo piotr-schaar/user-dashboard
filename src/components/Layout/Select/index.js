@@ -1,53 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import styled from 'styled-components';
 
 const SelectStyled = styled.select`
   background: white;
-  padding: 5px;
-  font-size: 15px;
   border-radius: 10px;
-  border: none;
-  border: 1px solid ${({ theme }) => theme.green};
-  font-size: 15px;
+  padding: 5px;
+  border: 2px solid ${({ theme }) => theme.greenOpacity};
 `;
 
-const LabelStyled = styled.label``;
-
-const Select = ({ value, options, name, handleChange }) => {
-  const [opts, setOpts] = useState([]);
-
-  useEffect(() => {
-    if (typeof options === 'number') {
-      let numbers = [];
-      for (let i = 0; i < options; i++) {
-        numbers = [...numbers, i];
-      }
-      setOpts(numbers);
-    } else {
-      setOpts(options);
-    }
-  }, [options]);
-
+const Select = ({ value, options, name, form, handleChange }) => {
+  console.log(form);
   return (
-    <>
-      <LabelStyled>category</LabelStyled>
-      <SelectStyled value={value} name={name} onChange={handleChange}>
-        {opts.map(option => (
+    <form>
+      <SelectStyled value={value} name={name} form={form} onChange={handleChange}>
+        {options.map(option => (
           <option value={option} key={option}>
             {option}
           </option>
         ))}
       </SelectStyled>
-    </>
+    </form>
   );
-};
-
-Select.propTypes = {
-  value: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  options: PropTypes.array.isRequired,
-  handleChange: PropTypes.func.isRequired,
 };
 
 export default Select;

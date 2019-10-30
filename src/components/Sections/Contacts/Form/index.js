@@ -4,13 +4,9 @@ import styled, { css } from 'styled-components';
 import { Contact } from 'constants/index';
 import { addContact as addContactAction } from 'redux/Contacts/Contacts.actions';
 
-import Form from 'components/Layout/Form';
-import Heading from 'components/Layout/Heading';
-
-import Button from 'components/Layout/Button';
+import { Form, Heading, Button, Card } from 'components/Layout';
 
 import useForm from 'hooks/useForm';
-import Card from 'components/Layout/Card';
 import useInputs from 'hooks/useInputs';
 
 const FormStyled = styled(Form)`
