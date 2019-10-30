@@ -66,17 +66,28 @@ const Tools = () => {
     type: String,
   });
 
-  const settingItem = (iconComponent, func, type) => {
+  // const modalSetter = type => {
+  //   setOpenModal({
+  //     cond: !modalOpen.cond,
+  //     type,
+  //   });
+  // };
+  const settingItem = (iconComponent, type) => {
+    const settingFn = () =>
+      type === settings.favorites
+        ? dispatch(filterListByType(settings.favorites))
+        : setOpenModal({
+            cond: !modalOpen.cond,
+            type,
+          });
     return {
       icon: () => iconComponent,
-      callback: () => (!func ? setOpenModal({ cond: !modalOpen, type }) : func(type)),
+      callback: () => settingFn(),
     };
   };
   const settingsList = [
     settingItem(<FaPlus />, settings.newContact),
-    settingItem(<FaHeart />, () =>
-      dispatch(filterListByType(settings.favorites), settings.newContact),
-    ),
+    settingItem(<FaHeart />, settings.favorites),
     settingItem(<FaSlidersH />, settings.filters),
     settingItem(<FaChartPie />, settings.statistics),
   ];
@@ -105,8 +116,8 @@ const Tools = () => {
         }
       >
         <ToolsList>
-          {settingsList.map(({ icon, callback }) => (
-            <ToolItem key={icon}>
+          {settingsList.map(({ icon, callback }, index) => (
+            <ToolItem key={index}>
               <ToolWrapper onClick={callback}>{icon()}</ToolWrapper>
             </ToolItem>
           ))}

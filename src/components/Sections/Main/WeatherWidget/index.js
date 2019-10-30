@@ -19,13 +19,22 @@ const IconWrapper = styled.div`
   align-items: center;
 `;
 
+const WeatherTemp = styled.p`
+  font-size: 21px;
+  font-weight: 700;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20px;
+`;
+
 const WeatherWidget = () => {
   const store = useSelector(({ WeatherReducer }) => WeatherReducer);
   const { position } = useGeoPosition();
   const dispatch = useDispatch();
 
   const [data, setData] = useState();
-
   useEffect(() => {
     if (Object.getOwnPropertyNames(position).length !== 0) {
       dispatch(fetch(position));
@@ -36,15 +45,17 @@ const WeatherWidget = () => {
     if (store.data) {
       setData(store.data.data.main);
     }
-  }, [store]);
+  }, [store.data]);
+
+  console.log(store.data);
 
   return (
-    <Widget width={200}>
+    <Widget width={150}>
       <FlexWrapper>
         <IconWrapper>
           <FaCloudSunRain />
         </IconWrapper>
-        <p>{data && convertKelvinsToCelcius(data.temp)}°</p>
+        <WeatherTemp>{data && convertKelvinsToCelcius(data.temp)}°</WeatherTemp>
       </FlexWrapper>
     </Widget>
   );
