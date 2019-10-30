@@ -1,13 +1,12 @@
-import types from './User.types';
+import avatar from 'static/avatar.jpg';
 
-// dummy
-import avatar from '../../placeholder/avatar.jpg';
+import types from './User.types';
 
 const initialState = {
   userID: `5d0e44b4033d0286511d0494`,
   isError: false,
   avatar,
-  name: 'Kevin'
+  name: 'Kevin',
 };
 
 const userReducer = (state = initialState, action) => {

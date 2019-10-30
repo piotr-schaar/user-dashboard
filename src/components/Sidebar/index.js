@@ -79,26 +79,10 @@ const navLink = (name, href, iconComponent) => ({
 });
 
 const navLinks = [
-  {
-    name: 'contacts',
-    href: routes.contacts,
-    icon: () => <FaAddressBook />,
-  },
-  {
-    name: 'tasks',
-    href: routes.tasks,
-    icon: () => <FaTasks />,
-  },
-  {
-    name: 'settings',
-    href: routes.settings,
-    icon: () => <FaCogs />,
-  },
-  {
-    name: 'logout',
-    href: routes.logout,
-    icon: () => <FaSignOutAlt />,
-  },
+  navLink('contacts', routes.contacts, <FaAddressBook />),
+  navLink('tasks', routes.tasks, <FaTasks />),
+  navLink('settings', routes.settings, <FaCogs />),
+  navLink('logout', routes.logout, <FaSignOutAlt />),
 ];
 
 const Sidebar = ({ avatar }) => {
