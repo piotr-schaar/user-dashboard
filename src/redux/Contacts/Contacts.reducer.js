@@ -5,8 +5,8 @@ import types from './Contacts.types';
 
 const initialState = {
   contacts: [
-    new Contact(uuid(), 'Tom Hanks', 'tom@gmail.com', 'New York', false),
-    new Contact(uuid(), 'Kate Moss', 'katem@gmail.com', 'New York', true),
+    new Contact(uuid(), 'Tom Slughorn', 'tom@gmail.com', 'New York', false),
+    new Contact(uuid(), 'Kate Smith', 'katem@gmail.com', 'New York', true),
     new Contact(uuid(), 'Pedro Cortez', 'pedrocortez@gmail.com', 'Mexico', false),
     new Contact(uuid(), 'Shinji Kagawashi', 'shinji@gmail.com', 'Tokyo', true),
   ],

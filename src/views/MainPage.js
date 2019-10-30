@@ -13,6 +13,14 @@ const WrapperStyled = styled.div`
   width: 100%;
 `;
 
+const FlexContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const FlexItem = styled.div`
+  margin: 15px 0;
+`;
+
 const CustomHeading = styled(Heading)`
   font-size: 42px;
 `;
@@ -28,9 +36,17 @@ const MainPage = () => {
     <DashboardTemplate>
       <CustomHeading>Hi {name}!</CustomHeading>
       <WrapperStyled>
-        <WeatherWidget />
-        <TasksWidget />
-        <ContactsWidget />
+        <FlexContainer>
+          <FlexItem>
+            <WeatherWidget />
+          </FlexItem>
+          <FlexItem>
+            <TasksWidget />
+          </FlexItem>
+          <FlexItem>
+            <ContactsWidget />
+          </FlexItem>
+        </FlexContainer>
       </WrapperStyled>
     </DashboardTemplate>
   );

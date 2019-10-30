@@ -39,7 +39,7 @@ const WeatherWidget = () => {
   }, [store]);
 
   return (
-    <Widget>
+    <Widget width={200}>
       <FlexWrapper>
         <IconWrapper>
           <FaCloudSunRain />

@@ -13,7 +13,7 @@ const TasksWidget = () => {
   }, [store]);
 
   return (
-    <Widget>
+    <Widget width={500}>
       <Heading>What to do today?</Heading>
       <ChangingWords words={tasks} />
     </Widget>
