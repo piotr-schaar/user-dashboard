@@ -26,7 +26,7 @@ const HeadingWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const ContactsPage = props => {
+const ContactsPage = () => {
   const subtitle = useSelector(({ ContactsReducer }) => ContactsReducer.subtitle);
 
   return (
@@ -38,7 +38,6 @@ const ContactsPage = props => {
           </Heading>
           <Toolbox />
         </HeadingWrapper>
-
         <FlexWrapper>
           <ContactsList />
         </FlexWrapper>

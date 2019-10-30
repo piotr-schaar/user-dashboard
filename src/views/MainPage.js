@@ -19,14 +19,14 @@ const CustomHeading = styled(Heading)`
 
 const MainPage = () => {
   const store = useSelector(({ UserReducer }) => UserReducer);
-
-  if (store.userID === null) {
+  const { userID, name } = store;
+  if (userID === null) {
     return <Redirect to="/login" />;
   }
 
   return (
     <DashboardTemplate>
-      <CustomHeading>Hi {store.name}!</CustomHeading>
+      <CustomHeading>Hi {name}!</CustomHeading>
       <WrapperStyled>
         <WeatherWidget />
         <TasksWidget />

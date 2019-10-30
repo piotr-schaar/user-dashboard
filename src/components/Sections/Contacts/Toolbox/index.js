@@ -66,44 +66,29 @@ const Tools = () => {
     type: String,
   });
 
+  const settingItem = (iconComponent, func, type) => {
+    return {
+      icon: () => iconComponent,
+      callback: () => (!func ? setOpenModal({ cond: !modalOpen, type }) : func(type)),
+    };
+  };
   const settingsList = [
-    {
-      icon: () => <FaPlus />,
-      callback: () =>
-        setOpenModal({
-          cond: !modalOpen.cond,
-          type: settings.newContact,
-        }),
-    },
-    {
-      icon: () => <FaHeart />,
-      callback: () => dispatch(filterListByType(settings.favorites)),
-    },
-    {
-      icon: () => <FaSlidersH />,
-      callback: () =>
-        setOpenModal({
-          cond: !modalOpen.cond,
-          type: settings.filters,
-        }),
-    },
-    {
-      icon: () => <FaChartPie />,
-      callback: () =>
-        setOpenModal({
-          cond: !modalOpen.cond,
-          type: settings.statistics,
-        }),
-    },
+    settingItem(<FaPlus />, settings.newContact),
+    settingItem(<FaHeart />, () =>
+      dispatch(filterListByType(settings.favorites), settings.newContact),
+    ),
+    settingItem(<FaSlidersH />, settings.filters),
+    settingItem(<FaChartPie />, settings.statistics),
   ];
 
   const renderTool = type => {
+    const { newContact, filters, statistics } = settings;
     switch (type) {
-      case settings.newContact:
+      case newContact:
         return <Form />;
-      case settings.filters:
+      case filters:
         return <Filters />;
-      case settings.statistics:
+      case statistics:
         return <Statistics />;
       default:
         return <p>Something goes wrong</p>;

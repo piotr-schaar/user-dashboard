@@ -72,6 +72,12 @@ const AvatarWrapper = styled.div`
   background-repeat: no-repeat;
 `;
 
+const navLink = (name, href, iconComponent) => ({
+  name,
+  href,
+  icon: () => iconComponent,
+});
+
 const navLinks = [
   {
     name: 'contacts',
@@ -114,10 +120,10 @@ const Sidebar = ({ avatar }) => {
               <AvatarWrapper avatar={avatar}>{!avatar && <FaUser />}</AvatarWrapper>
             </NavLink>
           </ItemStyled>
-          {navLinks.map(item => (
-            <ItemStyled key={item.href}>
-              <NavLink to={item.href}>
-                <IconWrapper active={isActive(item.name)}>{item.icon()}</IconWrapper>
+          {navLinks.map(({ href, name, icon }) => (
+            <ItemStyled key={href}>
+              <NavLink to={href}>
+                <IconWrapper active={isActive(name)}>{icon()}</IconWrapper>
               </NavLink>
             </ItemStyled>
           ))}

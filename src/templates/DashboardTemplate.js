@@ -28,7 +28,9 @@ const DashboardTemlate = ({ children }) => {
   return (
     <WrapperStyled>
       <Sidebar />
-      <AnimationWrapper mounted={Redirect}><MainWrapper>{children}</MainWrapper></AnimationWrapper>
+      <AnimationWrapper mounted={Redirect}>
+        <MainWrapper>{children}</MainWrapper>
+      </AnimationWrapper>
     </WrapperStyled>
   );
 };
