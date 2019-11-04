@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 const Button = styled.button`
   display: ${({ block }) => block && 'block'};
-  background: ${({ theme }) => theme.blue};
+  background: ${({ theme, background }) => (background ? `${background}` : theme.blue)};
   border: none;
-  color: white;
+  color: ${({ theme, color }) => (color ? `${color}` : 'white')};
   text-transform: lowercase;
   cursor: pointer;
   font-weight: 600;

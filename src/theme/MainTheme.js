@@ -2,6 +2,7 @@ export const theme = {
   blue: '#180D33',
   green: '#78B15C',
   greenOpacity: 'rgba(120,177,92,0.7)',
+  fontColor: '#4a4c4d',
   white: '#ffffff',
   grey: '#787774',
   lightGrey: 'rgba(0, 0, 0, 0.1)',

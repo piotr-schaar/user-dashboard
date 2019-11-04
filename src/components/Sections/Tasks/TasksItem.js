@@ -3,22 +3,18 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { toggleCompleteTask } from 'redux/Tasks/Tasks.actions';
-import Card from 'components/Layout/Card';
 import Checkbox from 'components/Layout/Checkbox';
 import { FaHome, FaBriefcase } from 'react-icons/fa';
 
-const isEven = n => n % 2 === 0;
-
-const CustomCard = styled(Card)`
+const CustomCard = styled.div`
   padding: 2px 10px;
-  background: ${({ index, theme }) => (isEven(index) ? theme.lightGrey : 'white')};
-  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
   opacity: ${({ index, last }) => (index === last ? '0' : '1')};
   transition: all ease-in 0.3s;
 `;
 
 const ItemWrapper = styled.li`
   padding: 2px;
+  border-bottom: 1px solid ${({ theme }) => theme.lightGrey};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -26,13 +22,16 @@ const ItemWrapper = styled.li`
 
 const TextStyled = styled.p`
   width: 80%;
-  padding-left: 15px;
+  color: ${({ theme }) => theme.fontColor};
   position: relative;
   text-decoration: ${({ isChecked }) => (isChecked ? 'line-through' : null)};
 `;
 
 const CategoryIconWrapper = styled.div`
   color: ${({ theme }) => theme.grey};
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const TasksItem = ({ task: { name, completed, id, category }, index, lastAdded }) => {

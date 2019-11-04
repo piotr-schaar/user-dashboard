@@ -4,34 +4,30 @@ import styled, { css } from 'styled-components';
 
 const TabItem = styled.li`
   display: block;
-  flex: 1;
   list-style: none;
-  &:hover,
-  &:active {
-    color: white;
-    background: ${({ theme }) => theme.green};
-  }
-
-  ${({ isActive }) =>
-    isActive &&
-    css`
-      color: ${({ theme }) => theme.green};
-      background: ${({ theme }) => theme.lightGrey};
-    `}
 `;
 
 const TabButton = styled.button`
   width: 100%;
   font-weight: 600;
-  padding: 10px;
+  padding: 7px;
   background: none;
-  border: none;
-  font-size: 18px;
-  color: ${({ theme, isActive }) => isActive && theme.green};
+  color: ${({ theme }) => theme.fontColor};
+  border: 2px solid ${({ theme }) => theme.green};
+  border-radius: 10px;
+  font-size: 15px;
   cursor: pointer;
+  ${({ isActive }) =>
+    isActive &&
+    css`
+      color: ${({ theme }) => theme.white};
+      background: ${({ theme }) => theme.green};
+    `}
+
   &:active,
   &:focus,
   &:hover {
+    background: ${({ theme }) => theme.green};
     color: white;
     outline: none;
   }
@@ -47,7 +43,7 @@ const Tab = ({ label, onClick, activeTab }) => {
   return (
     <TabItem isActive={isActive}>
       <TabButton isActive={isActive} type="button" onClick={() => onClick(label)}>
-        {label}
+        {label.toLowerCase()}
       </TabButton>
     </TabItem>
   );

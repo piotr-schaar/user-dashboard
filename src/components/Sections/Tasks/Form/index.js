@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { Card, Form, Heading, Input, Button } from 'components/Layout';
+import { Form, Heading, Input, Button } from 'components/Layout';
 import { FaHome, FaBriefcase } from 'react-icons/fa';
 import { addTask } from 'redux/Tasks/Tasks.actions';
 import { Task } from 'constants/index';
@@ -13,7 +13,7 @@ const AddTaskForm = styled(Form)`
 `;
 
 const CategoriesWrapper = styled.div`
-  margin: 15px 0;
+  margin: 24px 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 5px;
@@ -26,7 +26,8 @@ const CategoriesItem = styled.button`
   justify-content: flex-start;
   align-items: center;
   border-radius: 10px;
-  border: 2px solid ${({ theme }) => theme.green};
+  border: none;
+  border: 2px solid ${({ set, value, theme }) => (set === value ? 'none' : theme.greenOpacity)};
   cursor: pointer;
   svg {
     color: ${({ set, value, theme }) => (set === value ? 'white' : theme.green)};
@@ -50,8 +51,20 @@ const CategoriesItem = styled.button`
   }
 `;
 
-const CustomCard = styled(Card)`
+const CustomCard = styled.div`
   align-self: start;
+  padding-right: 80px;
+`;
+
+const SubmitButton = styled(Button)`
+  background: white;
+  border: 2px solid ${({ theme }) => theme.greenOpacity};
+  color: ${({ theme }) => theme.green};
+  width: 150px;
+  &:hover {
+    background: ${({ theme }) => theme.greenOpacity};
+    color: white;
+  }
 `;
 
 const TaskForm = () => {
@@ -105,9 +118,7 @@ const TaskForm = () => {
             <p>Work</p>
           </CategoriesItem>
         </CategoriesWrapper>
-        <Button type="submit" block>
-          add
-        </Button>
+        <SubmitButton type="submit">add</SubmitButton>
       </AddTaskForm>
     </CustomCard>
   );

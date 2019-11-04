@@ -6,8 +6,9 @@ import Tab from '../Tab';
 const WrapperStyled = styled.div``;
 
 const TabsListStyled = styled.ol`
-  display: flex;
-  border-bottom: 2px solid ${({ theme }) => theme.green};
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
   padding-left: 0;
 `;
 
@@ -21,6 +22,7 @@ const TabContent = styled.div`
       overflow-y: auto;
     `}
 `;
+
 const Tabs = ({ children, scroll, color }) => {
   const [activeTab, setActive] = useState(children[0].props.label);
   const [toggleAnimation, setToggleAnimation] = useState(false);

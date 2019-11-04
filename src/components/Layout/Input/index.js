@@ -5,8 +5,8 @@ const Input = styled.input`
   font-size: 15px;
   font-weight: 400;
   margin: 5px 0;
-  border-radius: 10px;
-  border: 2px solid ${({ theme }) => theme.green};
+  border: none;
+  border-bottom: 2px solid ${({ theme }) => theme.greenOpacity};
 `;
 
 export default Input;
